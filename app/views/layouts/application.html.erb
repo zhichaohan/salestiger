@@ -1,0 +1,14 @@
+
+<!doctype html>
+<!--[if (gt IE 9)|!(IE)]><html lang="en"><![endif]-->
+<html lang="en-US">
+<head>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= Gon::Base.render_data %>
+</head>
+
+<body>
+  <%= yield %>
+</body>
+</html>

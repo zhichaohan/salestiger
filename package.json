@@ -1,0 +1,38 @@
+{
+  "name": "rails-react-devise",
+  "private": true,
+  "scripts": {
+    "postinstall": "cd client; yarn install"
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^4.0.2",
+    "@stripe/react-stripe-js": "^1.9.0",
+    "@stripe/stripe-js": "^1.32.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "create-react-class": "^15.7.0",
+    "fstream": "^1.0.12",
+    "lodash": "^4.17.13",
+    "lodash.template": "^4.5.0",
+    "prop-types": "^15.7.2",
+    "quill-image-upload": "^0.1.3",
+    "react": "^16.8.6",
+    "react-aws-s3": "^1.5.0",
+    "react-bootstrap": "^2.4.0",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-dom": "^16.8.6",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "5.2.0",
+    "react-select": "^5.4.0",
+    "react-toastify": "^9.0.8",
+    "react-uuid": "^1.0.2",
+    "redux": "^4.2.0",
+    "swiper": "^8.3.1"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.3.1"
+  }
+}

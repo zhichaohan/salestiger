@@ -1,0 +1,49 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+        environment:
+          DATABASE_URL: postgresql://root@localhost:5432/circle_test
+          RAILS_ENV: test
+          AWS_ACCESS_KEY_ID: 'AWS_ACCESS_KEY_ID'
+          AWS_SECRET_ACCESS_KEY: 'AWS_SECRET_ACCESS_KEY'
+      - image: circleci/postgres:10.3-alpine
+      - image: circleci/node:8.14-jessie
+      - image: elasticsearch:2.4-alpine
+      - image: circleci/redis:alpine
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
+      - run:
+          name: Installing NPM dependencies
+          command: yarn install
+      - run:
+          name: Waiting for PostgreSQL to start
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Waiting for Elasticsearch to start
+          command: dockerize -wait tcp://localhost:9200 -timeout 1m
+      - run:
+          name: Waiting for Redis to start
+          command: dockerize -wait tcp://localhost:6379 -timeout 1m
+      - run: sudo apt update
+      - run: sudo apt install postgresql-client
+      - run:
+          name: Database setup
+          command: bundle exec rake db:schema:load --trace
+      - run:
+          name: RSpec
+          command: |
+            bundle exec rspec --format RspecJunitFormatter \
+                              --out test-results/rspec.xml \
+                              --format progress
+      - store_test_results:
+          path: test-results
