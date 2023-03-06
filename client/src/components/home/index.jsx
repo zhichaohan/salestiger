@@ -1034,6 +1034,140 @@ export default function Home() {
     )
   }
 
+  const renderContactUs = () => {
+    return (
+      <div id="be-content">
+        <div  className="tatsu-SyEsHkKVu tatsu-section  tatsu-bg-overlay   tatsu-clearfix" data-title=""  data-headerscheme="background--dark">
+          <div className='tatsu-section-pad clearfix' data-padding='{"d":"60px 0px 100px 0px","l":"60px 0px 100px 0px","t":"50px 50px 50px 50px","m":"50px 20px 50px 20px"}' data-padding-top='50px'>
+            <div className="tatsu-row-wrap  tatsu-wrap tatsu-row-has-one-half tatsu-row-has-two-cols tatsu-custom-gutter tatsu-reg-cols  tatsu-clearfix tatsu-B1g4iBJYEu" >
+              <div  className="tatsu-row HeroSectRow" style={{ marginLeft:"-0px", marginRight:"-0px" }}>
+                <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-image-none tatsu-column-effect-none imgtopsec tatsu-B1cEoSJFEO"  data-parallax-speed="0" style={{ padding: "0 0px" }}>
+                  <div className="tatsu-column-inner " >
+                    <div className="tatsu-column-pad-wrap">
+                      <div className="tatsu-column-pad" >
+                        <div  className="tatsu-single-image tatsu-module align-left tatsu-image-lazyload tatsu-image-overflow  tatsu-external-image tatsu-S1oNsSytN_  " >
+                          <div className="tatsu-single-image-inner ">
+                            <div class = "tatsu-single-image-padding-wrap"></div>
+                            <img class = "tatsu-gradient-border" data-src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/03/Spyro-saas-form-hero.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "tatsu-column-bg-image-wrap">
+                      <div class = "tatsu-column-bg-image" ></div>
+                    </div>
+                    <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
+                  </div>
+                </div>
+                <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-align-middle tatsu-column-image-none tatsu-column-effect-none  tatsu-BybNiH1Y4O"  data-parallax-speed="0" style={{ padding: "0 0px" }}>
+                  <div className="tatsu-column-inner " >
+                    <div className="tatsu-column-pad-wrap">
+                      <div className="tatsu-column-pad" >
+                        <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ryMEoH1FEd   " >
+                          <div className="tatsu-inline-text-inner tatsu-align-center">
+                            <h2>
+                              <span>Learn how we can<br />unlock <span className="palette-0">your opportunities</span></span>
+                            </h2>
+                          </div>
+                        </div>
+                        <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ry74sHJFNu   " >
+                          <div className="tatsu-inline-text-inner tatsu-align-center">
+                            <p>
+                              <span className="body_1">with a virtual sales team</span>
+                            </p>
+                          </div>
+                        </div>
+                        <div  class = "tatsu-forms tatsu-module  tatsu-BJHI0E2Bu " >
+                          <div class = "tatsu-forms-inner tatsu-forms-save tatsu-form-rounded tatsu-form-submit-rounded" id="form-6534">
+                            <form method="post" className="spyro-form basic tatsu-ryGHPIJKVu" data-action="email">
+                              <div className="form-fields-container">
+                                <div className="form-item-wrap tatsu-r1BDUJtNu form-text">
+                                  <div className="form-item">
+                                    <div className="form-label"></div>
+                                    <div className="form-field-wrap">
+                                      <div className="form-field">
+                                        <input type="text" className="form-element form-text-element" placeholder="First Name" data-map_field="none" name="first_name" required="required"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-item-wrap tatsu-Hk7QwyFV_ form-text">
+                                  <div className="form-item">
+                                    <div className="form-label"></div>
+                                    <div className="form-field-wrap">
+                                      <div className="form-field">
+                                        <input type="text" className="form-element form-text-element" placeholder="Last Name" data-map_field="none" name="last_name" required="required"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-item-wrap tatsu-BkbNDktEO form-text">
+                                  <div className="form-item">
+                                    <div className="form-label"></div>
+                                    <div className="form-field-wrap">
+                                      <div className="form-field">
+                                        <input type="email" className="form-element form-text-element" placeholder="Business Email" data-map_field="none" name="email" required="required"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-item-wrap tatsu-H1xLDyYVd form-text">
+                                  <div className="form-item">
+                                    <div className="form-label"></div>
+                                    <div className="form-field-wrap">
+                                      <div className="form-field">
+                                        <input type="text" className="form-element form-text-element" placeholder="Company Name" data-map_field="none" name="company_name" required="required"/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="form-item-wrap">
+                                  <div className="form-item">
+                                    <div className="form-field-wrap">
+                                      <div className="form-field">
+                                        <div className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block align-block block-center">
+                                          <input type="submit"  className="tatsu-shortcode blockbtn tatsu-button left-icon  rounded"  aria-label="Contact Us"  value="Contact Us" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                            <div className="tatsu-form-status">
+                              <div className="exp-subscribe-loader">
+                                <div className="exp-subscribe-loader-inner">
+                                </div>
+                              </div>
+                              <div className="subscribe_status tatsu-notification">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "tatsu-column-bg-image-wrap">
+                      <div class = "tatsu-column-bg-image" ></div>
+                    </div>
+                    <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="tatsu-section-background-wrap">
+            <div class = "tatsu-section-background" ></div>
+          </div>
+          <div className="tatsu-overlay tatsu-section-overlay"></div>
+        </div>
+        <div className="be-themes-comments exp-wrap">
+          <div id="comments" className="exp-comments exp-comments-without-content">
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <>
       { renderHero() }
@@ -1043,6 +1177,7 @@ export default function Home() {
       { /* renderTextLeftImgRight() */ }
       { renderTestimonials() }
       { renderWeSupport() }
+      { renderContactUs() }
     </>
   )
 }
