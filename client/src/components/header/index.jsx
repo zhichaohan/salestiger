@@ -24,9 +24,6 @@ export default function Header() {
                             <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6838"><a title="Home" href="#home">Home</a></li>
                             <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6823"><a title="Features" href="#feature">Features</a></li>
                             <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6824"><a title="Testimonials" href="#testimonials">Testimonials</a></li>
-                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6825"><a title="Price" href="#price">Price</a></li>
-                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6826"><a title="FAQs" href="#faq">FAQs</a></li>
-                            <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6892"><a title="Blog" href="https://spyrowptheme.com/saas-clickthrough-new/blog/">Blog</a></li>
                          </ul>
                       </div>
                    </nav>
