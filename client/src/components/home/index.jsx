@@ -1,8 +1,26 @@
 import React, { Component, useState, useContext } from 'react'
 import { Link } from "react-router-dom";
+import { createLandingPageContacts } from '../../api/landing_page_contacts';
+import { notifySuccess, notifyError } from '../../helpers';
 import styles from './index.module.css';
 
 export default function Home() {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [companyName, setCompanyName] = useState();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createLandingPageContacts({
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      company_name: companyName,
+    }, () => {
+      notifySuccess("Thank you for your submission. We will reach out to you within 24 hours!")
+    });
+  }
 
   const renderHero = () => {
     return (
@@ -26,7 +44,7 @@ export default function Home() {
                               </div>
                               <div  className="tatsu-module tatsu-button-group align-left tatsu-SjhrPiYhPU  btnmainsec"  >
                                  <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap   tatsu-cGqmz3dT2   btnmainsec">
-                                  <a className="tatsu-shortcode mediumbtn tatsu-button left-icon    bg-animation-none  " href="signup/"  aria-label="Signup for free" data-gdpr-atts={{}} >Contact us now</a></div>
+                                  <a className="tatsu-shortcode mediumbtn tatsu-button left-icon    bg-animation-none  " href="#contact"  aria-label="Signup for free" data-gdpr-atts={{}} >Contact us now</a></div>
                                  <div id="gdpr-alt-lightbox-qC56hh8kiv" className=" white-popup mfp-hide" >
                                     <div className="gdpr-alt-image">
                                        <img style={{ opacity: "1", width: "100%" }} src="https://img.youtube.com/vi/7e90gBu4pas/maxresdefault.jpg"/>
@@ -986,7 +1004,7 @@ export default function Home() {
                            <div className="tatsu-column-pad" >
                               <div  className="tatsu-module tatsu-text-block-wrap tatsu-U6OOa5En8  brrmvtagas">
                                  <div className="tatsu-text-inner   clearfix" >
-                                    <h2>Sales Make Easy</h2>
+                                    <h2>Sales Made Easy</h2>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-a-gKHmG1P   " >
@@ -996,7 +1014,7 @@ export default function Home() {
                                     </p>
                                  </div>
                               </div>
-                              <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap   tatsu-oo-QiKDD5   btnmainsec"><a className="tatsu-shortcode mediumbtn tatsu-button left-icon rounded   bg-animation-none  " href="signup/" aria-label="Signup for free" data-gdpr-atts={{}} >Contact us</a></div>
+                              <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap   tatsu-oo-QiKDD5   btnmainsec"><a className="tatsu-shortcode mediumbtn tatsu-button left-icon rounded   bg-animation-none  " href="#contact" aria-label="Signup for free" data-gdpr-atts={{}} >Contact us</a></div>
                            </div>
                         </div>
                         <div className="tatsu-column-bg-image-wrap">
@@ -1037,7 +1055,7 @@ export default function Home() {
   const renderContactUs = () => {
     return (
       <div id="be-content">
-        <div  className="tatsu-SyEsHkKVu tatsu-section  tatsu-bg-overlay   tatsu-clearfix" data-title=""  data-headerscheme="background--dark">
+        <div id="contact"  className="tatsu-SyEsHkKVu tatsu-section  tatsu-bg-overlay   tatsu-clearfix" data-title=""  data-headerscheme="background--dark">
           <div className='tatsu-section-pad clearfix' data-padding='{"d":"60px 0px 100px 0px","l":"60px 0px 100px 0px","t":"50px 50px 50px 50px","m":"50px 20px 50px 20px"}' data-padding-top='50px'>
             <div className="tatsu-row-wrap  tatsu-wrap tatsu-row-has-one-half tatsu-row-has-two-cols tatsu-custom-gutter tatsu-reg-cols  tatsu-clearfix tatsu-B1g4iBJYEu" >
               <div  className="tatsu-row HeroSectRow" style={{ marginLeft:"-0px", marginRight:"-0px" }}>
@@ -1078,15 +1096,15 @@ export default function Home() {
                           </div>
                         </div>
                         <div  class = "tatsu-forms tatsu-module  tatsu-BJHI0E2Bu " >
-                          <div class = "tatsu-forms-inner tatsu-forms-save tatsu-form-rounded tatsu-form-submit-rounded" id="form-6534">
-                            <form method="post" className="spyro-form basic tatsu-ryGHPIJKVu" data-action="email">
+                          <div class = "tatsu-forms-inner tatsu-form-rounded tatsu-form-submit-rounded" id="form-6534">
+                            <form onSubmit={onSubmit} method="post" className="spyro-form basic tatsu-ryGHPIJKVu" data-action="email">
                               <div className="form-fields-container">
                                 <div className="form-item-wrap tatsu-r1BDUJtNu form-text">
                                   <div className="form-item">
                                     <div className="form-label"></div>
                                     <div className="form-field-wrap">
                                       <div className="form-field">
-                                        <input type="text" className="form-element form-text-element" placeholder="First Name" data-map_field="none" name="first_name" required="required"/>
+                                        <input value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" className="form-element form-text-element" placeholder="First Name" data-map_field="none" name="first_name" required="required"/>
                                       </div>
                                     </div>
                                   </div>
@@ -1096,7 +1114,7 @@ export default function Home() {
                                     <div className="form-label"></div>
                                     <div className="form-field-wrap">
                                       <div className="form-field">
-                                        <input type="text" className="form-element form-text-element" placeholder="Last Name" data-map_field="none" name="last_name" required="required"/>
+                                        <input value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" className="form-element form-text-element" placeholder="Last Name" data-map_field="none" name="last_name" required="required"/>
                                       </div>
                                     </div>
                                   </div>
@@ -1106,7 +1124,7 @@ export default function Home() {
                                     <div className="form-label"></div>
                                     <div className="form-field-wrap">
                                       <div className="form-field">
-                                        <input type="email" className="form-element form-text-element" placeholder="Business Email" data-map_field="none" name="email" required="required"/>
+                                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-element form-text-element" placeholder="Business Email" data-map_field="none" name="email" required="required"/>
                                       </div>
                                     </div>
                                   </div>
@@ -1116,7 +1134,7 @@ export default function Home() {
                                     <div className="form-label"></div>
                                     <div className="form-field-wrap">
                                       <div className="form-field">
-                                        <input type="text" className="form-element form-text-element" placeholder="Company Name" data-map_field="none" name="company_name" required="required"/>
+                                        <input value={companyName} onChange={(e) => setCompanyName(e.target.value)} type="text" className="form-element form-text-element" placeholder="Company Name" data-map_field="none" name="company_name" required="required"/>
                                       </div>
                                     </div>
                                   </div>

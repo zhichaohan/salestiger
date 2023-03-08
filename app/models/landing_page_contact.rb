@@ -1,0 +1,2 @@
+class LandingPageContact < ApplicationRecord
+end

@@ -46,7 +46,7 @@ export default function Header() {
                 </div>
                 <div className="tatsu-header-col tatsu-fymr7ihage48oj9l  spyroheadermaincss" >
                    <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-l00veHRNz   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="login/" aria-label="Login" data-gdpr-atts={{}} >Login</a></div>
-                   <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-fymr7ihakg7lbul1   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="signup/" aria-label="Signup" data-gdpr-atts={{}} >Signup</a></div>
+                   <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-fymr7ihakg7lbul1   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="#contact" aria-label="Signup" data-gdpr-atts={{}} >Signup</a></div>
                    <div  className="tatsu-header-module tatsu-hamburger tatsu-fymr7ihc339u3a83  tatsu-hide-laptop tatsu-hide-desktop " data-slide-menu="tatsu-fymr7ihc339u3a83">
                       <div className="line-wrapper">
                          <span className="line-1"></span>
