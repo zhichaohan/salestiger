@@ -16,12 +16,12 @@ export default function Home() {
                            <div className="tatsu-column-pad" >
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-nxSVzqt23   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <h1><span className="h1 ">Your Virtual Sales Team</span></h1>
+                                    <h1><span className="h1 ">We book the meetings.<br/>You close the deals.</span></h1>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-OvcNgYbxL   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <p><span className="body ">We create your sales team by infusing decades of sales experience with AI and automation to help you unlock more opportunities, book more meetings and generate more sales.</span></p>
+                                    <p><span className="body ">Spend time on what's important - meeting with highly qualified leads and converting them into loyal customers. We've combined decades of sales expertise with powerful-AI to save you time and help you close more deals.</span></p>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-button-group align-left tatsu-SjhrPiYhPU  btnmainsec"  >
@@ -256,12 +256,12 @@ export default function Home() {
                            <div className="tatsu-column-pad" >
                               <div  className="tatsu-module tatsu-text-block-wrap tatsu-L964h8ELS  brrmvtagas">
                                  <div className="tatsu-text-inner   clearfix" >
-                                    <h2>Industry beating sales efficiency</h2>
+                                    <h2>Work smarter. Scale faster.</h2>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-qqMYFMQmik   " >
                                  <div className="tatsu-inline-text-inner tatsu-align-center">
-                                    <p><span className="body_1">Instead of going through the headache of hiring and training a sales team, get team members pre-programmed to search out the right opportunities and get booked meetings</span></p>
+                                    <p><span className="body_1">Sales reps spend an average of <b>456</b> hours each year on prospecting and lead-generation activities. Instead, give your reps a calendar full of meetings and 57 more days a year to close deals.</span></p>
                                  </div>
                               </div>
                               <div className="tatsu-row-wrap  tatsu-row-has-one-half tatsu-row-has-two-cols tatsu-medium-gutter tatsu-reg-cols tatsu-inner-row-wrap  tatsu-clearfix tatsu-wEPtfoLO1r" >
@@ -290,7 +290,7 @@ export default function Home() {
                                                 <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ff_Pna_AAZ   " >
                                                    <div className="tatsu-inline-text-inner ">
                                                       <p>
-                                                         <span className="body">We find the right leads from our database of contacts to create the right opportunities. Our AI algorithm learns what works and finds more similar opportunities</span>
+                                                         <span className="body">SalesTiger leverages the power of advanced algorithms to analyze vast amounts of data and pinpoint your perfect prospects.</span>
                                                       </p>
                                                    </div>
                                                 </div>
@@ -316,13 +316,13 @@ export default function Home() {
                                                 </div>
                                                 <div  className="tatsu-module tatsu-inline-text clearfix tatsu-CmNxbLp_ee   " >
                                                    <div className="tatsu-inline-text-inner ">
-                                                      <h5>Multichannel strategies</h5>
+                                                      <h5>Multi-Channel Strategy</h5>
                                                    </div>
                                                 </div>
                                                 <div  className="tatsu-module tatsu-inline-text clearfix tatsu-Pxn8sYxwzeZ   " >
                                                    <div className="tatsu-inline-text-inner ">
                                                       <p>
-                                                         <span className="body ">We get in front of your leads through email, LinkedIn and phone call to maximize response and conversion</span>
+                                                         <span className="body ">From there, it utilizes cutting- edge communication tactics and multi-channel outreach to schedule face-to-face meetings with decision-makers.</span>
                                                       </p>
                                                    </div>
                                                 </div>
@@ -735,7 +735,7 @@ export default function Home() {
                                           </svg>
                                        </span>
                                     </div>
-                                    <div style={{ width : "90%" }} className="tatsu-star-rating-filled">
+                                    <div className="tatsu-star-rating-filled">
                                        <span className="tatsu-star-rating-star">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15">
                                              <polygon points="1170 6866 1171.9 6871.348 1177 6871.348 1172.838 6874.488 1174.327 6880 1170 6876.695 1165.675 6880 1167.162 6874.488 1163 6871.348 1168.1 6871.348" transform="translate(-1163 -6866)"/>
@@ -766,7 +766,7 @@ export default function Home() {
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-7eao8thil   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <p><span className="body palette-3">I would like to say that I found the oshin theme really easy to manipulate, you can make a lot of beautiful things even if you don’t know how to code !</span></p>
+                                    <p><span className="body palette-3">Being a part of a fast-growing sales team for a start-up can be overwhelming at times, but having SalesTiger always made me feel excited to come to work the next day. I didn't have to spend hours every day finding the right customers and booking meetings - I came into work with a full calendar almost daily.</span></p>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-icon_card  tatsu-YtE0i0BcN  custominfo tatsu-icon_card-type-image tatsu-icon_card-style1 tatsu-icon_card-align-left tatsu-icon_card-vertical-align-center tatsu-icon_medium" >
@@ -774,10 +774,10 @@ export default function Home() {
                                  </div>
                                  <div className="tatsu-icon_card-title-caption">
                                     <div className="tatsu-icon_card-title h6">
-                                       Harvey Specter
+                                       Ben B.
                                     </div>
                                     <div className="tatsu-icon_card-caption body">
-                                       <p>Founder of Spyro</p>
+                                       <p>Sales Exec @ ServiceNow</p>
                                     </div>
                                  </div>
                               </div>
@@ -822,7 +822,7 @@ export default function Home() {
                                           </svg>
                                        </span>
                                     </div>
-                                    <div style={{ width : "90%" }} className="tatsu-star-rating-filled">
+                                    <div className="tatsu-star-rating-filled">
                                        <span className="tatsu-star-rating-star">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15">
                                              <polygon points="1170 6866 1171.9 6871.348 1177 6871.348 1172.838 6874.488 1174.327 6880 1170 6876.695 1165.675 6880 1167.162 6874.488 1163 6871.348 1168.1 6871.348" transform="translate(-1163 -6866)"/>
@@ -853,7 +853,7 @@ export default function Home() {
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-Ef9L7ZOQX   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <p><span className="palette-3 body">This is a truly spectacular theme! The custom page builder is definitely one of the most intuitive and user-friendly page builders I’ve ever used.</span></p>
+                                    <p><span className="palette-3 body">I had the privilege of working with SalesTiger at my previous company. They went above and beyond to understand our unique needs and tailor their solutions to fit our sales team. The results speak for themselves - they helped our team consistently exceed activity metrics and quota goals and we saw a 25% increase in revenue in just 3 months.</span></p>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-icon_card  tatsu-yXo8TSx7C  custominfo tatsu-icon_card-type-image tatsu-icon_card-style1 tatsu-icon_card-align-left tatsu-icon_card-vertical-align-center tatsu-icon_medium" >
@@ -861,10 +861,10 @@ export default function Home() {
                                  </div>
                                  <div className="tatsu-icon_card-title-caption">
                                     <div className="tatsu-icon_card-title h6">
-                                       Bruce Jones
+                                       Tyler M.
                                     </div>
                                     <div className="tatsu-icon_card-caption body">
-                                       <p>Wayne Enterprises</p>
+                                       <p>Sales Exec @ SmartSheets</p>
                                     </div>
                                  </div>
                               </div>
@@ -909,7 +909,7 @@ export default function Home() {
                                           </svg>
                                        </span>
                                     </div>
-                                    <div style={{ width: "90%" }} className="tatsu-star-rating-filled">
+                                    <div className="tatsu-star-rating-filled">
                                        <span className="tatsu-star-rating-star">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15">
                                              <polygon points="1170 6866 1171.9 6871.348 1177 6871.348 1172.838 6874.488 1174.327 6880 1170 6876.695 1165.675 6880 1167.162 6874.488 1163 6871.348 1168.1 6871.348" transform="translate(-1163 -6866)"/>
@@ -940,7 +940,7 @@ export default function Home() {
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-eMEf-qAoM   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <p><span className="palette-3 body">I would like to say that I found the oshin theme really easy to manipulate, you can make a lot of beautiful things even if you don’t know how to code !</span></p>
+                                    <p><span className="palette-3 body">We've been using SalesTiger for several months now and have seen tremendous results. Working with them has been a game-changer for our start-up. Their technology and expertise helped us scale quickly and efficiently.</span></p>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-icon_card  tatsu-lERMVlE_i  custominfo tatsu-icon_card-type-image tatsu-icon_card-style1 tatsu-icon_card-align-left tatsu-icon_card-vertical-align-center tatsu-icon_medium" >
@@ -948,10 +948,10 @@ export default function Home() {
                                  </div>
                                  <div className="tatsu-icon_card-title-caption">
                                     <div className="tatsu-icon_card-title h6">
-                                       Katherine Tessa
+                                       Soovin C.
                                     </div>
                                     <div className="tatsu-icon_card-caption body">
-                                       <p>Designer</p>
+                                       <p>Sales Enablement @ ServiceTitan</p>
                                     </div>
                                  </div>
                               </div>
