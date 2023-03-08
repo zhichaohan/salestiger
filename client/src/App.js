@@ -12,6 +12,8 @@ import Context from "./utils/context";
 import Auth from "./utils/auth";
 import './App.css'
 import styles from './index.module.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const auth = new Auth(gon.current_user || {});
 
@@ -74,6 +76,7 @@ const PrivateRoute = ({ component: Component, auth, path, layout: Layout }) => {
 
 const PublicLayout = (props) => (
   <>
+    <ToastContainer />
     <Header />
     {props.children}
     <Footer />
