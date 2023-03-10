@@ -89,7 +89,6 @@ export default function Footer() {
                                   <div className="tatsu-menu-widget ">
                                      <ul id="menu-06wizu-uQ" className="clearfix ">
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6919"><a title="Terms of Service" href="/terms">Terms of Service</a></li>
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6920"><a title="Customer Support" href="https://spyrowptheme.com/saas-clickthrough-new/customer-support/">Customer Support</a></li>
                                      </ul>
                                   </div>
                                </nav>
@@ -100,32 +99,36 @@ export default function Footer() {
                          </div>
                       </div>
                    </div>
-                   <div  className="tatsu-column  tatsu-column-no-bg tatsu-one-fourth tatsu-column-image-none tatsu-column-effect-none tatsu-prevent-overflow  tatsu-fynrg3ecq12x5ykf"  data-parallax-speed="0">
-                      <div className="tatsu-column-inner " >
-                         <div className="tatsu-column-pad-wrap">
-                            <div className="tatsu-column-pad" >
-                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-fynrg3e6qidyq3ej   " >
-                                  <div className="tatsu-inline-text-inner ">
-                                     <h5><span className="palette-0 ">Follow us on</span></h5>
-                                  </div>
-                               </div>
-                               <nav  className="tatsu-menu-widget-wrap tatsu-module clearfix   tatsu-duwexk_em h7   "  >
-                                  <div className="tatsu-menu-widget ">
-                                     <ul id="menu-duwexk_em" className="clearfix ">
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6827"><a title="Facebook" href="#">Facebook</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6828"><a title="Instagram" href="#">Instagram</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6829"><a title="Twitter" href="#">Twitter</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6830"><a title="Linkedin" href="#">Linkedin</a></li>
-                                     </ul>
-                                  </div>
-                               </nav>
-                            </div>
-                         </div>
-                         <div class = "tatsu-column-bg-image-wrap">
-                            <div class = "tatsu-column-bg-image" ></div>
-                         </div>
-                      </div>
-                   </div>
+                   {
+                     /*
+                     <div  className="tatsu-column  tatsu-column-no-bg tatsu-one-fourth tatsu-column-image-none tatsu-column-effect-none tatsu-prevent-overflow  tatsu-fynrg3ecq12x5ykf"  data-parallax-speed="0">
+                        <div className="tatsu-column-inner " >
+                           <div className="tatsu-column-pad-wrap">
+                              <div className="tatsu-column-pad" >
+                                 <div  className="tatsu-module tatsu-inline-text clearfix tatsu-fynrg3e6qidyq3ej   " >
+                                    <div className="tatsu-inline-text-inner ">
+                                       <h5><span className="palette-0 ">Follow us on</span></h5>
+                                    </div>
+                                 </div>
+                                 <nav  className="tatsu-menu-widget-wrap tatsu-module clearfix   tatsu-duwexk_em h7   "  >
+                                    <div className="tatsu-menu-widget ">
+                                       <ul id="menu-duwexk_em" className="clearfix ">
+                                          <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6827"><a title="Facebook" href="#">Facebook</a></li>
+                                          <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6828"><a title="Instagram" href="#">Instagram</a></li>
+                                          <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6829"><a title="Twitter" href="#">Twitter</a></li>
+                                          <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6830"><a title="Linkedin" href="#">Linkedin</a></li>
+                                       </ul>
+                                    </div>
+                                 </nav>
+                              </div>
+                           </div>
+                           <div class = "tatsu-column-bg-image-wrap">
+                              <div class = "tatsu-column-bg-image" ></div>
+                           </div>
+                        </div>
+                     </div>
+                     */
+                   }
                 </div>
              </div>
           </div>
