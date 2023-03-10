@@ -666,7 +666,7 @@ export default function Home() {
                               <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-qc4IFq6QM  " >
                                  <div className="tatsu-single-image-inner " >
                                     <div className="tatsu-single-image-padding-wrap" ></div>
-                                    <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/06/saas-manage-project.png" alt =" "  />
+                                    <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/images/dashboard.png" alt =" " style={{ paddingTop: '30px' }} />
                                  </div>
                               </div>
                            </div>
@@ -1192,7 +1192,7 @@ export default function Home() {
       { /* renderTrustedBy() */}
       { renderImgLeftTextRight() }
       { renderThreeBlock() }
-      { /* renderTextLeftImgRight() */ }
+      { renderTextLeftImgRight() }
       { renderTestimonials() }
       { renderWeSupport() }
       { renderContactUs() }
