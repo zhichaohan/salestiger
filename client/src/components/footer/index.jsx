@@ -63,9 +63,9 @@ export default function Footer() {
                                <nav  className="tatsu-menu-widget-wrap tatsu-module clearfix   tatsu-aPYssekWn h7   "  >
                                   <div className="tatsu-menu-widget ">
                                      <ul id="menu-aPYssekWn" className="clearfix ">
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6841"><a title="Home" href="#home">Home</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6842"><a title="Features" href="#feature">Features</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6843"><a title="Testimonials" href="#testimonials">Testimonials</a></li>
+                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6841"><a title="Home" href="/">Home</a></li>
+                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6842"><a title="Features" href="/">Features</a></li>
+                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6843"><a title="Testimonials" href="/">Testimonials</a></li>
                                      </ul>
                                   </div>
                                </nav>
@@ -88,9 +88,8 @@ export default function Footer() {
                                <nav  className="tatsu-menu-widget-wrap tatsu-module clearfix   tatsu-06wizu-uQ h7   "  >
                                   <div className="tatsu-menu-widget ">
                                      <ul id="menu-06wizu-uQ" className="clearfix ">
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6919"><a title="Terms of Service" href="https://spyrowptheme.com/saas-clickthrough-new/terms/">Terms of Service</a></li>
+                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6919"><a title="Terms of Service" href="/terms">Terms of Service</a></li>
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6920"><a title="Customer Support" href="https://spyrowptheme.com/saas-clickthrough-new/customer-support/">Customer Support</a></li>
-                                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6921"><a title="Careers" href="https://spyrowptheme.com/saas-clickthrough-new/careers/">Careers</a></li>
                                      </ul>
                                   </div>
                                </nav>
