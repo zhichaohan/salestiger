@@ -340,7 +340,7 @@ export default function Home() {
                                                 <div  className="tatsu-module tatsu-inline-text clearfix tatsu-Pxn8sYxwzeZ   " >
                                                    <div className="tatsu-inline-text-inner ">
                                                       <p>
-                                                         <span className="body ">From there, it utilizes cutting- edge communication tactics and multi-channel outreach to schedule face-to-face meetings with decision-makers.</span>
+                                                         <span className="body ">From there, we utilize cutting- edge communication tactics and multi-channel outreach to schedule face-to-face meetings with decision-makers.</span>
                                                       </p>
                                                    </div>
                                                 </div>
@@ -575,82 +575,87 @@ export default function Home() {
                               <div  className="tatsu-module tatsu-normal-icon tatsu-icon-shortcode align-none tatsu-SvsMGE0ZH   "><span  className="tatsu-icon-wrap circle  tatsu-animate    " data-animation="fadeIn"   aria-label="tatsu-icon-bell2" data-gdpr-atts={{}}   ><i className="tatsu-icon tatsu-custom-icon tatsu-custom-icon-class tatsu-icon-bell2 medium circle"  data-animation="fadeIn" data-animation-delay="0"></i></span></div>
                               <div  className="tatsu-module tatsu-text-block-wrap tatsu-ekkNLj2vz  brrmvtagas">
                                  <div className="tatsu-text-inner   clearfix" >
-                                    <h2>Manage your project<br />easily by our Spyro</h2>
+                                    <h2>Put Your Cyber Sales<br />Team to Work</h2>
                                  </div>
                               </div>
                               <div  className="tatsu-module tatsu-inline-text clearfix tatsu-6XYiBWUwDu   " >
                                  <div className="tatsu-inline-text-inner ">
-                                    <p><span className="body_1" style={{ fontSize: "18px" }}>Spyro is a modern marketing landing page WP theme, that lets you build stunning high performance websites without code using a fully visual interface.</span></p>
+                                    <p><span className="body_1" style={{ fontSize: "18px" }}>SalesTiger's easy-to-use CRM allows you to upload existing contacts and leads while analyzing and producing new leads and opportunities.</span></p>
                                  </div>
                               </div>
-                              <div className="tatsu-row-wrap  tatsu-row-has-one-half tatsu-row-has-two-cols tatsu-zero-margin tatsu-small-gutter tatsu-reg-cols tatsu-inner-row-wrap  tatsu-clearfix tatsu-o6ljZGYzQD" >
-                                 <div  className="tatsu-row " >
-                                    <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-image- tatsu-column-effect-  tatsu-SnOKVCwo32"  data-parallax-speed="0">
-                                       <div className="tatsu-column-inner " >
-                                          <div className="tatsu-column-pad-wrap">
-                                             <div className="tatsu-column-pad" >
-                                                <ul  className="tatsu-module tatsu-list tatsu-E0YIKkxoa5   ListManage tatsu-list-vertical-align-center tatsu-lists-icon" >
-                                                   <li  className="tatsu-list-content tatsu-sJpgKDUfao   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>Code Optimization</h6>
-                                                      </div>
-                                                   </li>
-                                                   <li  className="tatsu-list-content tatsu-cyxwVpwj_m   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>Hosting with SSL & CDN</h6>
-                                                      </div>
-                                                   </li>
-                                                   <li  className="tatsu-list-content tatsu-7Zdc0k9Gjs   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>Image Compression</h6>
-                                                      </div>
-                                                   </li>
-                                                </ul>
-                                             </div>
-                                          </div>
-                                          <div className="tatsu-column-bg-image-wrap">
-                                             <div className="tatsu-column-bg-image" ></div>
-                                          </div>
-                                          <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
-                                       </div>
-                                    </div>
-                                    <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-image- tatsu-column-effect-  tatsu-5OBIhj3HCf"  data-parallax-speed="0" >
-                                       <div className="tatsu-column-inner " >
-                                          <div className="tatsu-column-pad-wrap">
-                                             <div className="tatsu-column-pad" >
-                                                <ul  className="tatsu-module tatsu-list tatsu-zMxN7fWJcL   ListManage tatsu-list-vertical-align-center tatsu-lists-icon" >
-                                                   <li  className="tatsu-list-content tatsu-r0XTUmt3Eq   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>Code Optimization</h6>
-                                                      </div>
-                                                   </li>
-                                                   <li  className="tatsu-list-content tatsu-I17x6WBA9O   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>SSL & CDN</h6>
-                                                      </div>
-                                                   </li>
-                                                   <li  className="tatsu-list-content tatsu-o6f-D8By8an   " >
-                                                      <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
-                                                      <div className="tatsu-list-inner">
-                                                         <h6>Image Compression</h6>
-                                                      </div>
-                                                   </li>
-                                                </ul>
-                                             </div>
-                                          </div>
-                                          <div className="tatsu-column-bg-image-wrap">
-                                             <div className="tatsu-column-bg-image" ></div>
-                                          </div>
-                                          <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+                              {
+                                /*
+                                <div className="tatsu-row-wrap  tatsu-row-has-one-half tatsu-row-has-two-cols tatsu-zero-margin tatsu-small-gutter tatsu-reg-cols tatsu-inner-row-wrap  tatsu-clearfix tatsu-o6ljZGYzQD" >
+                                   <div  className="tatsu-row " >
+                                      <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-image- tatsu-column-effect-  tatsu-SnOKVCwo32"  data-parallax-speed="0">
+                                         <div className="tatsu-column-inner " >
+                                            <div className="tatsu-column-pad-wrap">
+                                               <div className="tatsu-column-pad" >
+                                                  <ul  className="tatsu-module tatsu-list tatsu-E0YIKkxoa5   ListManage tatsu-list-vertical-align-center tatsu-lists-icon" >
+                                                     <li  className="tatsu-list-content tatsu-sJpgKDUfao   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>Code Optimization</h6>
+                                                        </div>
+                                                     </li>
+                                                     <li  className="tatsu-list-content tatsu-cyxwVpwj_m   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>Hosting with SSL & CDN</h6>
+                                                        </div>
+                                                     </li>
+                                                     <li  className="tatsu-list-content tatsu-7Zdc0k9Gjs   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>Image Compression</h6>
+                                                        </div>
+                                                     </li>
+                                                  </ul>
+                                               </div>
+                                            </div>
+                                            <div className="tatsu-column-bg-image-wrap">
+                                               <div className="tatsu-column-bg-image" ></div>
+                                            </div>
+                                            <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
+                                         </div>
+                                      </div>
+                                      <div  className="tatsu-column  tatsu-bg-overlay tatsu-one-half tatsu-column-image- tatsu-column-effect-  tatsu-5OBIhj3HCf"  data-parallax-speed="0" >
+                                         <div className="tatsu-column-inner " >
+                                            <div className="tatsu-column-pad-wrap">
+                                               <div className="tatsu-column-pad" >
+                                                  <ul  className="tatsu-module tatsu-list tatsu-zMxN7fWJcL   ListManage tatsu-list-vertical-align-center tatsu-lists-icon" >
+                                                     <li  className="tatsu-list-content tatsu-r0XTUmt3Eq   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>Code Optimization</h6>
+                                                        </div>
+                                                     </li>
+                                                     <li  className="tatsu-list-content tatsu-I17x6WBA9O   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>SSL & CDN</h6>
+                                                        </div>
+                                                     </li>
+                                                     <li  className="tatsu-list-content tatsu-o6f-D8By8an   " >
+                                                        <div className="tatsu-list-icon-wrap" ><i className="tatsu-icon tatsu-icon-check-square "></i></div>
+                                                        <div className="tatsu-list-inner">
+                                                           <h6>Image Compression</h6>
+                                                        </div>
+                                                     </li>
+                                                  </ul>
+                                               </div>
+                                            </div>
+                                            <div className="tatsu-column-bg-image-wrap">
+                                               <div className="tatsu-column-bg-image" ></div>
+                                            </div>
+                                            <div className="tatsu-overlay tatsu-column-overlay tatsu-animate-none" ></div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                */
+                              }
+
                            </div>
                         </div>
                         <div className="tatsu-column-bg-image-wrap">
@@ -1084,14 +1089,14 @@ export default function Home() {
                         <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ryMEoH1FEd   " >
                           <div className="tatsu-inline-text-inner tatsu-align-center">
                             <h2>
-                              <span>Learn how we can<br />unlock <span className="palette-0">your opportunities</span></span>
+                              <span>Learn how we are<br /><span className="palette-0">revoluntionizing</span><br/>the sales game</span>
                             </h2>
                           </div>
                         </div>
                         <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ry74sHJFNu   " >
                           <div className="tatsu-inline-text-inner tatsu-align-center">
                             <p>
-                              <span className="body_1">with a virtual sales team</span>
+                              <span className="body_1">Reserve a spot today</span>
                             </p>
                           </div>
                         </div>
@@ -1144,7 +1149,7 @@ export default function Home() {
                                     <div className="form-field-wrap">
                                       <div className="form-field">
                                         <div className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block align-block block-center">
-                                          <input type="submit"  className="tatsu-shortcode blockbtn tatsu-button left-icon  rounded"  aria-label="Contact Us"  value="Contact Us" />
+                                          <input type="submit"  className="tatsu-shortcode blockbtn tatsu-button left-icon  rounded"  aria-label="Contact Us"  value="Submit" />
                                         </div>
                                       </div>
                                     </div>
