@@ -1,5 +1,13 @@
 import { toast } from 'react-toastify';
 
+export const autofocusAll = () => {
+  const els = document.getElementsByClassName('autofocus')
+
+  Array.prototype.forEach.call(els, (el) => {
+    el.focus();
+  });
+}
+
 export const snakeCaseToTitleCase = (str) => {
 	return str.split('_').map(function(w) {
 		return w[0].toUpperCase() + w.substr(1).toLowerCase();

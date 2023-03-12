@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   before_action :set_seo, only: [:home]
 
   def home
+    gon.current_user = current_user
   end
 
   def app

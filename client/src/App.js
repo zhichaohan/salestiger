@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Home from './components/home';
 import Terms from './components/terms';
+import SignIn from './components/sign_in';
 import Header from './components/header';
 import Footer from './components/footer';
 import Context from "./utils/context";
@@ -95,6 +96,7 @@ function App() {
         <Switch>
           <PublicRoute exact path="/" component={Home} layout={PublicLayout} />
           <PublicRoute exact path="/terms" component={Terms} layout={PublicLayout} />
+          <PublicRoute exact path="/sign-in" component={SignIn} layout={PublicLayout} />
         </Switch>
       </Router>
     </Context.Provider>
