@@ -4,6 +4,11 @@ class WelcomeController < ApplicationController
 
   def home
     gon.current_user = current_user
+    if current_user.present?
+      render layout: "account"
+    else
+      render layout: "application"
+    end
   end
 
   def app
