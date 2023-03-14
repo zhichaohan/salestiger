@@ -3,6 +3,12 @@ class WelcomeController < ApplicationController
   before_action :set_seo, only: [:home]
 
   def home
+    gon.current_user = current_user
+    if current_user.present?
+      render layout: "dashboard"
+    else
+      render layout: "application"
+    end
   end
 
   def app
