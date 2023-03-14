@@ -54,7 +54,7 @@ export default function SignIn() {
                     <div className="tatsu-column-pad" >
                       <div  className="tatsu-module tatsu-inline-text clearfix tatsu-ryMEoH1FEd   " >
                         <div className="tatsu-inline-text-inner tatsu-align-center">
-                          <h2><span>Login to Spyro</span></h2>
+                          <h2><span>Login to Sales Tiger</span></h2>
                         </div>
                       </div>
                       <div  className="tatsu-forms tatsu-module  tatsu-BJHI0E2Bu ">
