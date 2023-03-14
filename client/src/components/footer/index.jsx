@@ -64,8 +64,8 @@ export default function Footer() {
                                   <div className="tatsu-menu-widget ">
                                      <ul id="menu-aPYssekWn" className="clearfix ">
                                         <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6841"><a title="Home" href="/">Home</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6842"><a title="Features" href="/">Features</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6843"><a title="Testimonials" href="/">Testimonials</a></li>
+                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6842"><a title="Features" href="/#features">Features</a></li>
+                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6843"><a title="Testimonials" href="/#testimonials">Testimonials</a></li>
                                      </ul>
                                   </div>
                                </nav>

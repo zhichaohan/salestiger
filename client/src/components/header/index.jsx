@@ -27,9 +27,9 @@ export default function Header() {
                    <nav  className="tatsu-header-module tatsu-header-navigation clearfix  tatsu-hide-tablet tatsu-hide-mobile">
                       <div className="tatsu-menu tatsu-Y4BPcfWoe">
                          <ul id="normal-menu-Y4BPcfWoe" className="clearfix ">
-                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6838"><a title="Home" href="#home">Home</a></li>
-                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6823"><a title="Features" href="#feature">Features</a></li>
-                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6824"><a title="Testimonials" href="#testimonials">Testimonials</a></li>
+                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6838"><a title="Home" href="/">Home</a></li>
+                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6823"><a title="Features" href="/#feature">Features</a></li>
+                            <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-6824"><a title="Testimonials" href="/#testimonials">Testimonials</a></li>
                          </ul>
                       </div>
                    </nav>
@@ -55,7 +55,7 @@ export default function Header() {
                     !gon.current_user &&
                     <>
                       <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-l00veHRNz   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="/sign-in" aria-label="Login" data-gdpr-atts={{}} >Login</a></div>
-                      <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-fymr7ihakg7lbul1   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="#contact" aria-label="Signup" data-gdpr-atts={{}} >Signup</a></div>
+                      <div  className="tatsu-module tatsu-normal-button tatsu-button-wrap align-block block-  tatsu-fymr7ihakg7lbul1   tatsu-hide-mobile tatsu-hide-tablet btnmainsecheader"><a className="tatsu-shortcode smallbtn tatsu-button left-icon rounded   bg-animation-none  " href="/#contact" aria-label="Signup" data-gdpr-atts={{}} >Signup</a></div>
                     </>
                   }
                   {
