@@ -22,7 +22,8 @@ CREATE TABLE public.accounts (
     name character varying NOT NULL,
     slug character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    logo_url character varying
 );
 
 
@@ -238,6 +239,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230308202513'),
 ('20230312051854'),
 ('20230312052747'),
-('20230312053748');
+('20230312053748'),
+('20230315221237');
 
 

@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 a = Account.find_or_create_by(name: 'Sales Tiger')
+a.update!(logo_url: 'https://salestiger-assets.s3.us-west-2.amazonaws.com/images/logonobg.png')
 u = a.users.find_by(name: 'Zhichao')
 if u.blank?
   u = a.users.create!(name: 'Zhichao', email: 'zhichao@salestiger.io', password: 'asdfasdf')
