@@ -102,6 +102,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: team_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.team_members (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: team_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.team_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: team_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.team_members_id_seq OWNED BY public.team_members.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -153,6 +185,13 @@ ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: team_members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members ALTER COLUMN id SET DEFAULT nextval('public.team_members_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -192,11 +231,26 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: team_members team_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT team_members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_team_members_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_team_members_on_account_id ON public.team_members USING btree (account_id);
 
 
 --
@@ -229,6 +283,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: team_members fk_rails_7145ad667e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT fk_rails_7145ad667e FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -240,6 +302,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230312051854'),
 ('20230312052747'),
 ('20230312053748'),
-('20230315221237');
+('20230315221237'),
+('20230315231052');
 
 

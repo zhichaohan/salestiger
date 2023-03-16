@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :landing_page_contacts
+      resources :team_members
     end
   end
 

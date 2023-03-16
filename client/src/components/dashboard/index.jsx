@@ -7,13 +7,16 @@ import {
 } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
+import TeamMembersIndex from './team_members';
+import TeamMembersNew from './team_members/new';
 import Home from './home';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardLayout = (props) => (
   <>
-    <Header />
+    <ToastContainer />
     {props.children}
-    <Footer />
   </>
 )
 
@@ -33,6 +36,8 @@ function Dashboard() {
     <Router>
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members" component={TeamMembersIndex} layout={DashboardLayout} />
       </Switch>
     </Router>
   )
