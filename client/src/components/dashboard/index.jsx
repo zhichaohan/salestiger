@@ -9,6 +9,7 @@ import Header from './header';
 import Footer from './footer';
 import TeamMembersIndex from './team_members';
 import TeamMembersNew from './team_members/new';
+import TeamMembersShow from './team_members/show';
 import Home from './home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,6 +38,7 @@ function Dashboard() {
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members/:id" component={TeamMembersShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members" component={TeamMembersIndex} layout={DashboardLayout} />
       </Switch>
     </Router>

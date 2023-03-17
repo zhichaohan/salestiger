@@ -8,7 +8,17 @@ module Api
 
         respond_to do |format|
           format.json do
-            render json: team_members
+            render json: team_members, each_serializer: TeamMemberSerializer
+          end
+        end
+      end
+
+      def show
+        team_member = current_user.account.team_members.friendly.find(params[:id])
+
+        respond_to do |format|
+          format.json do
+            render json: team_member, serializer: TeamMemberSerializer
           end
         end
       end

@@ -18,3 +18,46 @@ if u.blank?
 end
 
 t = a.team_members.find_or_create_by!(name: 'Nathan Reeves')
+t.update(
+  title: 'Account Executive',
+  photo_url: 'https://admin.pixelstrap.com/enzo/assets/images/avtar/16.jpg',
+  gmail: 'nathan@salestiger.io'
+)
+
+t = a.team_members.find_or_create_by!(name: 'Chris Hedum')
+t.update(
+  title: 'CEO',
+  photo_url: 'https://media.licdn.com/dms/image/D5603AQFbiRPbSSUUyQ/profile-displayphoto-shrink_800_800/0/1668389157267?e=1684368000&v=beta&t=qa15SFnrNzjk8PfFs7YdGdc3tgV8S-fEU_y1321wpH4',
+  facebook_url: 'https://www.facebook.com/christopher.hedum',
+  twitter_url: 'asdfasdf',
+  instagram_url: 'https://www.instagram.com/chrisplaysrugby',
+  linkedin_url: 'https://www.linkedin.com/in/chris-h-67a649118/',
+  gmail: 'chris@salestiger.io'
+)
+t.team_member_infos.find_or_create_by!(
+  type: 'TeamMemberInfo::Education',
+  label: 'Marketing / Student-Athlete',
+  location: 'Oregon State University',
+  start_date: Date.new(2011, 9, 1)
+)
+t.team_member_infos.find_or_create_by!(
+  type: 'TeamMemberInfo::WorkExperience',
+  label: 'Vice President of Sales',
+  location: 'PatientPartner',
+  start_date: Date.new(2012, 3, 1),
+  end_date: Date.new(2023, 3, 1)
+)
+t.team_member_infos.find_or_create_by!(
+  type: 'TeamMemberInfo::WorkExperience',
+  label: 'Head of Sales',
+  location: 'bttn.',
+  start_date: Date.new(2021, 7, 1),
+  end_date: Date.new(2012, 3, 1)
+)
+t.team_member_infos.find_or_create_by!(
+  type: 'TeamMemberInfo::WorkExperience',
+  label: 'Sr. Manager, Sales Development',
+  location: 'GoSite',
+  start_date: Date.new(2019, 8, 1),
+  end_date: Date.new(2021, 7, 1)
+)

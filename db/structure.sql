@@ -102,6 +102,42 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: team_member_infos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.team_member_infos (
+    id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    type character varying NOT NULL,
+    label character varying NOT NULL,
+    location character varying,
+    start_date date NOT NULL,
+    end_date date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: team_member_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.team_member_infos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: team_member_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.team_member_infos_id_seq OWNED BY public.team_member_infos.id;
+
+
+--
 -- Name: team_members; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -110,7 +146,15 @@ CREATE TABLE public.team_members (
     account_id bigint NOT NULL,
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    title character varying,
+    photo_url character varying,
+    slug character varying,
+    facebook_url character varying,
+    gmail character varying,
+    twitter_url character varying,
+    instagram_url character varying,
+    linkedin_url character varying
 );
 
 
@@ -185,6 +229,13 @@ ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: team_member_infos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_member_infos ALTER COLUMN id SET DEFAULT nextval('public.team_member_infos_id_seq'::regclass);
+
+
+--
 -- Name: team_members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -231,6 +282,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: team_member_infos team_member_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_member_infos
+    ADD CONSTRAINT team_member_infos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: team_members team_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -244,6 +303,13 @@ ALTER TABLE ONLY public.team_members
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_team_member_infos_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_team_member_infos_on_team_member_id ON public.team_member_infos USING btree (team_member_id);
 
 
 --
@@ -275,6 +341,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: team_member_infos fk_rails_2a4059ad68; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_member_infos
+    ADD CONSTRAINT fk_rails_2a4059ad68 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
 -- Name: users fk_rails_61ac11da2b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -303,6 +377,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230312052747'),
 ('20230312053748'),
 ('20230315221237'),
-('20230315231052');
+('20230315231052'),
+('20230316223820'),
+('20230316225320'),
+('20230317163814'),
+('20230317190052');
 
 
