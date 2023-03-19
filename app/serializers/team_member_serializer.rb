@@ -7,7 +7,8 @@ class TeamMemberSerializer < ActiveModel::Serializer
              :gmail,
              :twitter_url,
              :instagram_url,
-             :linkedin_url
+             :linkedin_url,
+             :show_path
 
   has_many :team_member_infos, each_serializer: TeamMemberInfoSerializer
 end

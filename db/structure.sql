@@ -292,7 +292,11 @@ CREATE TABLE public.workflow_team_members (
     workflow_id bigint NOT NULL,
     team_member_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    num_leads integer,
+    num_meetings integer,
+    pipeline_generated integer,
+    messages_sent integer
 );
 
 
@@ -331,7 +335,10 @@ CREATE TABLE public.workflows (
     motivation character varying,
     active boolean DEFAULT false NOT NULL,
     num_leads integer,
-    num_meetings integer
+    num_meetings integer,
+    slug character varying,
+    pipeline_generated integer,
+    messages_sent integer
 );
 
 
@@ -693,6 +700,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230319001747'),
 ('20230319002357'),
 ('20230319173851'),
-('20230319174925');
+('20230319174925'),
+('20230319205632'),
+('20230319221028'),
+('20230319224905');
 
 

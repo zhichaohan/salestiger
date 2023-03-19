@@ -1,4 +1,7 @@
 class Workflow < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   belongs_to :target_audience, optional: true
   belongs_to :product, optional: true
   has_many :workflow_team_members

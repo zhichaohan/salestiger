@@ -8,6 +8,7 @@ import {
 import Header from './header';
 import Footer from './footer';
 import WorkflowsIndex from './workflows';
+import WorkflowsShow from './workflows/show';
 import TeamMembersIndex from './team_members';
 import TeamMembersNew from './team_members/new';
 import TeamMembersShow from './team_members/show';
@@ -38,6 +39,7 @@ function Dashboard() {
     <Router>
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/workflows/:id" component={WorkflowsShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows" component={WorkflowsIndex} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/:id" component={TeamMembersShow} layout={DashboardLayout} />

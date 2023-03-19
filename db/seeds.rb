@@ -85,11 +85,25 @@ w.update(
   motivation: "Cyber SDR will generate more meetings for you than the same investment into more sales personelle",
   active: true,
   num_leads: 1256,
-  num_meetings: 20
+  num_meetings: 20,
+  pipeline_generated: 1750000,
+  messages_sent: 2301
 )
-w.workflow_team_members.find_or_create_by!(
+wtm = w.workflow_team_members.find_or_create_by!(
   team_member: a.team_members.find_by!(name: 'Nathan Reeves')
 )
-w.workflow_team_members.find_or_create_by!(
+wtm.update!(
+  num_leads: 230,
+  num_meetings: 5,
+  pipeline_generated: 250000,
+  messages_sent: 804
+)
+wtm = w.workflow_team_members.find_or_create_by!(
   team_member: a.team_members.find_by!(name: 'Chris Hedum')
+)
+wtm.update!(
+  num_leads: 1026,
+  num_meetings: 15,
+  pipeline_generated: 1500000,
+  messages_sent: 1497
 )

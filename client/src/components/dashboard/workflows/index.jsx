@@ -2,6 +2,7 @@ import React, { Component, useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import PageTitleSection from '../page_title_section';
 import { toast } from 'react-toastify';
+import styles from './index.module.css'
 
 export default function WorkflowsIndex() {
   const [workflows, setWorkflows] = useState();
@@ -44,7 +45,7 @@ export default function WorkflowsIndex() {
           <div className="col-sm-12">
             <div className="card">
               <div className="table-responsive">
-                <table className="table">
+                <table className="table table-hover">
                   <thead>
                     <tr className="border-bottom-primary">
                       <th scope="col">Name</th>
@@ -58,7 +59,7 @@ export default function WorkflowsIndex() {
                   {
                     workflows.map(w => {
                       return (
-                        <tr className="border-bottom-light">
+                        <tr className={`border-bottom-light ${styles.clickable}`} onClick={() => window.location = `/workflows/${w.slug}`}>
                           <th scope="row">{w.name}</th>
                           {
                             w.active && <td> <span className="badge badge-light-success">Active</span></td>
@@ -70,9 +71,9 @@ export default function WorkflowsIndex() {
                             <div className="customers d-inline-block avatar-group">
                               <ul>
                                 {
-                                  w.team_members.map(tm => {
+                                  w.workflow_team_members.map(wtm => {
                                     return (
-                                      <li className="d-inline-block"><img className="img-40 rounded-circle" src={tm.photo_url} alt=""/></li>
+                                      <li className="d-inline-block"><img className="img-40 rounded-circle" src={wtm.team_member.photo_url} alt=""/></li>
                                     )
                                   })
                                 }
