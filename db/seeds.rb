@@ -61,3 +61,35 @@ t.team_member_infos.find_or_create_by!(
   start_date: Date.new(2019, 8, 1),
   end_date: Date.new(2021, 7, 1)
 )
+
+ta = a.target_audiences.find_or_create_by!(name: "Startup Executives")
+ta.update!(
+  titles: ['CEO', 'COO', 'VP of Sales', 'Head of Sales'],
+  industry: 'SAAS',
+  company_size: '1-50',
+  location: 'San Diego'
+)
+
+p = a.products.find_or_create_by!(name: 'Cyber SDR')
+p.update!(
+  description: 'Cyber SDR sets meetings for you so that you spend more time selling and less time prospecting. An average sales team member spends 40% of his or her time on generating leads. We have created battle tested prospectiving and outreach sequences fully automated to get you the best opportunities'
+)
+
+w = a.workflows.find_or_create_by!(
+  type: "Workflow::SaleProduct",
+  name: "Selling Cyber SDR to startup executives and head of sales"
+)
+w.update(
+  target_audience: a.target_audiences.find_by!(name: "Startup Executives"),
+  product: a.products.find_by!(name: 'Cyber SDR'),
+  motivation: "Cyber SDR will generate more meetings for you than the same investment into more sales personelle",
+  active: true,
+  num_leads: 1256,
+  num_meetings: 20
+)
+w.workflow_team_members.find_or_create_by!(
+  team_member: a.team_members.find_by!(name: 'Nathan Reeves')
+)
+w.workflow_team_members.find_or_create_by!(
+  team_member: a.team_members.find_by!(name: 'Chris Hedum')
+)

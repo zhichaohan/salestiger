@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :landing_page_contacts
       resources :team_members
+      resources :workflows
     end
   end
 

@@ -93,12 +93,81 @@ ALTER SEQUENCE public.landing_page_contacts_id_seq OWNED BY public.landing_page_
 
 
 --
+-- Name: products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.products (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    description character varying
+);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: target_audiences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.target_audiences (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    name character varying NOT NULL,
+    titles character varying[],
+    industry character varying,
+    company_size character varying,
+    location character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: target_audiences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.target_audiences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: target_audiences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.target_audiences_id_seq OWNED BY public.target_audiences.id;
 
 
 --
@@ -215,6 +284,77 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: workflow_team_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.workflow_team_members (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: workflow_team_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.workflow_team_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workflow_team_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.workflow_team_members_id_seq OWNED BY public.workflow_team_members.id;
+
+
+--
+-- Name: workflows; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.workflows (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    name character varying NOT NULL,
+    type character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    target_audience_id bigint,
+    product_id bigint,
+    motivation character varying,
+    active boolean DEFAULT false NOT NULL,
+    num_leads integer,
+    num_meetings integer
+);
+
+
+--
+-- Name: workflows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.workflows_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workflows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.workflows_id_seq OWNED BY public.workflows.id;
+
+
+--
 -- Name: accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -226,6 +366,20 @@ ALTER TABLE ONLY public.accounts ALTER COLUMN id SET DEFAULT nextval('public.acc
 --
 
 ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextval('public.landing_page_contacts_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Name: target_audiences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.target_audiences ALTER COLUMN id SET DEFAULT nextval('public.target_audiences_id_seq'::regclass);
 
 
 --
@@ -247,6 +401,20 @@ ALTER TABLE ONLY public.team_members ALTER COLUMN id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: workflow_team_members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_team_members ALTER COLUMN id SET DEFAULT nextval('public.workflow_team_members_id_seq'::regclass);
+
+
+--
+-- Name: workflows id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflows ALTER COLUMN id SET DEFAULT nextval('public.workflows_id_seq'::regclass);
 
 
 --
@@ -274,11 +442,27 @@ ALTER TABLE ONLY public.landing_page_contacts
 
 
 --
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: target_audiences target_audiences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.target_audiences
+    ADD CONSTRAINT target_audiences_pkey PRIMARY KEY (id);
 
 
 --
@@ -303,6 +487,36 @@ ALTER TABLE ONLY public.team_members
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workflow_team_members workflow_team_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_team_members
+    ADD CONSTRAINT workflow_team_members_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: workflows workflows_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflows
+    ADD CONSTRAINT workflows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_products_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_products_on_account_id ON public.products USING btree (account_id);
+
+
+--
+-- Name: index_target_audiences_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_target_audiences_on_account_id ON public.target_audiences USING btree (account_id);
 
 
 --
@@ -341,11 +555,62 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: index_workflow_team_members_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflow_team_members_on_team_member_id ON public.workflow_team_members USING btree (team_member_id);
+
+
+--
+-- Name: index_workflow_team_members_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflow_team_members_on_workflow_id ON public.workflow_team_members USING btree (workflow_id);
+
+
+--
+-- Name: index_workflows_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflows_on_account_id ON public.workflows USING btree (account_id);
+
+
+--
+-- Name: index_workflows_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflows_on_product_id ON public.workflows USING btree (product_id);
+
+
+--
+-- Name: index_workflows_on_target_audience_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflows_on_target_audience_id ON public.workflows USING btree (target_audience_id);
+
+
+--
 -- Name: team_member_infos fk_rails_2a4059ad68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.team_member_infos
     ADD CONSTRAINT fk_rails_2a4059ad68 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: workflow_team_members fk_rails_3451c85814; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_team_members
+    ADD CONSTRAINT fk_rails_3451c85814 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: workflows fk_rails_5ee10ef6fb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflows
+    ADD CONSTRAINT fk_rails_5ee10ef6fb FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -357,11 +622,51 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: workflow_team_members fk_rails_6744196585; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_team_members
+    ADD CONSTRAINT fk_rails_6744196585 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
+-- Name: products fk_rails_6dc06b37ef; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT fk_rails_6dc06b37ef FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
 -- Name: team_members fk_rails_7145ad667e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.team_members
     ADD CONSTRAINT fk_rails_7145ad667e FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: workflows fk_rails_8399d941f2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflows
+    ADD CONSTRAINT fk_rails_8399d941f2 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: workflows fk_rails_c93a2eb6a2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflows
+    ADD CONSTRAINT fk_rails_c93a2eb6a2 FOREIGN KEY (target_audience_id) REFERENCES public.target_audiences(id);
+
+
+--
+-- Name: target_audiences fk_rails_f1ce3b6297; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.target_audiences
+    ADD CONSTRAINT fk_rails_f1ce3b6297 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
 
 
 --
@@ -381,6 +686,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230316223820'),
 ('20230316225320'),
 ('20230317163814'),
-('20230317190052');
+('20230317190052'),
+('20230317201547'),
+('20230317202049'),
+('20230319001353'),
+('20230319001747'),
+('20230319002357'),
+('20230319173851'),
+('20230319174925');
 
 
