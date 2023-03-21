@@ -107,3 +107,67 @@ wtm.update!(
   pipeline_generated: 1500000,
   messages_sent: 1497
 )
+
+c = Company.find_or_create_by!(name: 'OpenCV')
+c.update!(
+  num_employees: 21,
+  industry: 'Nonprofit Organization Management',
+  logo_url: 'https://zenprospect-production.s3.amazonaws.com/uploads/pictures/64143f8913198d00011e840f/picture',
+  website_url: 'https://opencv.org/',
+  linkedin_url: 'https://www.linkedin.com/company/opencv/',
+  facebook_url: 'https://www.facebook.com/opencvlibrary',
+  twitter_url: 'https://twitter.com/opencvlibrary'
+)
+l = c.leads.find_or_create_by!(name: 'Satya Mallick')
+l.update!(
+  title: 'Chief Executive Officer',
+  business_email: 'spmallick@opencv.ai',
+  personal_email: 'spmallick@gmail.com',
+  location: 'San Diego, California',
+  linkedin_url: 'https://www.linkedin.com/in/satyamallick/',
+  twitter_url: 'https://twitter.com/learnopencv'
+)
+w = a.workflows.find_by!(
+  type: "Workflow::SaleProduct",
+  name: "Selling Cyber SDR to startup executives and head of sales"
+)
+w.workflow_leads.find_or_create_by!(lead: l)
+
+c = Company.find_or_create_by!(name: 'Acenda')
+c.update!(
+  num_employees: 24,
+  industry: 'Information Technology & Services',
+  logo_url: 'https://zenprospect-production.s3.amazonaws.com/uploads/pictures/640b1aa76eafb70001cbc100/picture',
+  website_url: 'https://www.acenda.com/',
+  linkedin_url: 'https://www.linkedin.com/company/acenda/',
+  facebook_url: 'https://www.facebook.com/acendainc',
+  twitter_url: 'https://twitter.com/Acenda_Official'
+)
+l = c.leads.find_or_create_by!(name: 'Gavin M')
+l.update!(
+  title: 'Chief Executive Officer',
+  business_email: 'gavinm@acenda.com',
+  location: 'San Diego, California',
+  linkedin_url: 'https://www.linkedin.com/in/grmandel/',
+  phone: '+1(866) 293-2151'
+)
+w.workflow_leads.find_or_create_by!(lead: l)
+
+c = Company.find_or_create_by!(name: 'PsychArmor')
+c.update!(
+  num_employees: 35,
+  industry: 'Nonprofit Organization Management',
+  logo_url: 'https://zenprospect-production.s3.amazonaws.com/uploads/pictures/640c8460ad3e0000010d70f1/picture',
+  website_url: 'https://psycharmor.org/',
+  linkedin_url: 'https://www.linkedin.com/company/psycharmor/',
+  twitter_url: 'https://twitter.com/PsychArmor'
+)
+l = c.leads.find_or_create_by!(name: 'Tina Atherall')
+l.update!(
+  title: 'Chief Executive Officer',
+  business_email: 'tatherall@psycharmor.org',
+  location: 'San Diego, California',
+  linkedin_url: 'https://www.linkedin.com/in/tina-atherall/',
+  phone: '+1-858-755-3006'
+)
+w.workflow_leads.find_or_create_by!(lead: l)

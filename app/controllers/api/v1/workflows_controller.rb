@@ -18,11 +18,22 @@ module Api
       end
 
       def show
-        workflow = current_user.account.workflows.friendly.find(params[:id])
+        workflow = current_user.account
+                               .workflows
+                               .preload(
+                                 workflow_team_members: :team_member,
+                                 workflow_leads: { lead: :company }
+                               ).friendly.find(params[:id])
 
         respond_to do |format|
           format.json do
-            render json: workflow, serializer: WorkflowSerializer, status: 200, include: { workflow_team_members: :team_member }
+            render json: workflow,
+                   serializer: WorkflowSerializer,
+                   status: 200,
+                   include: {
+                     workflow_team_members: :team_member,
+                     workflow_leads: { lead: :company }
+                   }
           end
         end
       end

@@ -10,4 +10,5 @@ class WorkflowSerializer < ActiveModel::Serializer
   belongs_to :target_audience, optional: true
   belongs_to :product, optional: true
   has_many :workflow_team_members, serializer: WorkflowTeamMemberSerializer
+  has_many :workflow_leads, serializer: WorkflowLeadSerializer
 end
