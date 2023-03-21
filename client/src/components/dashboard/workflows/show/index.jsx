@@ -268,23 +268,6 @@ export default function WorkflowsShow({
                         <td>
                           { wl.lead.company.industry }
                         </td>
-                        {
-                          /*
-
-                          <td>
-                            <div className="d-flex">
-                              <img src={wl.team_member.photo_url} alt="" />
-                              <div className="flex-grow-1">
-                                <a href={wtm.team_member.show_path} data-bs-original-title="" title="">
-                                  <h5>{wtm.team_member.name}
-                                </h5></a></div>
-                            </div>
-                          </td>
-                          <td>{wtm.num_meetings}</td>
-                          <td>{wtm.num_leads}</td>
-                          <td>{wtm.messages_sent}</td>
-                          */
-                        }
                       </tr>
                     )
                   })
@@ -294,6 +277,52 @@ export default function WorkflowsShow({
           </div>
         </div>
       </div>
+      </div>
+    )
+  }
+
+  const renderWorkflowInformation = () => {
+    return (
+      <div className="row">
+      {
+        workflow.product &&
+        <div className="col-xl-4 col-lg-4">
+          <div className="card">
+            <div className="card-header pb-0">
+              <h5>Product: {workflow.product.name}</h5>
+            </div>
+            <div className="card-body">
+              <p className="mb-0">{workflow.product.description}</p>
+            </div>
+          </div>
+        </div>
+      }
+      {
+        workflow.target_audience &&
+        <div className="col-xl-4 col-lg-4">
+          <div className="card">
+            <div className="card-header pb-0">
+              <h5>Target Audience: {workflow.target_audience.name}</h5>
+            </div>
+            <div className="card-body">
+              <p className="mb-0">We target companies in {workflow.target_audience.industry} of size {workflow.target_audience.company_size} in {workflow.target_audience.location}. We look for {workflow.target_audience.titles.join(', ')}.</p>
+            </div>
+          </div>
+        </div>
+      }
+      {
+        workflow.motivation &&
+        <div className="col-xl-4 col-lg-4">
+          <div className="card">
+            <div className="card-header pb-0">
+              <h5>Motivation</h5>
+            </div>
+            <div className="card-body">
+              <p className="mb-0">{workflow.motivation}</p>
+            </div>
+          </div>
+        </div>
+      }
       </div>
     )
   }
@@ -309,6 +338,7 @@ export default function WorkflowsShow({
       />
       <div className="container-fluid">
         { renderSummarySection() }
+        { renderWorkflowInformation() }
         <div className="row">
           { renderTeamMemberStatistic() }
           { renderUpcomingMeetings() }

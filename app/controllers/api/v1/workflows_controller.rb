@@ -31,8 +31,10 @@ module Api
                    serializer: WorkflowSerializer,
                    status: 200,
                    include: {
+                     product: {},
+                     target_audience: {},
                      workflow_team_members: :team_member,
-                     workflow_leads: { lead: :company }
+                     workflow_leads: { lead: :company },
                    }
           end
         end

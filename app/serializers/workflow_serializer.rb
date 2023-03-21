@@ -5,7 +5,8 @@ class WorkflowSerializer < ActiveModel::Serializer
              :num_meetings,
              :pipeline_generated,
              :messages_sent,
-             :slug
+             :slug,
+             :motivation
 
   belongs_to :target_audience, optional: true
   belongs_to :product, optional: true
