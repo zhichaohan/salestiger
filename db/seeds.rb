@@ -21,7 +21,7 @@ t = a.team_members.find_or_create_by!(name: 'Nathan Reeves')
 t.update(
   title: 'Account Executive',
   photo_url: 'https://admin.pixelstrap.com/enzo/assets/images/avtar/16.jpg',
-  gmail: 'nathan@salestiger.io'
+  gmail: 'zhichao@salestiger.io'
 )
 
 t = a.team_members.find_or_create_by!(name: 'Chris Hedum')

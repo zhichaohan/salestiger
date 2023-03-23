@@ -37,7 +37,7 @@ export default function TeamMembersShow({
               <div className="profile-img-wrrap"><img className="img-fluid bg-img-cover" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/user-profile/bg-profile.jpg" alt="" /></div>
               <div className="userpro-box">
                 <div className="img-wrraper">
-                  <div className="avatar"><img className="img-fluid" alt="" src={teamMember.photo_url} /></div><a className="icon-wrapper" href="edit-profile.html"><i className="icofont icofont-pencil-alt-5"></i></a>
+                  <div className="avatar"><img className="img-fluid" alt="" src={teamMember.photo_url} /></div><a className="icon-wrapper" href={`/team_members/${id}/edit`}><i className="icofont icofont-pencil-alt-5"></i></a>
                 </div>
                 <div className="user-designation">
                   <div className="title"><a target="_blank" href="">

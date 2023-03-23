@@ -3,6 +3,7 @@ class TeamMember < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_many :team_member_infos
+  belongs_to :auth_token, optional: true
 
   include Routable
 

@@ -334,7 +334,8 @@ CREATE TABLE public.team_members (
     gmail character varying,
     twitter_url character varying,
     instagram_url character varying,
-    linkedin_url character varying
+    linkedin_url character varying,
+    auth_token_id bigint
 );
 
 
@@ -751,6 +752,13 @@ CREATE INDEX index_team_members_on_account_id ON public.team_members USING btree
 
 
 --
+-- Name: index_team_members_on_auth_token_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_team_members_on_auth_token_id ON public.team_members USING btree (auth_token_id);
+
+
+--
 -- Name: index_users_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -818,6 +826,14 @@ CREATE INDEX index_workflows_on_product_id ON public.workflows USING btree (prod
 --
 
 CREATE INDEX index_workflows_on_target_audience_id ON public.workflows USING btree (target_audience_id);
+
+
+--
+-- Name: team_members fk_rails_1d9b7a31b8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT fk_rails_1d9b7a31b8 FOREIGN KEY (auth_token_id) REFERENCES public.auth_tokens(id);
 
 
 --
@@ -955,6 +971,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230319232837'),
 ('20230320223717'),
 ('20230320230524'),
-('20230322220446');
+('20230322220446'),
+('20230323035312');
 
 
