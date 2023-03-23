@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
 
   def home
     gon.current_user = current_user
+    gon.authenticity_token = form_authenticity_token
     if current_user.present?
       render layout: "dashboard"
     else

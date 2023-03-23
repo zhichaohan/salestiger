@@ -59,6 +59,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: auth_tokens; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_tokens (
+    id bigint NOT NULL,
+    access_token character varying,
+    refresh_token character varying,
+    expires_at timestamp without time zone,
+    email character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: auth_tokens_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_tokens_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_tokens_id_seq OWNED BY public.auth_tokens.id;
+
+
+--
 -- Name: companies; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -478,6 +512,13 @@ ALTER TABLE ONLY public.accounts ALTER COLUMN id SET DEFAULT nextval('public.acc
 
 
 --
+-- Name: auth_tokens id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_tokens ALTER COLUMN id SET DEFAULT nextval('public.auth_tokens_id_seq'::regclass);
+
+
+--
 -- Name: companies id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -568,6 +609,14 @@ ALTER TABLE ONLY public.accounts
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: auth_tokens auth_tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_tokens
+    ADD CONSTRAINT auth_tokens_pkey PRIMARY KEY (id);
 
 
 --
@@ -905,6 +954,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230319224905'),
 ('20230319232837'),
 ('20230320223717'),
-('20230320230524');
+('20230320230524'),
+('20230322220446');
 
 
