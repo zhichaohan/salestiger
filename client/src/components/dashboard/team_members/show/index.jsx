@@ -33,7 +33,8 @@ export default function TeamMembersShow({
       <div className="user-profile">
         <div className="row">
           <div className="col-sm-12">
-            <div className="card profile-header"><img className="img-fluid bg-img-cover" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/user-profile/bg-profile.jpg" alt="" />
+            <div className="card profile-header" style={{ backgroundImage: 'url(https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/user-profile/bg-profile.jpg)', backgroundSize: "cover", backgroundPosition: "center center", display: "block" }}>
+              <img className="img-fluid bg-img-cover" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/user-profile/bg-profile.jpg" alt="" />
               <div className="profile-img-wrrap"><img className="img-fluid bg-img-cover" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/user-profile/bg-profile.jpg" alt="" /></div>
               <div className="userpro-box">
                 <div className="img-wrraper">
