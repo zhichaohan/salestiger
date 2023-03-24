@@ -7,7 +7,7 @@ export default function EmailsCreateModal({
   teamMembers,
 }) {
   const teamMemberOnChange = (e) => {
-    console.log("e.target.value", e.target.value);
+    console.log("e.target.value ", e.target.value);
   }
 
   return (
