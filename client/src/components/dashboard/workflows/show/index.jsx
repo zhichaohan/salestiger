@@ -1,5 +1,6 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
+import EmailsCreateModal from '../../emails/create_modal';
 import { getWorkflow } from '../../../../api/workflows';
 import styles from './index.module.css';
 
@@ -8,6 +9,8 @@ export default function WorkflowsShow({
 }) {
   let id = match.params.id;
   const [workflow, setWorkflow] = useState();
+  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
+
   useEffect(() => {
     getWorkflow(id, (data) => {
       setWorkflow(data);
@@ -241,8 +244,8 @@ export default function WorkflowsShow({
                           <div className={styles.name_block}>{wl.lead.name}</div>
                           <div>
                             <ul className={styles.social_list}>
-                              { wl.lead.business_email && <li><a><i className="fa fa-envelope"></i></a></li> }
-                              { wl.lead.personal_email && <li><a><i className="fa fa-envelope-o"></i></a></li> }
+                              { wl.lead.business_email && <li><a href="javascript:;" onClick={() => setShowCreateEmailModal(true)}><i className="fa fa-envelope"></i></a></li> }
+                              { wl.lead.personal_email && <li><a href="javascript:;" onClick={() => setShowCreateEmailModal(true)}><i className="fa fa-envelope-o"></i></a></li> }
                               { wl.lead.linkedin_url && <li><a href={wl.lead.linkedin_url} target="_blank"><i className="fa fa-linkedin-square"></i></a></li> }
                               { wl.lead.twitter_url && <li><a href={wl.lead.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
                             </ul>
@@ -276,7 +279,12 @@ export default function WorkflowsShow({
             </table>
           </div>
         </div>
-      </div>
+        </div>
+        <EmailsCreateModal
+          showModal={showCreateEmailModal}
+          setShowModal={setShowCreateEmailModal}
+          teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
+        />
       </div>
     )
   }

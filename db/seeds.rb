@@ -171,3 +171,20 @@ l.update!(
   phone: '+1-858-755-3006'
 )
 w.workflow_leads.find_or_create_by!(lead: l)
+
+c = Company.find_or_create_by!(name: 'Sales Tiger')
+c.update!(
+  num_employees: 2,
+  industry: 'Sales Enablement',
+  logo_url: 'https://salestiger-assets.s3.us-west-2.amazonaws.com/favicons/android-chrome-192x192.png',
+  website_url: 'https://www.salestiger.io/'
+)
+l = c.leads.find_or_create_by!(name: 'Zhichao Han')
+l.update!(
+  title: 'Chief Technology Officer',
+  business_email: 'zhichao@salestiger.io',
+  location: 'San Diego, California',
+  linkedin_url: 'https://www.linkedin.com/in/zhichao-han-49366315/',
+  phone: '+1-703-220-3824'
+)
+w.workflow_leads.find_or_create_by!(lead: l)
