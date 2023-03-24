@@ -1,0 +1,46 @@
+.social_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-top: 5px;
+}
+
+ul.social_list li:nth-child(n+2) {
+    margin-left: 5px;
+}
+
+ul.social_list li a {
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(62, 95, 206, 0.08);
+}
+ul.social_list li a i {
+    font-size: 14px;
+    color: #3e5fce;
+}
+.company_logo {
+  padding-right: 5px;
+}
+.name_block {
+  line-height: 40px;
+}

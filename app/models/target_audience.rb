@@ -1,0 +1,2 @@
+class TargetAudience < ApplicationRecord
+end

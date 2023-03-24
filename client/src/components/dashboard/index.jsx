@@ -7,13 +7,20 @@ import {
 } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
+import WorkflowsIndex from './workflows';
+import WorkflowsShow from './workflows/show';
+import TeamMembersIndex from './team_members';
+import TeamMembersNew from './team_members/new';
+import TeamMembersShow from './team_members/show';
+import TeamMembersEdit from './team_members/edit';
 import Home from './home';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardLayout = (props) => (
   <>
-    <Header />
+    <ToastContainer />
     {props.children}
-    <Footer />
   </>
 )
 
@@ -33,6 +40,12 @@ function Dashboard() {
     <Router>
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/workflows/:id" component={WorkflowsShow} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/workflows" component={WorkflowsIndex} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members/:id" component={TeamMembersShow} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members/:id/edit" component={TeamMembersEdit} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/team_members" component={TeamMembersIndex} layout={DashboardLayout} />
       </Switch>
     </Router>
   )
