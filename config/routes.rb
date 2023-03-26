@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :landing_page_contacts
       resources :team_members
       resources :workflows
+      resources :emails
     end
   end
 

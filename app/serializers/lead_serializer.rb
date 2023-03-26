@@ -6,7 +6,8 @@ class LeadSerializer < ActiveModel::Serializer
              :phone,
              :location,
              :linkedin_url,
-             :twitter_url
+             :twitter_url,
+             :uuid
 
   belongs_to :company
 end

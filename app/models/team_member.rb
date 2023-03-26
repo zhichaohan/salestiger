@@ -4,6 +4,7 @@ class TeamMember < ApplicationRecord
 
   has_many :team_member_infos
   belongs_to :auth_token, optional: true
+  has_many :emails
 
   include Routable
 

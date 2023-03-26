@@ -145,6 +145,44 @@ ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
 
 
 --
+-- Name: emails; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.emails (
+    id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    subject character varying,
+    body_html text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    recipient character varying,
+    gmail_id character varying,
+    status character varying,
+    sent_at timestamp without time zone
+);
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.emails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.emails_id_seq OWNED BY public.emails.id;
+
+
+--
 -- Name: landing_page_contacts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -194,7 +232,8 @@ CREATE TABLE public.leads (
     linkedin_url character varying,
     twitter_url character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
 );
 
 
@@ -542,6 +581,13 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: emails id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails ALTER COLUMN id SET DEFAULT nextval('public.emails_id_seq'::regclass);
+
+
+--
 -- Name: landing_page_contacts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -644,6 +690,14 @@ ALTER TABLE ONLY public.companies
 
 
 --
+-- Name: emails emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: landing_page_contacts landing_page_contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -729,6 +783,20 @@ ALTER TABLE ONLY public.workflow_team_members
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT workflows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_emails_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_emails_on_lead_id ON public.emails USING btree (lead_id);
+
+
+--
+-- Name: index_emails_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_member_id);
 
 
 --
@@ -868,11 +936,27 @@ ALTER TABLE ONLY public.team_member_infos
 
 
 --
+-- Name: emails fk_rails_2dbaf9b6c7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT fk_rails_2dbaf9b6c7 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: workflow_team_members fk_rails_3451c85814; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.workflow_team_members
     ADD CONSTRAINT fk_rails_3451c85814 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: emails fk_rails_470ffccb45; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT fk_rails_470ffccb45 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
 
 
 --
@@ -988,6 +1072,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230320230524'),
 ('20230322220446'),
 ('20230323035312'),
-('20230323180233');
+('20230323180233'),
+('20230324212357'),
+('20230324214807'),
+('20230326215209'),
+('20230326224017'),
+('20230326225520');
 
 
