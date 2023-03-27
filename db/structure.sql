@@ -389,7 +389,8 @@ CREATE TABLE public.team_members (
     instagram_url character varying,
     linkedin_url character varying,
     auth_token_id bigint,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    email_signature text
 );
 
 
@@ -1077,6 +1078,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230324214807'),
 ('20230326215209'),
 ('20230326224017'),
-('20230326225520');
+('20230326225520'),
+('20230326231349');
 
 

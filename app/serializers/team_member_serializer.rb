@@ -10,7 +10,8 @@ class TeamMemberSerializer < ActiveModel::Serializer
              :linkedin_url,
              :show_path,
              :auth_token_id,
-             :uuid
+             :uuid,
+             :email_signature
 
   has_many :team_member_infos, each_serializer: TeamMemberInfoSerializer
 end
