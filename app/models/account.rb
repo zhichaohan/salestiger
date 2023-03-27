@@ -8,4 +8,5 @@ class Account < ApplicationRecord
   has_many :target_audiences
   has_many :products
   has_many :workflows
+  has_many :account_leads
 end

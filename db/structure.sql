@@ -28,6 +28,39 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: account_leads; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_leads (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    status character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: account_leads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.account_leads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_leads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.account_leads_id_seq OWNED BY public.account_leads.id;
+
+
+--
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -561,6 +594,13 @@ ALTER SEQUENCE public.workflows_id_seq OWNED BY public.workflows.id;
 
 
 --
+-- Name: account_leads id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads ALTER COLUMN id SET DEFAULT nextval('public.account_leads_id_seq'::regclass);
+
+
+--
 -- Name: accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -656,6 +696,14 @@ ALTER TABLE ONLY public.workflow_team_members ALTER COLUMN id SET DEFAULT nextva
 --
 
 ALTER TABLE ONLY public.workflows ALTER COLUMN id SET DEFAULT nextval('public.workflows_id_seq'::regclass);
+
+
+--
+-- Name: account_leads account_leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT account_leads_pkey PRIMARY KEY (id);
 
 
 --
@@ -784,6 +832,20 @@ ALTER TABLE ONLY public.workflow_team_members
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT workflows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_account_leads_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_leads_on_account_id ON public.account_leads USING btree (account_id);
+
+
+--
+-- Name: index_account_leads_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_leads_on_lead_id ON public.account_leads USING btree (lead_id);
 
 
 --
@@ -1001,11 +1063,27 @@ ALTER TABLE ONLY public.team_members
 
 
 --
+-- Name: account_leads fk_rails_81529a4071; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT fk_rails_81529a4071 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: workflows fk_rails_8399d941f2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT fk_rails_8399d941f2 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: account_leads fk_rails_9773a1a0d6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT fk_rails_9773a1a0d6 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
 
 
 --
@@ -1079,6 +1157,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230326215209'),
 ('20230326224017'),
 ('20230326225520'),
-('20230326231349');
+('20230326231349'),
+('20230327213215');
 
 

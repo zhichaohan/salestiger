@@ -7,4 +7,12 @@ class Email < ApplicationRecord
 
     "zhichao+lead-#{self.lead.uuid}@salestiger.io"
   end
+
+  def update_account_lead_status!
+    account_lead = self.team_member.account.account_leads.find_or_create_by!(lead: self.lead)
+
+    if account_lead.status.blank?
+      account_lead.update!(status: 'approaching')
+    end
+  end
 end

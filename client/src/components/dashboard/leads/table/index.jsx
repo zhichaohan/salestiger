@@ -28,6 +28,7 @@ export default function LeadsTable({
             <th scope="col">Company</th>
             <th scope="col">Company Size</th>
             <th scope="col">Company Industry</th>
+            <th scope="col">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -65,6 +66,11 @@ export default function LeadsTable({
                 </td>
                 <td>
                   { lead.company.industry }
+                </td>
+                <td>
+                  {
+                    lead.account_info && lead.account_info.status === 'approaching' && <span class="badge badge-info">Approaching</span>
+                  }
                 </td>
               </tr>
             )

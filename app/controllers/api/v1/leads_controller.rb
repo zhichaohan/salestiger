@@ -6,9 +6,11 @@ module Api
       def index
         leads = Lead.preload(:company).all
 
+        account_leads = current_user.account.account_leads.where(lead_id: leads.pluck(:id))
+
         respond_to do |format|
           format.json do
-            render json: leads, each_serializer: LeadSerializer
+            render json: leads, each_serializer: LeadSerializer, account_leads: account_leads
           end
         end
       end

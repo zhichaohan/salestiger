@@ -34,5 +34,6 @@ class Emails::SendWorker
       status: 'sent',
       sent_at: DateTime.now
     )
+    email.update_account_lead_status!
   end
 end
