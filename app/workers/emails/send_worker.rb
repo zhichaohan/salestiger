@@ -19,8 +19,8 @@ class Emails::SendWorker
     gmail.authorization = email.team_member.auth_token.as_credentials!
 
     message = RMail::Message.new
-    message.header['To'] = email.final_recipient
-    message.header['From'] = email.team_member.gmail
+    message.header['To'] = "#{email.lead.name} <#{email.final_recipient}>"
+    message.header['From'] = "#{email.team_member.name} <#{email.team_member.gmail}>"
     message.header['Subject'] = email.subject
     message.header['content-type'] = 'text/html; charset=utf-8'
     message.body = email.body_html + email.team_member.email_signature

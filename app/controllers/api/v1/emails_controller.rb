@@ -1,7 +1,11 @@
 module Api
   module V1
     class EmailsController < ApplicationController
-      before_action :authenticate_user!, only: [:index]
+      before_action :authenticate_user!, only: [:index, :create]
+
+      def index
+        
+      end
 
       def create
         team_member = current_user.account.team_members.find_by(uuid: params[:team_member_id])

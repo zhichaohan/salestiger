@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :team_members
       resources :workflows
       resources :emails
+      resources :leads
     end
   end
 

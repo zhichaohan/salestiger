@@ -1,8 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
-import EmailsCreateModal from '../../emails/create_modal';
+import LeadsTable from '../../leads/table';
 import { getWorkflow } from '../../../../api/workflows';
-import { createEmail } from '../../../../api/emails';
 import { notifySuccess } from '../../../../helpers';
 import styles from './index.module.css';
 
@@ -11,9 +10,6 @@ export default function WorkflowsShow({
 }) {
   let id = match.params.id;
   const [workflow, setWorkflow] = useState();
-  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
-  const [createEmailRecipient, setCreateEmailRecipient] = useState();
-  const [emailRecipientId, setEmailRecipientId] = useState();
 
   useEffect(() => {
     getWorkflow(id, (data) => {
@@ -220,16 +216,6 @@ export default function WorkflowsShow({
     )
   }
 
-  const emailOnClick = (email, lead) => () => {
-    console.log("email", email);
-    setCreateEmailRecipient(email);
-    setEmailRecipientId(lead.uuid);
-    setShowCreateEmailModal(true);
-  }
-
-  console.log("showCreateEmailModal", showCreateEmailModal);
-  console.log("createEmailRecipient", createEmailRecipient);
-
   const renderLeads = () => {
     return (
       <div className="col-xl-12 col-lg-12">
@@ -238,80 +224,12 @@ export default function WorkflowsShow({
             <h5>Leads</h5>
           </div>
           <div className="card-body">
-            <div className="table-responsive">
-              <table className="table table-bordernone table-hover">
-                <thead>
-                  <tr className="border-bottom-primary">
-                    <th scope="col">Name</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Company Size</th>
-                    <th scope="col">Company Industry</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                  workflow.workflow_leads.map(wl => {
-                    return (
-                      <tr>
-                        <td>
-                          <div className={styles.name_block}>{wl.lead.name}</div>
-                          <div>
-                            <ul className={styles.social_list}>
-                              { wl.lead.business_email && <li><a href="javascript:;" onClick={emailOnClick(wl.lead.business_email, wl.lead)}><i className="fa fa-envelope"></i></a></li> }
-                              { wl.lead.personal_email && <li><a href="javascript:;" onClick={emailOnClick(wl.lead.personal_email, wl.lead)}><i className="fa fa-envelope-o"></i></a></li> }
-                              { wl.lead.linkedin_url && <li><a href={wl.lead.linkedin_url} target="_blank"><i className="fa fa-linkedin-square"></i></a></li> }
-                              { wl.lead.twitter_url && <li><a href={wl.lead.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
-                            </ul>
-                          </div>
-                        </td>
-                        <td>{wl.lead.title}</td>
-                        <td>
-                          <div className={styles.name_block}>
-                            <img className={styles.company_logo} width="35" height="35" src={wl.lead.company.logo_url} />
-                            {wl.lead.company.name}
-                          </div>
-                          <div>
-                            <ul className={styles.social_list}>
-                              { wl.lead.company.website_url && <li><a href={wl.lead.company.website_url} target="_blank"><i className="fa fa-external-link"></i></a></li> }
-                              { wl.lead.company.linkedin_url && <li><a href={wl.lead.company.linkedin_url} target="_blank"><i className="fa fa-linkedin-square"></i></a></li> }
-                              { wl.lead.company.twitter_url && <li><a href={wl.lead.company.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
-                            </ul>
-                          </div>
-                        </td>
-                        <td>
-                          { wl.lead.company.num_employees }
-                        </td>
-                        <td>
-                          { wl.lead.company.industry }
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+            <LeadsTable
+              leads={workflow.workflow_leads.map(wl => wl.lead)}
+              teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
+            />
           </div>
         </div>
-        </div>
-        {
-          showCreateEmailModal &&
-          <EmailsCreateModal
-            showModal={showCreateEmailModal}
-            setShowModal={setShowCreateEmailModal}
-            teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
-            recipient={createEmailRecipient}
-            onSubmit={(params) => {
-              createEmail({
-                ...params,
-                lead_id: emailRecipientId,
-                recipient: createEmailRecipient,
-              }, () => {
-                notifySuccess(`Sending email to ${createEmailRecipient}`)
-              })
-            }}
-          />
-        }
       </div>
     )
   }

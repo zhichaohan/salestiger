@@ -13,6 +13,7 @@ import TeamMembersIndex from './team_members';
 import TeamMembersNew from './team_members/new';
 import TeamMembersShow from './team_members/show';
 import TeamMembersEdit from './team_members/edit';
+import LeadsIndex from './leads';
 import Home from './home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,6 +47,7 @@ function Dashboard() {
         <RouteWithLayout exact path="/team_members/:id" component={TeamMembersShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/:id/edit" component={TeamMembersEdit} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members" component={TeamMembersIndex} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/leads" component={LeadsIndex} layout={DashboardLayout} />
       </Switch>
     </Router>
   )

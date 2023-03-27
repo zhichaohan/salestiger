@@ -30,3 +30,18 @@ export const updateTeamMember = (
     successCallback(data);
   })
 }
+
+export const getTeamMembers = (
+    params,
+    successCallback
+) => {
+  fetch(`/api/v1/team_members`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}
