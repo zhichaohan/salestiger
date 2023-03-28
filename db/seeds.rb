@@ -188,3 +188,8 @@ l.update!(
   phone: '+1-703-220-3824'
 )
 w.workflow_leads.find_or_create_by!(lead: l)
+
+s = w.sequences.find_or_create_by!(name: 'Sales Method: SPIN')
+s.update(
+  active: true
+)

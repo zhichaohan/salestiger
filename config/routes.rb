@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       resources :workflows
       resources :emails
       resources :leads
+      resources :sequences, only: [:show] do
+        resources :sequence_steps, only: [:create]
+      end
     end
   end
 

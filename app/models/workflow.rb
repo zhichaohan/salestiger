@@ -8,4 +8,5 @@ class Workflow < ApplicationRecord
   has_many :team_members, through: :workflow_team_members
   has_many :workflow_leads
   has_many :leads, through: :workflow_leads
+  has_many :sequences
 end

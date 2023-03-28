@@ -1,6 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import LeadsTable from '../../leads/table';
+import SequencesTable from '../../sequences/table';
 import { getWorkflow } from '../../../../api/workflows';
 import { notifySuccess } from '../../../../helpers';
 import styles from './index.module.css';
@@ -234,6 +235,24 @@ export default function WorkflowsShow({
     )
   }
 
+  const renderSequences = () => {
+    return (
+      <div className="col-xl-12 col-lg-12">
+        <div className="card">
+          <div className="card-header pb-0">
+            <h5>Sequences</h5>
+          </div>
+          <div className="card-body">
+            <SequencesTable
+              workflow={workflow}
+              sequences={workflow.sequences}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   const renderWorkflowInformation = () => {
     return (
       <div className="row">
@@ -298,6 +317,9 @@ export default function WorkflowsShow({
         </div>
         <div className="row">
           { renderLeads() }
+        </div>
+        <div className="row">
+          { renderSequences() }
         </div>
       </div>
     </>

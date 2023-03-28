@@ -14,6 +14,7 @@ import TeamMembersNew from './team_members/new';
 import TeamMembersShow from './team_members/show';
 import TeamMembersEdit from './team_members/edit';
 import LeadsIndex from './leads';
+import SequencesShow from './sequences/show';
 import Home from './home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,6 +42,7 @@ function Dashboard() {
     <Router>
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/workflows/:workflowId/sequences/:sequenceId" component={SequencesShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:id" component={WorkflowsShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows" component={WorkflowsIndex} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />

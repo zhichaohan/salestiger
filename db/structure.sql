@@ -332,6 +332,74 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: sequence_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequence_steps (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    hours_delay integer NOT NULL,
+    email_subject character varying,
+    email_template text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sequence_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequence_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequence_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequence_steps_id_seq OWNED BY public.sequence_steps.id;
+
+
+--
+-- Name: sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequences (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    name character varying,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
+);
+
+
+--
+-- Name: sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequences_id_seq OWNED BY public.sequences.id;
+
+
+--
 -- Name: target_audiences; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -650,6 +718,20 @@ ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps ALTER COLUMN id SET DEFAULT nextval('public.sequence_steps_id_seq'::regclass);
+
+
+--
+-- Name: sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences ALTER COLUMN id SET DEFAULT nextval('public.sequences_id_seq'::regclass);
+
+
+--
 -- Name: target_audiences id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -779,6 +861,22 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: sequence_steps sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps
+    ADD CONSTRAINT sequence_steps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sequences sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences
+    ADD CONSTRAINT sequences_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: target_audiences target_audiences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -874,6 +972,20 @@ CREATE INDEX index_leads_on_company_id ON public.leads USING btree (company_id);
 --
 
 CREATE INDEX index_products_on_account_id ON public.products USING btree (account_id);
+
+
+--
+-- Name: index_sequence_steps_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequence_steps_on_sequence_id ON public.sequence_steps USING btree (sequence_id);
+
+
+--
+-- Name: index_sequences_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequences_on_workflow_id ON public.sequences USING btree (workflow_id);
 
 
 --
@@ -975,6 +1087,14 @@ CREATE INDEX index_workflows_on_target_audience_id ON public.workflows USING btr
 
 
 --
+-- Name: sequences fk_rails_044a7f2691; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences
+    ADD CONSTRAINT fk_rails_044a7f2691 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
 -- Name: team_members fk_rails_1d9b7a31b8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -988,6 +1108,14 @@ ALTER TABLE ONLY public.team_members
 
 ALTER TABLE ONLY public.workflow_leads
     ADD CONSTRAINT fk_rails_23e66a20f3 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
+-- Name: sequence_steps fk_rails_285e44196d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps
+    ADD CONSTRAINT fk_rails_285e44196d FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
 
 
 --
@@ -1158,6 +1286,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230326224017'),
 ('20230326225520'),
 ('20230326231349'),
-('20230327213215');
+('20230327213215'),
+('20230328034252'),
+('20230328165547'),
+('20230328182034');
 
 
