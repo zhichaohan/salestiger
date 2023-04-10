@@ -71,6 +71,28 @@ export default function TeamMembersEdit({
                     <button type="submit" className="btn btn-primary btn-block">Connect Gmail Account</button>
                   </div>
                 </form>
+
+                {
+                  /*
+                  <form method="post" action="/auth/linkedin">
+                    <input type="hidden" name="authenticity_token" value={gon.authenticity_token}/>
+                    <div className="row mb-2">
+                      <div className="profile-title">
+                        <div className="d-flex">
+                        <img className="img-70 rounded-circle" alt="" src={teamMember.photo_url} />
+                          <div className="flex-grow-1 ms-3"><a href="user-profile.html">
+                              <h3 className="mb-1 f-20 txt-primary">{teamMember.name}</h3></a>
+                            <p className="f-12">{teamMember.title}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="form-footer">
+                      <button type="submit" className="btn btn-primary btn-block">Connect Linkedin</button>
+                    </div>
+                  </form>
+                  */
+                }
               </div>
             </div>
           </div>

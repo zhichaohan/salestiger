@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
 
   get "/auth/google_oauth2/callback", to: "google_oauth_tokens#create"
+  get "/auth/linkedin/callback", to: "linkedin_oauth_tokens#create"
+
 
   namespace :api do
     namespace :v1 do
