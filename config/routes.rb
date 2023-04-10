@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :leads
       resources :sequences, only: [:show] do
         resources :sequence_steps, only: [:create]
+
+        post :add_leads, on: :member
       end
     end
   end

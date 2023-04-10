@@ -228,6 +228,7 @@ export default function WorkflowsShow({
             <LeadsTable
               leads={workflow.workflow_leads.map(wl => wl.lead)}
               teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
+              sequences={workflow.sequences}
             />
           </div>
         </div>

@@ -9,6 +9,8 @@ class TeamMember < ApplicationRecord
 
   include Routable
 
+  scope :email_activated, -> { where.not(auth_token_id: nil) }
+
   def show_path
     "/team_members/#{self.slug}"
   end

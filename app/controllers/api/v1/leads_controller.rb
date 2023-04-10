@@ -14,6 +14,16 @@ module Api
           end
         end
       end
+
+      def start_sequence
+        Leads::StartSequenceWorker.perform_async(params[:lead_id], params[:sequence_id])
+
+        respond_to do |format|
+          format.json do
+            render json: { success: true }
+          end
+        end
+      end
     end
   end
 end

@@ -8,7 +8,8 @@ class LeadSerializer < ActiveModel::Serializer
              :linkedin_url,
              :twitter_url,
              :uuid,
-             :account_info
+             :account_info,
+             :id
 
   belongs_to :company
 

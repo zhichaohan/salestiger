@@ -15,3 +15,21 @@ export const getSequence = (
   .then(data => successCallback(data))
   .catch(data => onError(data))
 }
+
+export const addLeadsToSequence = (
+  sequenceId,
+  leadIds,
+  successCallback
+) => {
+  fetch(`/api/v1/sequences/${sequenceId}/add_leads`, {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ lead_ids: leadIds })
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}
