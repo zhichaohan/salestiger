@@ -552,6 +552,39 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: workflow_attributes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.workflow_attributes (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    name character varying NOT NULL,
+    value character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: workflow_attributes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.workflow_attributes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workflow_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.workflow_attributes_id_seq OWNED BY public.workflow_attributes.id;
+
+
+--
 -- Name: workflow_leads; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -760,6 +793,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
+-- Name: workflow_attributes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes ALTER COLUMN id SET DEFAULT nextval('public.workflow_attributes_id_seq'::regclass);
+
+
+--
 -- Name: workflow_leads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -909,6 +949,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: workflow_attributes workflow_attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes
+    ADD CONSTRAINT workflow_attributes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: workflow_leads workflow_leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1035,6 +1083,13 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: index_workflow_attributes_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflow_attributes_on_workflow_id ON public.workflow_attributes USING btree (workflow_id);
 
 
 --
@@ -1167,6 +1222,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: workflow_attributes fk_rails_64c9ef1705; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes
+    ADD CONSTRAINT fk_rails_64c9ef1705 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
 -- Name: workflow_team_members fk_rails_6744196585; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1289,6 +1352,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230327213215'),
 ('20230328034252'),
 ('20230328165547'),
-('20230328182034');
+('20230328182034'),
+('20230411184348');
 
 

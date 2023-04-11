@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :landing_page_contacts
       resources :team_members
-      resources :workflows
+      resources :workflows do
+        resources :workflow_attributes, only: [:create]
+      end
       resources :emails
       resources :leads
       resources :sequences, only: [:show] do

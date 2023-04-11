@@ -40,7 +40,8 @@ module Api
                      target_audience: {},
                      workflow_team_members: :team_member,
                      workflow_leads: { lead: :company },
-                     sequences: []
+                     sequences: [],
+                     workflow_attributes: []
                    }
           end
         end
