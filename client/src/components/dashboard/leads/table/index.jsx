@@ -1,5 +1,6 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import EmailsCreateModal from '../../emails/create_modal';
+import LeadSequencesCreateModal from '../../lead_sequences/create_modal';
 import { createEmail } from '../../../../api/emails';
 import { addLeadsToSequence } from '../../../../api/sequences';
 import { notifySuccess } from '../../../../helpers';
@@ -9,11 +10,14 @@ export default function LeadsTable({
   leads,
   teamMembers,
   sequences = [],
+  reload
 }) {
   const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
   const [createEmailRecipient, setCreateEmailRecipient] = useState();
   const [emailRecipientId, setEmailRecipientId] = useState();
   const [checkedLeads, setCheckAllLeads] = useState([]);
+  const [selectedSequenceId, setSelectedSequenceId] = useState();
+  const [showLeadSequenceCreateModal, setShowLeadSequenceCreateModal] = useState();
 
   const checkAllChecked = checkedLeads.length === leads.length;
   const checkAllClick = () => {
@@ -42,9 +46,8 @@ export default function LeadsTable({
 
   const addLeadsToSequenceClick = (sequenceId) => () => {
     if (checkedLeads.length !== 0) {
-      addLeadsToSequence(sequenceId, checkedLeads, () => {
-        notifySuccess(`Added ${checkedLeads.length} leads to sequence`);
-      })
+      setSelectedSequenceId(sequenceId);
+      setShowLeadSequenceCreateModal(true);
     }
   }
 
@@ -78,6 +81,7 @@ export default function LeadsTable({
               <th scope="col">Company</th>
               <th scope="col">Company Size</th>
               <th scope="col">Company Industry</th>
+              <th scope="col">Sequences</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
@@ -119,6 +123,9 @@ export default function LeadsTable({
                     { lead.company.industry }
                   </td>
                   <td>
+                    { lead.lead_sequences.map(ls => ls.sequence.name).join(', ') }
+                  </td>
+                  <td>
                     {
                       lead.account_info && lead.account_info.status === 'approaching' && <span className="badge badge-info">Approaching</span>
                     }
@@ -143,6 +150,22 @@ export default function LeadsTable({
                 recipient: createEmailRecipient,
               }, () => {
                 notifySuccess(`Sending email to ${createEmailRecipient}`)
+              })
+            }}
+          />
+        }
+        {
+          showLeadSequenceCreateModal &&
+          <LeadSequencesCreateModal
+            showModal={showLeadSequenceCreateModal}
+            setShowModal={setShowLeadSequenceCreateModal}
+            teamMembers={teamMembers}
+            onSubmit={(teamMemberId) => {
+              addLeadsToSequence(selectedSequenceId, checkedLeads, teamMemberId, () => {
+                notifySuccess(`Added ${checkedLeads.length} leads to sequence`);
+                if (reload) {
+                  reload()
+                }
               })
             }}
           />

@@ -1,5 +1,6 @@
 class Lead < ApplicationRecord
   belongs_to :company
+  has_many :lead_sequences
 
   def email_sendable?
     self.business_email.present? || self.personal_email.present?

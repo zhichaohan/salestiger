@@ -23,7 +23,7 @@ module Api
                                .workflows
                                .preload(
                                  workflow_team_members: :team_member,
-                                 workflow_leads: { lead: :company },
+                                 workflow_leads: { lead: [:company, { lead_sequences: [:sequence, :team_member] }] },
                                  sequences: []
                                ).friendly.find(params[:id])
 
@@ -39,7 +39,7 @@ module Api
                      product: {},
                      target_audience: {},
                      workflow_team_members: :team_member,
-                     workflow_leads: { lead: :company },
+                     workflow_leads: { lead: [:company, { lead_sequences: [:sequence, :team_member] }] },
                      sequences: [],
                      workflow_attributes: []
                    }

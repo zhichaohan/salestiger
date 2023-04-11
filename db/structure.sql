@@ -250,6 +250,39 @@ ALTER SEQUENCE public.landing_page_contacts_id_seq OWNED BY public.landing_page_
 
 
 --
+-- Name: lead_sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_sequences (
+    id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lead_sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_sequences_id_seq OWNED BY public.lead_sequences.id;
+
+
+--
 -- Name: leads; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -737,6 +770,13 @@ ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: lead_sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences ALTER COLUMN id SET DEFAULT nextval('public.lead_sequences_id_seq'::regclass);
+
+
+--
 -- Name: leads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -877,6 +917,14 @@ ALTER TABLE ONLY public.landing_page_contacts
 
 
 --
+-- Name: lead_sequences lead_sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT lead_sequences_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: leads leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1006,6 +1054,27 @@ CREATE INDEX index_emails_on_lead_id ON public.emails USING btree (lead_id);
 --
 
 CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_member_id);
+
+
+--
+-- Name: index_lead_sequences_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_lead_id ON public.lead_sequences USING btree (lead_id);
+
+
+--
+-- Name: index_lead_sequences_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_sequence_id ON public.lead_sequences USING btree (sequence_id);
+
+
+--
+-- Name: index_lead_sequences_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_team_member_id ON public.lead_sequences USING btree (team_member_id);
 
 
 --
@@ -1150,6 +1219,22 @@ ALTER TABLE ONLY public.sequences
 
 
 --
+-- Name: lead_sequences fk_rails_05d9c4ba58; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_05d9c4ba58 FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
+-- Name: lead_sequences fk_rails_09be4f3241; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_09be4f3241 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
 -- Name: team_members fk_rails_1d9b7a31b8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1286,6 +1371,14 @@ ALTER TABLE ONLY public.workflow_leads
 
 
 --
+-- Name: lead_sequences fk_rails_c5bd1e0747; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_c5bd1e0747 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: workflows fk_rails_c93a2eb6a2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1353,6 +1446,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328034252'),
 ('20230328165547'),
 ('20230328182034'),
-('20230411184348');
+('20230411184348'),
+('20230411213402');
 
 

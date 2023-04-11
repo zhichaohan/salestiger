@@ -19,6 +19,7 @@ export const getSequence = (
 export const addLeadsToSequence = (
   sequenceId,
   leadIds,
+  teamMemberId,
   successCallback
 ) => {
   fetch(`/api/v1/sequences/${sequenceId}/add_leads`, {
@@ -26,7 +27,7 @@ export const addLeadsToSequence = (
       headers: {
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({ lead_ids: leadIds })
+      body: JSON.stringify({ lead_ids: leadIds, team_member_id: teamMemberId })
   })
   .then(response => response.json())
   .then(data => {
