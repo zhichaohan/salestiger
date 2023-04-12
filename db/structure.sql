@@ -250,6 +250,41 @@ ALTER SEQUENCE public.landing_page_contacts_id_seq OWNED BY public.landing_page_
 
 
 --
+-- Name: lead_sequence_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_sequence_steps (
+    id bigint NOT NULL,
+    lead_sequence_id bigint NOT NULL,
+    sequence_step_id bigint NOT NULL,
+    email_id bigint,
+    scheduled_for timestamp without time zone,
+    job_id character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lead_sequence_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_sequence_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_sequence_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_sequence_steps_id_seq OWNED BY public.lead_sequence_steps.id;
+
+
+--
 -- Name: lead_sequences; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -770,6 +805,13 @@ ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: lead_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps ALTER COLUMN id SET DEFAULT nextval('public.lead_sequence_steps_id_seq'::regclass);
+
+
+--
 -- Name: lead_sequences id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -917,6 +959,14 @@ ALTER TABLE ONLY public.landing_page_contacts
 
 
 --
+-- Name: lead_sequence_steps lead_sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT lead_sequence_steps_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lead_sequences lead_sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1054,6 +1104,27 @@ CREATE INDEX index_emails_on_lead_id ON public.emails USING btree (lead_id);
 --
 
 CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_member_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_email_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_email_id ON public.lead_sequence_steps USING btree (email_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_lead_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_lead_sequence_id ON public.lead_sequence_steps USING btree (lead_sequence_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_sequence_step_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_sequence_step_id ON public.lead_sequence_steps USING btree (sequence_step_id);
 
 
 --
@@ -1235,6 +1306,14 @@ ALTER TABLE ONLY public.lead_sequences
 
 
 --
+-- Name: lead_sequence_steps fk_rails_1d47b0be48; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_1d47b0be48 FOREIGN KEY (email_id) REFERENCES public.emails(id);
+
+
+--
 -- Name: team_members fk_rails_1d9b7a31b8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1280,6 +1359,14 @@ ALTER TABLE ONLY public.emails
 
 ALTER TABLE ONLY public.workflow_team_members
     ADD CONSTRAINT fk_rails_3451c85814 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: lead_sequence_steps fk_rails_4640350e4b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_4640350e4b FOREIGN KEY (sequence_step_id) REFERENCES public.sequence_steps(id);
 
 
 --
@@ -1360,6 +1447,14 @@ ALTER TABLE ONLY public.workflows
 
 ALTER TABLE ONLY public.account_leads
     ADD CONSTRAINT fk_rails_9773a1a0d6 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: lead_sequence_steps fk_rails_a774ebfaf2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_a774ebfaf2 FOREIGN KEY (lead_sequence_id) REFERENCES public.lead_sequences(id);
 
 
 --
@@ -1447,6 +1542,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328165547'),
 ('20230328182034'),
 ('20230411184348'),
-('20230411213402');
+('20230411213402'),
+('20230412033459');
 
 

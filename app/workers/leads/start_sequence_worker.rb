@@ -7,6 +7,6 @@ class Leads::StartSequenceWorker
     lead_sequence = LeadSequence.find_by(id: lead_sequence_id)
     return unless lead_sequence.present?
 
-    lead_sequence.lead.start_sequence!(lead_sequence.sequence, lead_sequence.team_member)
+    lead_sequence.start!
   end
 end

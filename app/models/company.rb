@@ -3,7 +3,7 @@ class Company < ApplicationRecord
 
   def process_merge_keys(text)
     str = text
-    str = str.gsub!("{{LEAD COMPANY NAME}}", self.name)
+    str = str.gsub("{{LEAD COMPANY NAME}}", self.name)
 
     str
   end

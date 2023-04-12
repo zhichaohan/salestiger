@@ -24,7 +24,7 @@ module Api
               team_member: team_member
             )
 
-            # Leads::StartSequenceWorker.perform_async(lead_sequence.id)
+            Leads::StartSequenceWorker.perform_async(lead_sequence.id)
           end
         end
 

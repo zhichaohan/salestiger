@@ -17,8 +17,8 @@ class TeamMember < ApplicationRecord
 
   def process_merge_keys(text)
     str = text
-    str = str.gsub!("{{TEAM MEMBER FIRST NAME}}", self.first_name)
-    str = str.gsub!("{{TEAM MEMBER LAST NAME}}", self.last_name)
+    str = str.gsub("{{TEAM MEMBER FIRST NAME}}", self.first_name)
+    str = str.gsub("{{TEAM MEMBER LAST NAME}}", self.last_name)
 
     str
   end

@@ -9,6 +9,8 @@ class Emails::SendWorker
   Gmail = Google::Apis::GmailV1
 
   def perform(id)
+    return
+    
     email = Email.find_by(id: id)
     return unless email.present?
 

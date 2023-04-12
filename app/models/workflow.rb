@@ -14,9 +14,9 @@ class Workflow < ApplicationRecord
   def process_merge_keys(text)
     str = text
     self.workflow_attributes.each do |wa|
-      str = str.gsub!("{{#{wa.name.upcase}}}", wa.value)
+      str = str.gsub("{{#{wa.name.upcase}}}", wa.value)
     end
-    
+
     str
   end
 end

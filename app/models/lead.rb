@@ -27,8 +27,8 @@ class Lead < ApplicationRecord
 
   def process_merge_keys(text)
     str = text
-    str = str.gsub!("{{LEAD FIRST NAME}}", self.first_name)
-    str = str.gsub!("{{LEAD LAST NAME}}", self.last_name)
+    str = str.gsub("{{LEAD FIRST NAME}}", self.first_name)
+    str = str.gsub("{{LEAD LAST NAME}}", self.last_name)
 
     str = self.company.process_merge_keys(str)
 
