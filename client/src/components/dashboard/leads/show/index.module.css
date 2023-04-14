@@ -1,0 +1,12 @@
+.logs_header {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #eeeeee !important;
+}
+.edit_button {
+  margin: 0 15px 0 10px;
+}

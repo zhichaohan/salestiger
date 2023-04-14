@@ -15,4 +15,26 @@ class Email < ApplicationRecord
       account_lead.update!(status: 'approaching')
     end
   end
+
+  def to_log_description
+    "<b>#{self.subject}</b> - #{self.sanitized_body_html[0, 20]}"
+  end
+
+  def to_log_statuses
+    return [{ type: 'success', label: 'sent' }] if self.status == 'sent'
+
+    [{ type: 'primary', label: 'scheduled' }]
+  end
+
+  def sanitized_body_html
+    ActionView::Base.full_sanitizer.sanitize(self.body_html)
+  end
+
+  def can_edit?
+    self.status != 'sent'
+  end
+
+  def can_cancel?
+    self.status != 'sent'
+  end
 end

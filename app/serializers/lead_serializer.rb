@@ -9,7 +9,8 @@ class LeadSerializer < ActiveModel::Serializer
              :twitter_url,
              :uuid,
              :account_info,
-             :id
+             :id,
+             :show_path
 
   belongs_to :company
   has_many :lead_sequences, serializer: LeadSequenceSerializer

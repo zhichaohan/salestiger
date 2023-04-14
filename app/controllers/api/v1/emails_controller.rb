@@ -4,7 +4,29 @@ module Api
       before_action :authenticate_user!, only: [:index, :create]
 
       def index
-        
+
+      end
+
+      def show
+        email = Email.find(params[:id])
+
+        respond_to do |format|
+          format.json do
+            render json: email, serializer: EmailSerializer
+          end
+        end
+      end
+
+      def update
+        email = Email.find(params[:id])
+
+        email.update(email_params)
+
+        respond_to do |format|
+          format.json do
+            render json: email, serializer: EmailSerializer
+          end
+        end
       end
 
       def create
@@ -25,6 +47,10 @@ module Api
             render json: email, serializer: EmailSerializer
           end
         end
+      end
+
+      def email_params
+        params.permit(:body_html, :subject)
       end
     end
   end

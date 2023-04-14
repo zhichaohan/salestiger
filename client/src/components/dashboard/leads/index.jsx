@@ -89,7 +89,7 @@ export default function LeadsIndex() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-10 col-md-12 box-col-9 xl-75 box-col-75">
+            <div className="col-xl-10 col-md-9 box-col-9 xl-75 box-col-75">
               <div className="email-right-aside bookmark-tabcontent">
                 <div className="card email-body">
                   <div className="ps-0">

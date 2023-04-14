@@ -15,7 +15,9 @@ Rails.application.routes.draw do
         resources :workflow_attributes, only: [:create]
       end
       resources :emails
-      resources :leads
+      resources :leads do
+        get :logs, on: :member
+      end
       resources :sequences, only: [:show] do
         resources :sequence_steps, only: [:create]
 

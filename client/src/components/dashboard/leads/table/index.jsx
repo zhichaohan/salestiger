@@ -92,7 +92,7 @@ export default function LeadsTable({
                 <tr>
                   <td><input checked={checkedLeads.includes(lead.id)} onChange={leadClick(lead.id)} className="form-check-input" id={`check-${lead.uuid}`} type="checkbox"/><label className="form-check-label" for={`check-${lead.uuid}`}></label></td>
                   <td>
-                    <div className={styles.name_block}>{lead.name}</div>
+                    <div className={styles.name_block}><a href={lead.show_path}>{lead.name}</a></div>
                     <div>
                       <ul className={styles.social_list}>
                         { lead.business_email && <li><a href="javascript:;" onClick={emailOnClick(lead.business_email, lead)}><i className="fa fa-envelope"></i></a></li> }

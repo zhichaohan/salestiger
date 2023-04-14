@@ -334,7 +334,8 @@ CREATE TABLE public.leads (
     twitter_url character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    slug character varying
 );
 
 
@@ -1543,6 +1544,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230328182034'),
 ('20230411184348'),
 ('20230411213402'),
-('20230412033459');
+('20230412033459'),
+('20230412180246');
 
 

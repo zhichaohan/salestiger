@@ -9,4 +9,7 @@ class Account < ApplicationRecord
   has_many :products
   has_many :workflows
   has_many :account_leads
+  has_many :sequences, through: :workflows
+  has_many :lead_sequences, through: :sequences
+  has_many :lead_sequence_steps, through: :lead_sequences
 end

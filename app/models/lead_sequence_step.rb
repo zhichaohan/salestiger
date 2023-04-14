@@ -48,4 +48,18 @@ class LeadSequenceStep < ApplicationRecord
     str = self.team_member.process_merge_keys(str)
     self.sequence.workflow.process_merge_keys(str)
   end
+
+  def to_log
+    {
+      id: self.id,
+      type: "LeadSequenceStep",
+      title: self.lead_sequence.sequence.name,
+      subtitle: "Sequence",
+      description: self.email&.to_log_description || "",
+      statuses: self.email&.to_log_statuses || [],
+      can_edit: self.email&.can_edit? || false,
+      can_cancel: self.email&.can_cancel? || false,
+      email_id: self.email&.id
+    }
+  end
 end

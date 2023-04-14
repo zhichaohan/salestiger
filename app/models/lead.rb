@@ -1,6 +1,12 @@
 class Lead < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  include Routable
+
   belongs_to :company
   has_many :lead_sequences
+  has_many :lead_sequence_steps, through: :lead_sequences
 
   def email_sendable?
     self.business_email.present? || self.personal_email.present?
@@ -43,5 +49,17 @@ class Lead < ApplicationRecord
     return name.split.last if name.split.count > 1
 
     ""
+  end
+
+  def show_path
+    "/leads/#{self.slug}"
+  end
+
+  def logs(account_id)
+    Account.find(account_id)
+           .lead_sequence_steps
+           .preload(:email, lead_sequence: { sequence: :workflow })
+           .where(lead_sequences: { id: self.id })
+           .map { |step| step.to_log }
   end
 end
