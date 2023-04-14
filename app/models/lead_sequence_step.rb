@@ -59,7 +59,8 @@ class LeadSequenceStep < ApplicationRecord
       statuses: self.email&.to_log_statuses || [],
       can_edit: self.email&.can_edit? || false,
       can_cancel: self.email&.can_cancel? || false,
-      email_id: self.email&.id
+      email_id: self.email&.id,
+      datetime: self.scheduled_for
     }
   end
 

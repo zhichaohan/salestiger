@@ -1,6 +1,10 @@
 class Email < ApplicationRecord
   belongs_to :team_member
   belongs_to :lead
+  has_many :lead_sequence_steps
+
+  scope :sent, -> { where(status: 'sent').where.not(sent_at: nil) }
+  scope :not_in_sequence, -> { left_outer_joins(:lead_sequence_steps).where(lead_sequence_steps: { id: nil }) }
 
   def final_recipient
     return self.recipient if ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
@@ -42,5 +46,20 @@ class Email < ApplicationRecord
 
   def cancel!
     self.update(status: 'canceled')
+  end
+
+  def to_log
+    {
+      id: self.id,
+      type: "Email",
+      title: "Individual Email",
+      subtitle: "Sequence",
+      description: self.to_log_description || "",
+      statuses: self.to_log_statuses || [],
+      can_edit: false,
+      can_cancel: false,
+      email_id: self.id,
+      datetime: self.sent_at
+    }
   end
 end

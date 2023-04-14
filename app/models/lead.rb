@@ -7,6 +7,7 @@ class Lead < ApplicationRecord
   belongs_to :company
   has_many :lead_sequences
   has_many :lead_sequence_steps, through: :lead_sequences
+  has_many :emails
 
   def email_sendable?
     self.business_email.present? || self.personal_email.present?
@@ -56,10 +57,16 @@ class Lead < ApplicationRecord
   end
 
   def logs(account_id)
-    Account.find(account_id)
-           .lead_sequence_steps
-           .preload(:email, lead_sequence: { sequence: :workflow })
-           .where(lead_sequences: { id: self.id })
-           .map { |step| step.to_log }
+    email_logs = self.emails.sent.not_in_sequence.map { |e| e.to_log }
+
+    sequence_logs = Account.find(account_id)
+                           .lead_sequence_steps
+                           .preload(:email, lead_sequence: { sequence: :workflow })
+                           .where(lead_sequences: { id: self.id })
+                           .map { |step| step.to_log }
+
+    logs = email_logs + sequence_logs
+
+    logs.sort! { |a, b| a[:datetime] <=> b[:datetime] }
   end
 end
