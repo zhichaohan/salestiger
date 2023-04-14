@@ -9,7 +9,7 @@ class Emails::SendWorker
   Gmail = Google::Apis::GmailV1
 
   def perform(id)
-    return
+    return unless ENV['RAILS_ENV'] == 'production'
 
     email = Email.find_by(id: id)
     return unless email.present?
