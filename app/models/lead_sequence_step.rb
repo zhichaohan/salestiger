@@ -62,4 +62,13 @@ class LeadSequenceStep < ApplicationRecord
       email_id: self.email&.id
     }
   end
+
+  def cancel!
+    return unless self.job_id.present?
+
+    job = Sidekiq::ScheduledSet.new.find_job(self.job_id)
+    job.delete if job.present?
+
+    self.email.cancel! if self.email.present?
+  end
 end

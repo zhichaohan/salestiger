@@ -10,12 +10,13 @@ class Emails::SendWorker
 
   def perform(id)
     return
-    
+
     email = Email.find_by(id: id)
     return unless email.present?
 
     return unless email.team_member.auth_token.present?
 
+    return if email.status == 'canceled' || email.status == 'sent'
 
     gmail = Gmail::GmailService.new
     gmail.authorization = email.team_member.auth_token.as_credentials!

@@ -23,6 +23,8 @@ class Email < ApplicationRecord
   def to_log_statuses
     return [{ type: 'success', label: 'sent' }] if self.status == 'sent'
 
+    return [{ type: 'danger', label: 'canceled' }] if self.status == 'canceled'
+
     [{ type: 'primary', label: 'scheduled' }]
   end
 
@@ -31,10 +33,14 @@ class Email < ApplicationRecord
   end
 
   def can_edit?
-    self.status != 'sent'
+    self.status != 'sent' && self.status != 'canceled'
   end
 
   def can_cancel?
-    self.status != 'sent'
+    self.status != 'sent' && self.status != 'canceled'
+  end
+
+  def cancel!
+    self.update(status: 'canceled')
   end
 end

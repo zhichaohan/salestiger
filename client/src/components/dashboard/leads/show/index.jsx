@@ -2,9 +2,12 @@ import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import SocialList from '../../team_members/social_list';
 import EmailsEditModal from '../../emails/edit_modal';
+import ConfirmationModal from '../../../ui_kit/confirmation_modal'
 import DOMPurify from '../../../../utils/purify.min.js'
 import { getLead, getLeadLogs } from '../../../../api/leads';
 import { getEmail } from '../../../../api/emails';
+import { cancelLeadSequenceStep } from '../../../../api/lead_sequence_steps';
+import { notifySuccess } from '../../../../helpers';
 import styles from "./index.module.css"
 
 export default function LeadsShow({
@@ -16,6 +19,8 @@ export default function LeadsShow({
   const [logs, setLogs] = useState();
   const [showEditEmailModal, setShowEditEmailModal] = useState();
   const [email, setEmail] = useState();
+  const [stepIdToCancel, setStepIdToCancel] = useState();
+  const [showCancelEmailModal, setShowCancelEmailModal] = useState();
 
   const loadLead = () => {
     getLead(id, (r) => {
@@ -38,6 +43,11 @@ export default function LeadsShow({
       setEmail(r);
       setShowEditEmailModal(true);
     })
+  }
+
+  const cancelEmailClick = (stepId) => () => {
+    setStepIdToCancel(stepId);
+    setShowCancelEmailModal(true);
   }
 
   if (view === 'loading') {
@@ -135,6 +145,9 @@ export default function LeadsShow({
                               {
                                 log.can_edit && <a href="javascript:void(0)" onClick={editEmailClick(log.email_id)}><i className={`fa fa-pencil-square-o ${styles.edit_button}`}></i></a>
                               }
+                              {
+                                log.can_cancel && <a href="javascript:void(0)" onClick={cancelEmailClick(log.id)}><i className={`fa fa-stop-circle-o ${styles.edit_button}`}></i></a>
+                              }
                             </td>
                           </tr>
                         )
@@ -152,6 +165,20 @@ export default function LeadsShow({
                   email={email}
                   onSubmit={() => {
                     loadLead();
+                  }}
+                />
+              }
+              {
+                showCancelEmailModal &&
+                <ConfirmationModal
+                  showModal={showCancelEmailModal}
+                  setShowModal={setShowCancelEmailModal}
+                  title={`Are you sure you want to cancel this email`}
+                  onSubmit={() => {
+                    cancelLeadSequenceStep(stepIdToCancel, () => {
+                      notifySuccess('Your email has been canceled');
+                      loadLead()
+                    })
                   }}
                 />
               }
