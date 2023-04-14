@@ -1,13 +1,29 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
+import HtmlEditor from '../../../ui_kit/html_editor';
 import Modal from "react-bootstrap/Modal";
 
 export default function EmailsCreateModal({
   showModal,
   setShowModal,
   teamMembers,
+  recipient,
+  onSubmit
 }) {
+  const [bodyHtml, setBodyHtml] = useState();
+  const [subject, setSubject] = useState('');
+  const [teamMember, setTeamMember] = useState(teamMembers[0].uuid)
+
   const teamMemberOnChange = (e) => {
-    console.log("e.target.value ", e.target.value);
+    setTeamMember(e.target.value);
+  }
+
+  const onSubmitClick = () => {
+    setShowModal(false);
+    onSubmit({
+      team_member_id: teamMember,
+      subject: subject,
+      body_html: bodyHtml,
+    });
   }
 
   return (
@@ -33,17 +49,24 @@ export default function EmailsCreateModal({
           </div>
           <div className="mb-3">
             <label className="col-form-label" for="recipient-name">Recipient:</label>
-            <input className="form-control" type="text" value="@getbootstrap" />
+            <input className="form-control" type="text" value={recipient} disabled />
+          </div>
+          <div className="mb-3">
+            <label className="col-form-label" for="recipient-name">Subject:</label>
+            <input className="form-control" type="text" value={subject} onChange={(e) => setSubject(e.target.value)} />
           </div>
           <div className="mb-3">
             <label className="col-form-label" for="message-text">Message:</label>
-            <textarea className="form-control"></textarea>
+            <HtmlEditor
+              bodyHtml={bodyHtml}
+              setBodyHtml={setBodyHtml}
+            />
           </div>
         </form>
       </div>
       <div className="modal-footer">
         <button onClick={() => setShowModal(false)} className="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-        <button className="btn btn-primary" type="button">Send message</button>
+        <button onClick={onSubmitClick} className="btn btn-primary" type="button">Send message</button>
       </div>
     </Modal>
   )

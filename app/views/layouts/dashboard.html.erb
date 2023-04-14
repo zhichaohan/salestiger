@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://salestiger-assets.s3.us-west-2.amazonaws.com/favicons/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,6 +43,24 @@
     <link id="color" rel="stylesheet" href="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/css/responsive.css">
+
+    <style>
+      .ql-container {
+        min-height: 10rem;
+        height: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ql-editor {
+        height: 100%;
+        flex: 1;
+        overflow-y: auto;
+        width: 100%;
+      }
+    </style>
+
   </head>
   <body>
     <!-- tap on top starts-->
@@ -95,6 +114,8 @@
                     <ul>
                       <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="/team_members"><i data-feather="users"></i><span>Your Sales Team</span></a>
                       <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="/workflows"><i data-feather="check-circle"></i><span>Workflows</span></a>
+                      <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="/leads"><i data-feather="list"></i><span>Leads</span></a>
+
                       <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="home"></i><span class="lan-3">Dashboard              </span></a>
                         <ul class="sidebar-submenu">

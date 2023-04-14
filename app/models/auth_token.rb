@@ -28,12 +28,15 @@ class AuthToken < ActiveRecord::Base
     expires_at < Time.now
   end
 
-  def fresh_token
+  def fresh_token!
     refresh! if expired?
     access_token
   end
 
-  def as_credentials
+  def as_credentials!
+    self.fresh_token!
+    self.reload
+
     Google::Auth::UserRefreshCredentials.new(
      client_id: ENV['GOOGLE_CLIENT_ID'],
      client_secret: ENV['GOOGLE_CLIENT_SECRET'],

@@ -7,4 +7,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     access_type: 'offline',
     prompt: 'consent'
   }
+  provider :linkedin, ENV['LINKEDIN_CLIENT_ID'], ENV['LINKEDIN_CLIENT_SECRET'], {
+    token_params: {
+      client_id: ENV['LINKEDIN_CLIENT_ID'],
+      client_secret: ENV['LINKEDIN_CLIENT_SECRET']
+    }
+    # scope: 'w_compliance' they don't have any scopes that are of interest
+  }
 end

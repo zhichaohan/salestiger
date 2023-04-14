@@ -12,3 +12,36 @@ export const getTeamMember = (
   .then(data => successCallback(data))
   .catch(data => onError(data))
 }
+
+export const updateTeamMember = (
+  teamMemberId,
+  params,
+  successCallback
+) => {
+  fetch(`/api/v1/team_members/${teamMemberId}`, {
+      method: 'PUT',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params)
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}
+
+export const getTeamMembers = (
+    params,
+    successCallback
+) => {
+  fetch(`/api/v1/team_members`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}

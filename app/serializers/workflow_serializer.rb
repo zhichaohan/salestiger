@@ -6,10 +6,13 @@ class WorkflowSerializer < ActiveModel::Serializer
              :pipeline_generated,
              :messages_sent,
              :slug,
-             :motivation
+             :motivation,
+             :id
 
   belongs_to :target_audience, optional: true
   belongs_to :product, optional: true
   has_many :workflow_team_members, serializer: WorkflowTeamMemberSerializer
   has_many :workflow_leads, serializer: WorkflowLeadSerializer
+  has_many :sequences
+  has_many :workflow_attributes
 end

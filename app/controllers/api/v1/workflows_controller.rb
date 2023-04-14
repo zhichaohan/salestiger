@@ -7,12 +7,13 @@ module Api
         workflows = current_user.account.workflows.preload(
           :target_audience,
           :product,
+          :sequences,
           workflow_team_members: :team_member
         )
 
         respond_to do |format|
           format.json do
-            render json: workflows, each_serializer: WorkflowSerializer, include: { workflow_team_members: :team_member }
+            render json: workflows, each_serializer: WorkflowSerializer, include: { workflow_team_members: :team_member, sequences: [] }
           end
         end
       end
@@ -22,19 +23,25 @@ module Api
                                .workflows
                                .preload(
                                  workflow_team_members: :team_member,
-                                 workflow_leads: { lead: :company }
+                                 workflow_leads: { lead: [:company, { lead_sequences: [:sequence, :team_member] }] },
+                                 sequences: []
                                ).friendly.find(params[:id])
+
+        account_leads = current_user.account.account_leads.where(lead_id: workflow.leads.pluck(:id))
 
         respond_to do |format|
           format.json do
             render json: workflow,
                    serializer: WorkflowSerializer,
+                   account_leads: account_leads,
                    status: 200,
                    include: {
                      product: {},
                      target_audience: {},
                      workflow_team_members: :team_member,
-                     workflow_leads: { lead: :company },
+                     workflow_leads: { lead: [:company, { lead_sequences: [:sequence, :team_member] }] },
+                     sequences: [],
+                     workflow_attributes: []
                    }
           end
         end

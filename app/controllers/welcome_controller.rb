@@ -5,6 +5,11 @@ class WelcomeController < ApplicationController
   def home
     gon.current_user = current_user
     gon.authenticity_token = form_authenticity_token
+    gon.s3_bucket_name = ENV['S3_BUCKET_NAME']
+    gon.s3_store_dir = ENV['S3_STORE_DIR']
+    gon.s3_region = ENV['S3_REGION']
+    gon.s3_key = ENV['S3_KEY']
+    gon.s3_secret = ENV['S3_SECRET']
     if current_user.present?
       render layout: "dashboard"
     else

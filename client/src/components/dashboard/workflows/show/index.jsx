@@ -1,7 +1,10 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
-import EmailsCreateModal from '../../emails/create_modal';
+import LeadsTable from '../../leads/table';
+import SequencesTable from '../../sequences/table';
+import WorkflowAttributesCreateModal from '../../workflow_attributes/create_modal';
 import { getWorkflow } from '../../../../api/workflows';
+import { notifySuccess } from '../../../../helpers';
 import styles from './index.module.css';
 
 export default function WorkflowsShow({
@@ -9,15 +12,23 @@ export default function WorkflowsShow({
 }) {
   let id = match.params.id;
   const [workflow, setWorkflow] = useState();
-  const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
+  const [showCreateAttributeModal, setShowCreateAttributeModal] = useState(false);
 
-  useEffect(() => {
+  const loadWorkflow = () => {
     getWorkflow(id, (data) => {
       setWorkflow(data);
     }, () => {
       console.log("error");
     });
+  }
+
+  useEffect(() => {
+    loadWorkflow();
   }, [])
+
+  const addAttributeClick = () => {
+    setShowCreateAttributeModal(true);
+  }
 
   if (!workflow) {
     return (
@@ -224,114 +235,124 @@ export default function WorkflowsShow({
             <h5>Leads</h5>
           </div>
           <div className="card-body">
-            <div className="table-responsive">
-              <table className="table table-bordernone table-hover">
-                <thead>
-                  <tr className="border-bottom-primary">
-                    <th scope="col">Name</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">Company Size</th>
-                    <th scope="col">Company Industry</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                  workflow.workflow_leads.map(wl => {
-                    return (
-                      <tr>
-                        <td>
-                          <div className={styles.name_block}>{wl.lead.name}</div>
-                          <div>
-                            <ul className={styles.social_list}>
-                              { wl.lead.business_email && <li><a href="javascript:;" onClick={() => setShowCreateEmailModal(true)}><i className="fa fa-envelope"></i></a></li> }
-                              { wl.lead.personal_email && <li><a href="javascript:;" onClick={() => setShowCreateEmailModal(true)}><i className="fa fa-envelope-o"></i></a></li> }
-                              { wl.lead.linkedin_url && <li><a href={wl.lead.linkedin_url} target="_blank"><i className="fa fa-linkedin-square"></i></a></li> }
-                              { wl.lead.twitter_url && <li><a href={wl.lead.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
-                            </ul>
-                          </div>
-                        </td>
-                        <td>{wl.lead.title}</td>
-                        <td>
-                          <div className={styles.name_block}>
-                            <img className={styles.company_logo} width="35" height="35" src={wl.lead.company.logo_url} />
-                            {wl.lead.company.name}
-                          </div>
-                          <div>
-                            <ul className={styles.social_list}>
-                              { wl.lead.company.website_url && <li><a href={wl.lead.company.website_url} target="_blank"><i className="fa fa-external-link"></i></a></li> }
-                              { wl.lead.company.linkedin_url && <li><a href={wl.lead.company.linkedin_url} target="_blank"><i className="fa fa-linkedin-square"></i></a></li> }
-                              { wl.lead.company.twitter_url && <li><a href={wl.lead.company.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
-                            </ul>
-                          </div>
-                        </td>
-                        <td>
-                          { wl.lead.company.num_employees }
-                        </td>
-                        <td>
-                          { wl.lead.company.industry }
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+            <LeadsTable
+              leads={workflow.workflow_leads.map(wl => wl.lead)}
+              teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
+              sequences={workflow.sequences}
+              reload={loadWorkflow}
+            />
           </div>
         </div>
+      </div>
+    )
+  }
+
+  const renderSequences = () => {
+    return (
+      <div className="col-xl-12 col-lg-12">
+        <div className="card">
+          <div className="card-header pb-0">
+            <h5>Sequences</h5>
+          </div>
+          <div className="card-body">
+            <SequencesTable
+              workflow={workflow}
+              sequences={workflow.sequences}
+            />
+          </div>
         </div>
-        <EmailsCreateModal
-          showModal={showCreateEmailModal}
-          setShowModal={setShowCreateEmailModal}
-          teamMembers={workflow.workflow_team_members.filter(wtm => wtm.team_member.auth_token_id).map(wtm => wtm.team_member)}
-        />
       </div>
     )
   }
 
   const renderWorkflowInformation = () => {
     return (
-      <div className="row">
-      {
-        workflow.product &&
-        <div className="col-xl-4 col-lg-4">
-          <div className="card">
-            <div className="card-header pb-0">
-              <h5>Product: {workflow.product.name}</h5>
+      <>
+        <div className="row">
+        {
+          workflow.product &&
+          <div className="col-xl-6 col-lg-6">
+            <div className="card">
+              <div className="card-header pb-0">
+                <h5>Product: {workflow.product.name}</h5>
+              </div>
+              <div className="card-body">
+                <p className="mb-0">{workflow.product.description}</p>
+              </div>
             </div>
-            <div className="card-body">
-              <p className="mb-0">{workflow.product.description}</p>
+          </div>
+        }
+        {
+          workflow.target_audience &&
+          <div className="col-xl-6 col-lg-6">
+            <div className="card">
+              <div className="card-header pb-0">
+                <h5>Target Audience: {workflow.target_audience.name}</h5>
+              </div>
+              <div className="card-body">
+                <p className="mb-0">We target companies in {workflow.target_audience.industry} of size {workflow.target_audience.company_size} in {workflow.target_audience.location}. We look for {workflow.target_audience.titles.join(', ')}.</p>
+              </div>
+            </div>
+          </div>
+        }
+        </div>
+        <div className="row">
+          <div className="col-xl-12 col-lg-12">
+            <div className="card">
+              <div className={`card-header ${styles.workflow_attribtues_header}`}>
+                <h5 className="mb-0">Created by me</h5>
+                <a className="f-w-600" href="javascript:void(0)" onClick={addAttributeClick}><i class="fa fa-plus"></i>Create attribute</a>
+              </div>
+              <div className="card-body p-0">
+                <div className="taskadd">
+                  <div className="table-responsive">
+                    <table className="table">
+                      <tbody>
+                      {
+                        workflow.workflow_attributes.map(wa => {
+                          return (
+                            <tr>
+                              <td>
+                                <h6 className="task_title_0">{wa.name}</h6>
+                              </td>
+                              <td>
+                                <p className="task_desc_0">{wa.value}</p>
+                              </td>
+                              {
+                                /*
+                                <td>
+                                  <a className="me-2" href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a><a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                  </a>
+                                </td>
+                                <td>
+                                  <a href="javascript:void(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>
+                                </td>
+                                */
+                              }
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody></table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      }
-      {
-        workflow.target_audience &&
-        <div className="col-xl-4 col-lg-4">
-          <div className="card">
-            <div className="card-header pb-0">
-              <h5>Target Audience: {workflow.target_audience.name}</h5>
-            </div>
-            <div className="card-body">
-              <p className="mb-0">We target companies in {workflow.target_audience.industry} of size {workflow.target_audience.company_size} in {workflow.target_audience.location}. We look for {workflow.target_audience.titles.join(', ')}.</p>
-            </div>
-          </div>
-        </div>
-      }
-      {
-        workflow.motivation &&
-        <div className="col-xl-4 col-lg-4">
-          <div className="card">
-            <div className="card-header pb-0">
-              <h5>Motivation</h5>
-            </div>
-            <div className="card-body">
-              <p className="mb-0">{workflow.motivation}</p>
-            </div>
-          </div>
-        </div>
-      }
-      </div>
+        {
+          showCreateAttributeModal &&
+          <WorkflowAttributesCreateModal
+            showModal={showCreateAttributeModal}
+            setShowModal={setShowCreateAttributeModal}
+            workflow={workflow}
+            onSubmit={() => {
+              loadWorkflow();
+              notifySuccess(`A new workflow attribute is created`)
+            }}
+          />
+        }
+      </>
     )
   }
 
@@ -353,6 +374,9 @@ export default function WorkflowsShow({
         </div>
         <div className="row">
           { renderLeads() }
+        </div>
+        <div className="row">
+          { renderSequences() }
         </div>
       </div>
     </>

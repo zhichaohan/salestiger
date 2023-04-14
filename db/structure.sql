@@ -28,6 +28,39 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: account_leads; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_leads (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    status character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: account_leads_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.account_leads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_leads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.account_leads_id_seq OWNED BY public.account_leads.id;
+
+
+--
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -145,6 +178,44 @@ ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
 
 
 --
+-- Name: emails; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.emails (
+    id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    subject character varying,
+    body_html text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    recipient character varying,
+    gmail_id character varying,
+    status character varying,
+    sent_at timestamp without time zone
+);
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.emails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.emails_id_seq OWNED BY public.emails.id;
+
+
+--
 -- Name: landing_page_contacts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -179,6 +250,74 @@ ALTER SEQUENCE public.landing_page_contacts_id_seq OWNED BY public.landing_page_
 
 
 --
+-- Name: lead_sequence_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_sequence_steps (
+    id bigint NOT NULL,
+    lead_sequence_id bigint NOT NULL,
+    sequence_step_id bigint NOT NULL,
+    email_id bigint,
+    scheduled_for timestamp without time zone,
+    job_id character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lead_sequence_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_sequence_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_sequence_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_sequence_steps_id_seq OWNED BY public.lead_sequence_steps.id;
+
+
+--
+-- Name: lead_sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_sequences (
+    id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lead_sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_sequences_id_seq OWNED BY public.lead_sequences.id;
+
+
+--
 -- Name: leads; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -194,7 +333,9 @@ CREATE TABLE public.leads (
     linkedin_url character varying,
     twitter_url character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    slug character varying
 );
 
 
@@ -257,6 +398,74 @@ ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: sequence_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequence_steps (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    hours_delay integer NOT NULL,
+    email_subject character varying,
+    email_template text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sequence_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequence_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequence_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequence_steps_id_seq OWNED BY public.sequence_steps.id;
+
+
+--
+-- Name: sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequences (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    name character varying,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
+);
+
+
+--
+-- Name: sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequences_id_seq OWNED BY public.sequences.id;
 
 
 --
@@ -350,7 +559,8 @@ CREATE TABLE public.team_members (
     instagram_url character varying,
     linkedin_url character varying,
     auth_token_id bigint,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    email_signature text
 );
 
 
@@ -408,6 +618,39 @@ CREATE SEQUENCE public.users_id_seq
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: workflow_attributes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.workflow_attributes (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    name character varying NOT NULL,
+    value character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: workflow_attributes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.workflow_attributes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: workflow_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.workflow_attributes_id_seq OWNED BY public.workflow_attributes.id;
 
 
 --
@@ -521,6 +764,13 @@ ALTER SEQUENCE public.workflows_id_seq OWNED BY public.workflows.id;
 
 
 --
+-- Name: account_leads id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads ALTER COLUMN id SET DEFAULT nextval('public.account_leads_id_seq'::regclass);
+
+
+--
 -- Name: accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -542,10 +792,31 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: emails id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails ALTER COLUMN id SET DEFAULT nextval('public.emails_id_seq'::regclass);
+
+
+--
 -- Name: landing_page_contacts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextval('public.landing_page_contacts_id_seq'::regclass);
+
+
+--
+-- Name: lead_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps ALTER COLUMN id SET DEFAULT nextval('public.lead_sequence_steps_id_seq'::regclass);
+
+
+--
+-- Name: lead_sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences ALTER COLUMN id SET DEFAULT nextval('public.lead_sequences_id_seq'::regclass);
 
 
 --
@@ -560,6 +831,20 @@ ALTER TABLE ONLY public.leads ALTER COLUMN id SET DEFAULT nextval('public.leads_
 --
 
 ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Name: sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps ALTER COLUMN id SET DEFAULT nextval('public.sequence_steps_id_seq'::regclass);
+
+
+--
+-- Name: sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences ALTER COLUMN id SET DEFAULT nextval('public.sequences_id_seq'::regclass);
 
 
 --
@@ -591,6 +876,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
+-- Name: workflow_attributes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes ALTER COLUMN id SET DEFAULT nextval('public.workflow_attributes_id_seq'::regclass);
+
+
+--
 -- Name: workflow_leads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -609,6 +901,14 @@ ALTER TABLE ONLY public.workflow_team_members ALTER COLUMN id SET DEFAULT nextva
 --
 
 ALTER TABLE ONLY public.workflows ALTER COLUMN id SET DEFAULT nextval('public.workflows_id_seq'::regclass);
+
+
+--
+-- Name: account_leads account_leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT account_leads_pkey PRIMARY KEY (id);
 
 
 --
@@ -644,11 +944,35 @@ ALTER TABLE ONLY public.companies
 
 
 --
+-- Name: emails emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: landing_page_contacts landing_page_contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.landing_page_contacts
     ADD CONSTRAINT landing_page_contacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_sequence_steps lead_sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT lead_sequence_steps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_sequences lead_sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT lead_sequences_pkey PRIMARY KEY (id);
 
 
 --
@@ -673,6 +997,22 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: sequence_steps sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps
+    ADD CONSTRAINT sequence_steps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sequences sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences
+    ADD CONSTRAINT sequences_pkey PRIMARY KEY (id);
 
 
 --
@@ -708,6 +1048,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: workflow_attributes workflow_attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes
+    ADD CONSTRAINT workflow_attributes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: workflow_leads workflow_leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -732,6 +1080,76 @@ ALTER TABLE ONLY public.workflows
 
 
 --
+-- Name: index_account_leads_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_leads_on_account_id ON public.account_leads USING btree (account_id);
+
+
+--
+-- Name: index_account_leads_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_leads_on_lead_id ON public.account_leads USING btree (lead_id);
+
+
+--
+-- Name: index_emails_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_emails_on_lead_id ON public.emails USING btree (lead_id);
+
+
+--
+-- Name: index_emails_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_member_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_email_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_email_id ON public.lead_sequence_steps USING btree (email_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_lead_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_lead_sequence_id ON public.lead_sequence_steps USING btree (lead_sequence_id);
+
+
+--
+-- Name: index_lead_sequence_steps_on_sequence_step_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequence_steps_on_sequence_step_id ON public.lead_sequence_steps USING btree (sequence_step_id);
+
+
+--
+-- Name: index_lead_sequences_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_lead_id ON public.lead_sequences USING btree (lead_id);
+
+
+--
+-- Name: index_lead_sequences_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_sequence_id ON public.lead_sequences USING btree (sequence_id);
+
+
+--
+-- Name: index_lead_sequences_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_sequences_on_team_member_id ON public.lead_sequences USING btree (team_member_id);
+
+
+--
 -- Name: index_leads_on_company_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -743,6 +1161,20 @@ CREATE INDEX index_leads_on_company_id ON public.leads USING btree (company_id);
 --
 
 CREATE INDEX index_products_on_account_id ON public.products USING btree (account_id);
+
+
+--
+-- Name: index_sequence_steps_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequence_steps_on_sequence_id ON public.sequence_steps USING btree (sequence_id);
+
+
+--
+-- Name: index_sequences_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequences_on_workflow_id ON public.sequences USING btree (workflow_id);
 
 
 --
@@ -795,6 +1227,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: index_workflow_attributes_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_workflow_attributes_on_workflow_id ON public.workflow_attributes USING btree (workflow_id);
+
+
+--
 -- Name: index_workflow_leads_on_lead_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -844,6 +1283,38 @@ CREATE INDEX index_workflows_on_target_audience_id ON public.workflows USING btr
 
 
 --
+-- Name: sequences fk_rails_044a7f2691; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequences
+    ADD CONSTRAINT fk_rails_044a7f2691 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
+-- Name: lead_sequences fk_rails_05d9c4ba58; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_05d9c4ba58 FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
+-- Name: lead_sequences fk_rails_09be4f3241; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_09be4f3241 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: lead_sequence_steps fk_rails_1d47b0be48; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_1d47b0be48 FOREIGN KEY (email_id) REFERENCES public.emails(id);
+
+
+--
 -- Name: team_members fk_rails_1d9b7a31b8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -860,6 +1331,14 @@ ALTER TABLE ONLY public.workflow_leads
 
 
 --
+-- Name: sequence_steps fk_rails_285e44196d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_steps
+    ADD CONSTRAINT fk_rails_285e44196d FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
 -- Name: team_member_infos fk_rails_2a4059ad68; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -868,11 +1347,35 @@ ALTER TABLE ONLY public.team_member_infos
 
 
 --
+-- Name: emails fk_rails_2dbaf9b6c7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT fk_rails_2dbaf9b6c7 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: workflow_team_members fk_rails_3451c85814; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.workflow_team_members
     ADD CONSTRAINT fk_rails_3451c85814 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: lead_sequence_steps fk_rails_4640350e4b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_4640350e4b FOREIGN KEY (sequence_step_id) REFERENCES public.sequence_steps(id);
+
+
+--
+-- Name: emails fk_rails_470ffccb45; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.emails
+    ADD CONSTRAINT fk_rails_470ffccb45 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
 
 
 --
@@ -889,6 +1392,14 @@ ALTER TABLE ONLY public.workflows
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT fk_rails_61ac11da2b FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: workflow_attributes fk_rails_64c9ef1705; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.workflow_attributes
+    ADD CONSTRAINT fk_rails_64c9ef1705 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
 
 
 --
@@ -916,6 +1427,14 @@ ALTER TABLE ONLY public.team_members
 
 
 --
+-- Name: account_leads fk_rails_81529a4071; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT fk_rails_81529a4071 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: workflows fk_rails_8399d941f2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -924,11 +1443,35 @@ ALTER TABLE ONLY public.workflows
 
 
 --
+-- Name: account_leads fk_rails_9773a1a0d6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT fk_rails_9773a1a0d6 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: lead_sequence_steps fk_rails_a774ebfaf2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequence_steps
+    ADD CONSTRAINT fk_rails_a774ebfaf2 FOREIGN KEY (lead_sequence_id) REFERENCES public.lead_sequences(id);
+
+
+--
 -- Name: workflow_leads fk_rails_ac83b6939b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.workflow_leads
     ADD CONSTRAINT fk_rails_ac83b6939b FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
+-- Name: lead_sequences fk_rails_c5bd1e0747; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_sequences
+    ADD CONSTRAINT fk_rails_c5bd1e0747 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
 
 
 --
@@ -988,6 +1531,20 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230320230524'),
 ('20230322220446'),
 ('20230323035312'),
-('20230323180233');
+('20230323180233'),
+('20230324212357'),
+('20230324214807'),
+('20230326215209'),
+('20230326224017'),
+('20230326225520'),
+('20230326231349'),
+('20230327213215'),
+('20230328034252'),
+('20230328165547'),
+('20230328182034'),
+('20230411184348'),
+('20230411213402'),
+('20230412033459'),
+('20230412180246');
 
 
