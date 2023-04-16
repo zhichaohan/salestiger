@@ -50,6 +50,11 @@ export default function LeadsShow({
     setShowCancelEmailModal(true);
   }
 
+  const renderTime = (time) => {
+    const m = new Date(time);
+    return m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
+  }
+
   if (view === 'loading') {
     return <>Loading</>
   }
@@ -127,7 +132,7 @@ export default function LeadsShow({
                           <tr>
                             <td>
                               <h6 class="task_title_0">{log.title}</h6>
-                              <p class="project_name_0">{log.subtitle}</p>
+                              <p class="project_name_0">{renderTime(log.datetime)}</p>
                             </td>
                             <td>
                               <p class="task_desc_0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(log.description.replaceAll('\n', '<br/>'), {target: 'blank'})}}></p>

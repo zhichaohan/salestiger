@@ -62,7 +62,7 @@ class Lead < ApplicationRecord
     sequence_logs = Account.find(account_id)
                            .lead_sequence_steps
                            .preload(:email, lead_sequence: { sequence: :workflow })
-                           .where(lead_sequences: { id: self.id })
+                           .where(lead_sequences: { lead_id: self.id })
                            .map { |step| step.to_log }
 
     logs = email_logs + sequence_logs

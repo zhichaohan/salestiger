@@ -9,10 +9,16 @@ class Emails::SendWorker
   Gmail = Google::Apis::GmailV1
 
   def perform(id)
-    return unless ENV['RAILS_ENV'] == 'production'
-
     email = Email.find_by(id: id)
     return unless email.present?
+
+    if ENV['RAILS_ENV'] != 'production'
+      email.update!(
+        status: 'sent',
+        sent_at: DateTime.now
+      )
+      email.update_account_lead_status!
+    end
 
     return unless email.team_member.auth_token.present?
 

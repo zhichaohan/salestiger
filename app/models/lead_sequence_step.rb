@@ -3,13 +3,28 @@ class LeadSequenceStep < ApplicationRecord
   belongs_to :sequence_step
   belongs_to :email, optional: true
 
-  def perform!
+  def schedule!
     self.set_email!
-    self.update!(scheduled_for: Time.now + self.sequence_step.hours_delay.hours)
 
-    jid = Emails::SendWorker.perform_in(self.sequence_step.hours_delay.hours, self.email.id)
+    delay = self.sequence_step.hours_delay.minutes # self.sequence_step.hours_delay.hours
+
+    self.update!(scheduled_for: Time.now + delay)
+
+    jid = LeadSequenceSteps::PerformWorker.perform_in(delay, self.id)
 
     self.update!(job_id: jid)
+  end
+
+  def perform!
+    jid = Emails::SendWorker.perform_async(self.email.id)
+
+    self.next_step&.schedule!
+  end
+
+  def next_step
+    a = self.lead_sequence.sequence.sequence_steps.find_by(order_index: self.sequence_step.order_index + 1)
+
+    self.lead_sequence.lead_sequence_steps.find_or_create_by!(sequence_step: a) if a.present?
   end
 
   def set_email!
@@ -71,5 +86,7 @@ class LeadSequenceStep < ApplicationRecord
     job.delete if job.present?
 
     self.email.cancel! if self.email.present?
+
+    self.destroy!
   end
 end

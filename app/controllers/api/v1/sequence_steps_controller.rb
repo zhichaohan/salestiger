@@ -6,7 +6,10 @@ module Api
       def create
         sequence = Sequence.find_by(id: params[:sequence_id])
 
+        order_index = sequence.sequence_steps.count + 1
+
         sequence_step = sequence.sequence_steps.create!(
+          order_index: order_index,
           hours_delay: params[:hours_delay],
           email_subject: params[:email_subject],
           email_template: params[:email_template]

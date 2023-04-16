@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :team_members
       resources :workflows do
         resources :workflow_attributes, only: [:create]
+        resources :sequences, only: [:create]
       end
       resources :emails do
         post :cancel, on: :member
