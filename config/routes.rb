@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :lead_sequence_steps do
         post :cancel, on: :member
       end
+      resources :sequence_steps, only: [:update]
     end
   end
 

@@ -10,3 +10,7 @@
 .plus_icon {
   padding-right: 8px;
 }
+.step_title {
+  display: flex;
+  justify-content: space-between;
+}

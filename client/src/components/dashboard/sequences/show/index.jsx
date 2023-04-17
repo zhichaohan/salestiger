@@ -1,6 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import SequenceStepsCreateModal from '../../sequence_steps/create_modal';
+import SequenceStepsUpdateModal from '../../sequence_steps/update_modal';
 import { getSequence } from '../../../../api/sequences';
 import { notifySuccess } from '../../../../helpers';
 import DOMPurify from '../../../../utils/purify.min.js'
@@ -12,6 +13,15 @@ export default function SequencesShow({
   let sequenceId = match.params.sequenceId;
   const [sequence, setSequence] = useState();
   const [createStepModal, setCreateStepModal] = useState();
+  const [sequenceStepToUpdate, setSequenceStepToUpdate] = useState();
+  const [updateStepModal, setUpdateStepModal] = useState();
+
+  const updateSequenceStepClick = (step) => () => {
+    setSequenceStepToUpdate(step);
+    setTimeout(() => {
+      setUpdateStepModal(true);
+    }, 1);
+  }
 
   const loadSequence = () => {
     getSequence(sequenceId, (data) => {
@@ -57,7 +67,12 @@ export default function SequencesShow({
                       <div className="cd-timeline-block">
                         <div className="cd-timeline-img cd-picture bg-primary"><i class="fa fa-pencil-square-o"></i></div>
                         <div className="cd-timeline-content">
-                          <h4>{step.email_subject}</h4>
+                          <div className={styles.step_title}>
+                            <h4 className={styles.step_title}>
+                              {step.email_subject}
+                            </h4>
+                            <i className="fa fa-pencil-square-o" onClick={updateSequenceStepClick(step)}></i>
+                          </div>
                           <p className="m-0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(step.sanitized_email_template.replaceAll('\n', '<br/>'), {target: 'blank'})}}></p>
                           <span className="cd-date">{step.hours_delay} hours delay</span>
                         </div>
@@ -80,6 +95,18 @@ export default function SequencesShow({
           onSubmit={() => {
             loadSequence();
             notifySuccess(`A new step is created`)
+          }}
+        />
+      }
+      {
+        updateStepModal &&
+        <SequenceStepsUpdateModal
+          showModal={updateStepModal}
+          setShowModal={setUpdateStepModal}
+          sequenceStep={sequenceStepToUpdate}
+          onSubmit={() => {
+            loadSequence();
+            notifySuccess(`A step is updated`)
           }}
         />
       }
