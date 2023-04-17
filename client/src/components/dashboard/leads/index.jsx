@@ -1,12 +1,14 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PageTitleSection from '../page_title_section';
+import CardHeader from '../../ui_kit/card_header';
 import LeadsTable from './table';
 import { toast } from 'react-toastify';
 
 export default function LeadsIndex() {
   const [leads, setLeads] = useState();
   const [teamMembers, setTeamMembers] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     const response = toast.promise(
@@ -41,7 +43,11 @@ export default function LeadsIndex() {
         setLeads(d2);
       })
     })
-  }, [])
+  }, []);
+
+  const addLeadClick = () => {
+    history.push('/leads/new');
+  }
 
   if ((!leads || leads.length === 0) || (!teamMembers || teamMembers.length === 0)) {
     return (
@@ -96,9 +102,11 @@ export default function LeadsIndex() {
                     <div className="tab-content">
                       <div className="tab-pane fade active show" id="pills-created" role="tabpanel" aria-labelledby="pills-created-tab">
                         <div className="card mb-0">
-                          <div className="card-header">
-                            <h5 className="mb-0">All leads</h5>
-                          </div>
+                          <CardHeader
+                            title={`All leads`}
+                            addObj={`lead`}
+                            addObjOnClick={addLeadClick}
+                          />
                           <div className="card-body">
                             <LeadsTable
                               leads={leads}
