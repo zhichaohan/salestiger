@@ -6,7 +6,11 @@ class LeadSequenceStep < ApplicationRecord
   def schedule!
     self.set_email!
 
-    delay = self.sequence_step.hours_delay.minutes # self.sequence_step.hours_delay.hours
+    delay = if ENV['RAILS_ENV'] == 'production'
+      self.sequence_step.hours_delay.hours
+    else
+      self.sequence_step.hours_delay.minutes
+    end
 
     self.update!(scheduled_for: Time.now + delay)
 
