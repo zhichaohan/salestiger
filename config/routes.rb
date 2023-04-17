@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :team_members
       resources :workflows do
         resources :workflow_attributes, only: [:create]
+        resources :sequences, only: [:create]
       end
       resources :emails do
         post :cancel, on: :member
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
       resources :leads do
         get :logs, on: :member
       end
-      resources :sequences, only: [:show] do
+      resources :sequences, only: [:index, :show] do
         resources :sequence_steps, only: [:create]
 
         post :add_leads, on: :member
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       resources :lead_sequence_steps do
         post :cancel, on: :member
       end
+      resources :sequence_steps, only: [:update]
     end
   end
 

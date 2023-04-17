@@ -411,7 +411,8 @@ CREATE TABLE public.sequence_steps (
     email_subject character varying,
     email_template text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    order_index integer NOT NULL
 );
 
 
@@ -1545,6 +1546,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230411184348'),
 ('20230411213402'),
 ('20230412033459'),
-('20230412180246');
+('20230412180246'),
+('20230416184124');
 
 

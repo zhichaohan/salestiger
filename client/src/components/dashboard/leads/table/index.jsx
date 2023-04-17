@@ -1,6 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import EmailsCreateModal from '../../emails/create_modal';
 import LeadSequencesCreateModal from '../../lead_sequences/create_modal';
+import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { createEmail } from '../../../../api/emails';
 import { addLeadsToSequence } from '../../../../api/sequences';
 import { notifySuccess } from '../../../../helpers';
@@ -16,8 +17,6 @@ export default function LeadsTable({
   const [createEmailRecipient, setCreateEmailRecipient] = useState();
   const [emailRecipientId, setEmailRecipientId] = useState();
   const [checkedLeads, setCheckAllLeads] = useState([]);
-  const [selectedSequenceId, setSelectedSequenceId] = useState();
-  const [showLeadSequenceCreateModal, setShowLeadSequenceCreateModal] = useState();
 
   const checkAllChecked = checkedLeads.length === leads.length;
   const checkAllClick = () => {
@@ -44,33 +43,14 @@ export default function LeadsTable({
     setShowCreateEmailModal(true);
   }
 
-  const addLeadsToSequenceClick = (sequenceId) => () => {
-    if (checkedLeads.length !== 0) {
-      setSelectedSequenceId(sequenceId);
-      setShowLeadSequenceCreateModal(true);
-    }
-  }
-
   return (
     <>
-      {
-        sequences.length !== 0 &&
-        <div className="dropdown-basic">
-          <div className="dropdown">
-            <button className="dropbtn btn-primary" type="button">Add to sequence<span><i className="icofont icofont-arrow-down"></i></span></button>
-            <div className="dropdown-content">
-              {
-                sequences.map(sequence => {
-                  return (
-                    <a href="javascript:void(0)" onClick={addLeadsToSequenceClick(sequence.id)}>{sequence.name}</a>
-                  )
-                })
-              }
-            </div>
-          </div>
-        </div>
-      }
-
+      <LeadSequencesCreateButton
+        sequences={sequences}
+        leads={checkedLeads}
+        teamMembers={teamMembers}
+        reload={reload}
+      />
       <div className="table-responsive">
         <table className="table table-bordernone table-hover">
           <thead>
@@ -150,22 +130,6 @@ export default function LeadsTable({
                 recipient: createEmailRecipient,
               }, () => {
                 notifySuccess(`Sending email to ${createEmailRecipient}`)
-              })
-            }}
-          />
-        }
-        {
-          showLeadSequenceCreateModal &&
-          <LeadSequencesCreateModal
-            showModal={showLeadSequenceCreateModal}
-            setShowModal={setShowLeadSequenceCreateModal}
-            teamMembers={teamMembers}
-            onSubmit={(teamMemberId) => {
-              addLeadsToSequence(selectedSequenceId, checkedLeads, teamMemberId, () => {
-                notifySuccess(`Added ${checkedLeads.length} leads to sequence`);
-                if (reload) {
-                  reload()
-                }
               })
             }}
           />

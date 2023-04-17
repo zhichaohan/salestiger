@@ -34,3 +34,35 @@ export const addLeadsToSequence = (
     successCallback(data);
   })
 }
+
+export const createSequence = (
+  workflowId,
+  params,
+  successCallback
+) => {
+  fetch(`/api/v1/workflows/${workflowId}/sequences`, {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params)
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}
+
+export const getSequences = (
+    successCallback
+) => {
+  fetch(`/api/v1/sequences`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}

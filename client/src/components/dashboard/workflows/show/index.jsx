@@ -3,6 +3,8 @@ import PageTitleSection from '../../page_title_section';
 import LeadsTable from '../../leads/table';
 import SequencesTable from '../../sequences/table';
 import WorkflowAttributesCreateModal from '../../workflow_attributes/create_modal';
+import SequencesCreateModal from '../../sequences/create_modal';
+import CardHeader from '../../../ui_kit/card_header';
 import { getWorkflow } from '../../../../api/workflows';
 import { notifySuccess } from '../../../../helpers';
 import styles from './index.module.css';
@@ -13,6 +15,7 @@ export default function WorkflowsShow({
   let id = match.params.id;
   const [workflow, setWorkflow] = useState();
   const [showCreateAttributeModal, setShowCreateAttributeModal] = useState(false);
+  const [showCreateSequenceModal, setShowCreateSequenceModal] = useState(false);
 
   const loadWorkflow = () => {
     getWorkflow(id, (data) => {
@@ -28,6 +31,10 @@ export default function WorkflowsShow({
 
   const addAttributeClick = () => {
     setShowCreateAttributeModal(true);
+  }
+
+  const addSequenceClick = () => {
+    setShowCreateSequenceModal(true);
   }
 
   if (!workflow) {
@@ -251,9 +258,11 @@ export default function WorkflowsShow({
     return (
       <div className="col-xl-12 col-lg-12">
         <div className="card">
-          <div className="card-header pb-0">
-            <h5>Sequences</h5>
-          </div>
+          <CardHeader
+            title={`Sequences`}
+            addObj={`sequence`}
+            addObjOnClick={addSequenceClick}
+          />
           <div className="card-body">
             <SequencesTable
               workflow={workflow}
@@ -261,6 +270,18 @@ export default function WorkflowsShow({
             />
           </div>
         </div>
+        {
+          showCreateSequenceModal &&
+          <SequencesCreateModal
+            showModal={showCreateSequenceModal}
+            setShowModal={setShowCreateSequenceModal}
+            workflow={workflow}
+            onSubmit={() => {
+              loadWorkflow();
+              notifySuccess(`A new sequence is created`)
+            }}
+          />
+        }
       </div>
     )
   }
@@ -299,10 +320,11 @@ export default function WorkflowsShow({
         <div className="row">
           <div className="col-xl-12 col-lg-12">
             <div className="card">
-              <div className={`card-header ${styles.workflow_attribtues_header}`}>
-                <h5 className="mb-0">Created by me</h5>
-                <a className="f-w-600" href="javascript:void(0)" onClick={addAttributeClick}><i class="fa fa-plus"></i>Create attribute</a>
-              </div>
+              <CardHeader
+                title={`Workflow Attributes`}
+                addObj={`attribute`}
+                addObjOnClick={addAttributeClick}
+              />
               <div className="card-body p-0">
                 <div className="taskadd">
                   <div className="table-responsive">
