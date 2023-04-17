@@ -3,6 +3,16 @@ module Api
     class SequencesController < ApplicationController
       before_action :authenticate_user!, only: [:index, :create]
 
+      def index
+        sequences = current_user.account.sequences
+
+        respond_to do |format|
+          format.json do
+            render json: sequences, each_serializer: SequenceSerializer
+          end
+        end
+      end
+
       def create
         workflow = Workflow.find_by(id: params[:workflow_id])
 

@@ -52,3 +52,17 @@ export const createSequence = (
     successCallback(data);
   })
 }
+
+export const getSequences = (
+    successCallback
+) => {
+  fetch(`/api/v1/sequences`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}

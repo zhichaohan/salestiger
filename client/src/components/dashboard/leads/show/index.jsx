@@ -4,8 +4,12 @@ import SocialList from '../../team_members/social_list';
 import EmailsEditModal from '../../emails/edit_modal';
 import ConfirmationModal from '../../../ui_kit/confirmation_modal'
 import DOMPurify from '../../../../utils/purify.min.js'
+import CardHeader from '../../../ui_kit/card_header';
+import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { getLead, getLeadLogs } from '../../../../api/leads';
 import { getEmail } from '../../../../api/emails';
+import { getSequences } from '../../../../api/sequences';
+import { getTeamMembers } from '../../../../api/team_members';
 import { cancelLeadSequenceStep } from '../../../../api/lead_sequence_steps';
 import { notifySuccess } from '../../../../helpers';
 import styles from "./index.module.css"
@@ -21,13 +25,21 @@ export default function LeadsShow({
   const [email, setEmail] = useState();
   const [stepIdToCancel, setStepIdToCancel] = useState();
   const [showCancelEmailModal, setShowCancelEmailModal] = useState();
+  const [sequences, setSequences] = useState();
+  const [teamMembers, setTeamMembers] = useState();
 
   const loadLead = () => {
     getLead(id, (r) => {
       setLead(r);
       getLeadLogs(id, (rlogs) => {
         setLogs(rlogs);
-        setView('loaded');
+        getSequences((r) => {
+          setSequences(r);
+          getTeamMembers({}, (tm) => {
+            setTeamMembers(tm);
+            setView('loaded');
+          })
+        })
       })
     }, () => {
       console.log("an error has occurred");
@@ -53,6 +65,10 @@ export default function LeadsShow({
   const renderTime = (time) => {
     const m = new Date(time);
     return m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
+  }
+
+  const addSequenceClick = () => {
+
   }
 
   if (view === 'loading') {
@@ -102,7 +118,7 @@ export default function LeadsShow({
               </div>
             </div>
           </div>
-          <div className="col-xl-3 col-md-5 xl-35 box-col-35">
+          <div className="col-xl-4 col-md-5 xl-35 box-col-35">
             <div className="default-according style-1 job-accordion">
               <div className="row">
                 <div className="col-xl-12">
@@ -115,9 +131,35 @@ export default function LeadsShow({
                   </div>
                 </div>
               </div>
+              <div className="row">
+                <div className="col-xl-12">
+                  <div className="card">
+                    <div className={`card-header ${styles.workflow_attribtues_header}`}>
+                      <h5 className="mb-0">Sequences</h5>
+                      <LeadSequencesCreateButton
+                        sequences={sequences}
+                        leads={[lead.id]}
+                        teamMembers={teamMembers}
+                        reload={loadLead}
+                      />
+                    </div>
+                    <div className="card-body">
+                      {
+                        lead.lead_sequences.map((ls) => {
+                          return (
+                            <div className={styles.sequence_container}>
+                              <p>{ls.sequence.name}</p>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col-xl-9 col-md-7 xl-65 box-col-65">
+          <div className="col-xl-8 col-md-7 xl-65 box-col-65">
             <div className="card">
               <div className={`card-header ${styles.logs_header}`}>
                 <h5 class="mb-0">Logs</h5>

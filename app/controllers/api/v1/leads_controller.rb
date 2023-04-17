@@ -23,7 +23,7 @@ module Api
 
         respond_to do |format|
           format.json do
-            render json: lead, serializer: LeadSerializer
+            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }
           end
         end
       end
