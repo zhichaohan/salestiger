@@ -27,7 +27,15 @@ class Email < ApplicationRecord
   end
 
   def to_log_statuses
-    return [{ type: 'success', label: 'sent' }] if self.status == 'sent'
+    if self.status == 'sent'
+      log_statuses = [{ type: 'success', label: 'sent' }]
+
+      if self.open_count > 0
+        log_statuses.push({ type: 'info', label: "opened #{self.open_count} times" })
+      end
+
+      return log_statuses
+    end
 
     return [{ type: 'danger', label: 'canceled' }] if self.status == 'canceled'
 
