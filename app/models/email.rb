@@ -30,7 +30,7 @@ class Email < ApplicationRecord
     if self.status == 'sent'
       log_statuses = [{ type: 'success', label: 'sent' }]
 
-      if self.open_count > 0
+      if self.open_count.present? && self.open_count  > 0
         log_statuses.push({ type: 'info', label: "opened #{self.open_count} times" })
       end
 
