@@ -87,6 +87,9 @@ const PublicLayout = (props) => (
 )
 
 function App() {
+  const returnTo = window.location.pathname;
+  const pathname = `/sign-in?return_to=${encodeURIComponent(returnTo)}`;
+
   return (
     <Context.Provider
       value={{
@@ -100,6 +103,7 @@ function App() {
             <PublicRoute exact path="/" component={Home} layout={PublicLayout} />
             <PublicRoute exact path="/terms" component={Terms} layout={PublicLayout} />
             <PublicRoute exact path="/sign-in" component={SignIn} layout={PublicLayout} />
+            <Redirect to={pathname} />
           </Switch>
         </Router>
       }
