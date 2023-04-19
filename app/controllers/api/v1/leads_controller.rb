@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!, only: [:index, :logs, :create]
 
       def index
-        leads = Lead.preload(:company).all
+        leads = Lead.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}).all
 
         account_leads = current_user.account.account_leads.where(lead_id: leads.pluck(:id))
 

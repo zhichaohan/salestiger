@@ -148,7 +148,7 @@ export default function LeadsShow({
                         lead.lead_sequences.map((ls) => {
                           return (
                             <div className={styles.sequence_container}>
-                              <p>{ls.sequence.name}</p>
+                              <p><a href={ls.sequence.show_path}>{ls.sequence.name}</a></p>
                             </div>
                           )
                         })
