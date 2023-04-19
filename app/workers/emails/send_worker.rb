@@ -32,7 +32,7 @@ class Emails::SendWorker
     message.header['From'] = "#{email.team_member.name} <#{email.team_member.gmail}>"
     message.header['Subject'] = email.subject
     message.header['content-type'] = 'text/html; charset=utf-8'
-    message.body = email.body_html + (email.team_member.email_signature || '')
+    message.body = email.body_html + (email.team_member.email_signature || '') + email.open_email_pixel_html
 
     r = gmail.send_user_message('me',
                                 upload_source: StringIO.new(message.to_s),

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
       resources :emails do
         post :cancel, on: :member
+        get :opened_email_pixel_url, on: :member
       end
       resources :leads do
         get :logs, on: :member
