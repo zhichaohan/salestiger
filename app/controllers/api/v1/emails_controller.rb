@@ -49,6 +49,16 @@ module Api
         end
       end
 
+      def opened_email_pixel_url
+        email = Email.find_by(uuid: params[:id])
+
+        if email.present?
+          email.increment!(:open_count)
+        end
+
+        send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")
+      end
+
       def email_params
         params.permit(:body_html, :subject)
       end

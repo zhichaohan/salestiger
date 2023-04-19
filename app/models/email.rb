@@ -1,4 +1,6 @@
 class Email < ApplicationRecord
+  include Routable
+
   belongs_to :team_member
   belongs_to :lead
   has_many :lead_sequence_steps
@@ -61,5 +63,15 @@ class Email < ApplicationRecord
       email_id: self.id,
       datetime: self.sent_at
     }
+  end
+
+  def open_email_pixel_html
+    return "" unless ENV['RAILS_ENV'] == 'production'
+
+    return "<img src='#{self.opened_email_pixel_url}' width='1' height='1' />"
+  end
+
+  def opened_email_pixel_url
+    opened_email_pixel_url_api_v1_email_url(id: self.uuid)
   end
 end

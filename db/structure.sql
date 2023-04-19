@@ -192,7 +192,9 @@ CREATE TABLE public.emails (
     recipient character varying,
     gmail_id character varying,
     status character varying,
-    sent_at timestamp without time zone
+    sent_at timestamp without time zone,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    open_count integer
 );
 
 
@@ -1547,6 +1549,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230411213402'),
 ('20230412033459'),
 ('20230412180246'),
-('20230416184124');
+('20230416184124'),
+('20230419174422');
 
 
