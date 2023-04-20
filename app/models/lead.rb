@@ -8,6 +8,11 @@ class Lead < ApplicationRecord
   has_many :lead_sequences
   has_many :lead_sequence_steps, through: :lead_sequences
   has_many :emails
+  belongs_to :lead_import, optional: true
+
+  def self.deep_includes
+    { lead_sequences: [:sequence], company: {} }
+  end
 
   def email_sendable?
     self.business_email.present? || self.personal_email.present?

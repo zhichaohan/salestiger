@@ -3,6 +3,7 @@ import PageTitleSection from '../../page_title_section';
 import { useHistory } from 'react-router-dom';
 import { createLead } from '../../../../api/leads';
 import { notifySuccess } from '../../../../helpers';
+import styles from './index.module.css'
 
 export default function LeadsNew() {
   const [name, setName] = useState();
@@ -66,6 +67,9 @@ export default function LeadsNew() {
           <div className="row">
             <div className="col-lg-12">
               <div className="card">
+                <div className={`card-header ${styles.header}`}>
+                  <a className="f-w-600" href={`/lead_imports/new`}><i class={`fa fa-plus ${styles.icon}`}></i>Import CSV</a>
+                </div>
                 <div className="card-body">
                   <form>
                     <div className="mb-3">

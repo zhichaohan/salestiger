@@ -154,7 +154,19 @@ CREATE TABLE public.companies (
     facebook_url character varying,
     website_url character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    address character varying,
+    city character varying,
+    state character varying,
+    phone character varying,
+    annual_revenue integer,
+    total_funding integer,
+    latest_funding character varying,
+    latest_funding_amount integer,
+    last_raised_at date,
+    keywords character varying,
+    seo_description character varying,
+    technologies character varying
 );
 
 
@@ -252,6 +264,43 @@ ALTER SEQUENCE public.landing_page_contacts_id_seq OWNED BY public.landing_page_
 
 
 --
+-- Name: lead_imports; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_imports (
+    id bigint NOT NULL,
+    csv_url character varying NOT NULL,
+    user_id bigint NOT NULL,
+    success_count integer,
+    error_count integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    status character varying,
+    duplicate_count integer
+);
+
+
+--
+-- Name: lead_imports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_imports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_imports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_imports_id_seq OWNED BY public.lead_imports.id;
+
+
+--
 -- Name: lead_sequence_steps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -337,7 +386,13 @@ CREATE TABLE public.leads (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    slug character varying
+    slug character varying,
+    apollo_id character varying,
+    seniority character varying,
+    departments character varying,
+    city character varying,
+    state character varying,
+    lead_import_id bigint
 );
 
 
@@ -809,6 +864,13 @@ ALTER TABLE ONLY public.landing_page_contacts ALTER COLUMN id SET DEFAULT nextva
 
 
 --
+-- Name: lead_imports id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_imports ALTER COLUMN id SET DEFAULT nextval('public.lead_imports_id_seq'::regclass);
+
+
+--
 -- Name: lead_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -963,6 +1025,14 @@ ALTER TABLE ONLY public.landing_page_contacts
 
 
 --
+-- Name: lead_imports lead_imports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_imports
+    ADD CONSTRAINT lead_imports_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lead_sequence_steps lead_sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1111,6 +1181,13 @@ CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_m
 
 
 --
+-- Name: index_lead_imports_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_imports_on_user_id ON public.lead_imports USING btree (user_id);
+
+
+--
 -- Name: index_lead_sequence_steps_on_email_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1153,10 +1230,24 @@ CREATE INDEX index_lead_sequences_on_team_member_id ON public.lead_sequences USI
 
 
 --
+-- Name: index_leads_on_apollo_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_leads_on_apollo_id ON public.leads USING btree (apollo_id);
+
+
+--
 -- Name: index_leads_on_company_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_leads_on_company_id ON public.leads USING btree (company_id);
+
+
+--
+-- Name: index_leads_on_lead_import_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_leads_on_lead_import_id ON public.leads USING btree (lead_import_id);
 
 
 --
@@ -1438,6 +1529,14 @@ ALTER TABLE ONLY public.account_leads
 
 
 --
+-- Name: leads fk_rails_83674d0a67; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.leads
+    ADD CONSTRAINT fk_rails_83674d0a67 FOREIGN KEY (lead_import_id) REFERENCES public.lead_imports(id);
+
+
+--
 -- Name: workflows fk_rails_8399d941f2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1550,6 +1649,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230412033459'),
 ('20230412180246'),
 ('20230416184124'),
-('20230419174422');
+('20230419174422'),
+('20230420195859'),
+('20230420202103'),
+('20230420210600'),
+('20230420215555');
 
 

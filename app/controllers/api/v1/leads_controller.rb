@@ -13,7 +13,7 @@ module Api
             render json: leads,
                    each_serializer: LeadSerializer,
                    account_leads: account_leads,
-                   include: { lead_sequences: [:sequence], company: {} }
+                   include: Lead.deep_includes
           end
         end
       end

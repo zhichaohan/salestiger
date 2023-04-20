@@ -16,6 +16,8 @@ import TeamMembersEdit from './team_members/edit';
 import LeadsIndex from './leads';
 import LeadsShow from './leads/show';
 import LeadsNew from './leads/new';
+import LeadImportsNew from './lead_imports/new';
+import LeadImportsShow from './lead_imports/show';
 import SequencesShow from './sequences/show';
 import Home from './home';
 import { ToastContainer } from 'react-toastify';
@@ -54,6 +56,8 @@ function Dashboard() {
         <RouteWithLayout exact path="/leads/new" component={LeadsNew} layout={DashboardLayout} />
         <RouteWithLayout exact path="/leads/:id" component={LeadsShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/leads" component={LeadsIndex} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/lead_imports/new" component={LeadImportsNew} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/lead_imports/:id" component={LeadImportsShow} layout={DashboardLayout} />
       </Switch>
     </Router>
   )

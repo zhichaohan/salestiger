@@ -1,0 +1,12 @@
+.header {
+  -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #eeeeee !important;
+}
+.icon {
+  padding-right: 5px;
+}
