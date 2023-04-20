@@ -85,7 +85,9 @@ export default function LeadsTable({
                   <td>{lead.title}</td>
                   <td>
                     <div className={styles.name_block}>
-                      <img className={styles.company_logo} width="35" height="35" src={lead.company.logo_url} />
+                      {
+                        lead.company.logo_url && <img className={styles.company_logo} width="35" height="35" src={lead.company.logo_url} />
+                      }
                       {lead.company.name}
                     </div>
                     <div>

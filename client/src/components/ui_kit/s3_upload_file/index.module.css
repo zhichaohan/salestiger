@@ -1,0 +1,51 @@
+.file_btn{
+    background-color: #F2F2F2;
+    cursor: pointer;
+    padding: 0px;
+    display: block;
+}
+.file_btn:hover{
+    background-color: #dbdbdb;
+}
+.btn_txt{
+    color: #333333;
+    font-size: 14px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    padding: 11px 40px;
+}
+.helper_txt{
+    color: #828282;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.icon{
+    margin-left: 15px;
+    margin-right: -20px;
+}
+
+.attachment_btn{
+  cursor: pointer;
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  bottom: 20px;
+  left: 20px;
+  padding: 0px;
+  z-index: 1
+}
+.attachment_btn *{
+  cursor: pointer;
+}
+.attachment_btn:hover{
+  background-color: transparent;
+}
+@media only screen and (max-width: 425px) {
+  /* <--- mess with this value to find the device size */
+  .attachment_btn {
+    top: "0px";
+    right: "0px"; /* <--- mess with this value to find the sweet spot of the svg size */
+  }
+}

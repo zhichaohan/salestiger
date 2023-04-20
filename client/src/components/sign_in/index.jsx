@@ -9,6 +9,11 @@ export default function SignIn() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const context = useContext(Context);
+  const searchParams = new URLSearchParams(location.search);
+  let returnTo = '';
+  if (searchParams.get('return_to')) {
+    returnTo = searchParams.get('return_to');
+  }
 
   useEffect(() => {
     autofocusAll();
@@ -17,11 +22,15 @@ export default function SignIn() {
   const onSubmit = (e) => {
     e.preventDefault();
     context.auth.userSignIn(email, password, true, (data) => {
-      window.location = "/";
+      if (returnTo === '') {
+        window.location = "/";
+      }
+      else {
+        window.location = returnTo;
+      }
     }, (errors) => {
       console.log("errors", errors);
     });
-    setError('');
   }
 
   return (
