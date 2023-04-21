@@ -18,6 +18,7 @@ class LeadSerializer < ActiveModel::Serializer
   def account_info
     return unless @instance_options[:account_leads].present?
 
-    @instance_options[:account_leads].find { |al| al.lead_id == object.id }
+    info = @instance_options[:account_leads].find { |al| al.lead_id == object.id }
+    return AccountLeadSerializer.new(info).to_h
   end
 end

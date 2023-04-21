@@ -37,3 +37,11 @@ export const notifyError = (message) => {
     progress: undefined,
   });
 }
+
+export const renderTime = (time) => {
+  if (!time) {
+    return "";
+  }
+  const m = new Date(time);
+  return m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
+}

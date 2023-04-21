@@ -21,7 +21,7 @@ module Api
 
         lead_import.leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}})
 
-        account_leads = current_user.account.account_leads.where(lead_id: lead_import.leads.pluck(:id))
+        account_leads = current_user.account.account_leads.preload(:last_sent_email).where(lead_id: lead_import.leads.pluck(:id))
 
         respond_to do |format|
           format.json do

@@ -11,7 +11,7 @@ import { getEmail } from '../../../../api/emails';
 import { getSequences } from '../../../../api/sequences';
 import { getTeamMembers } from '../../../../api/team_members';
 import { cancelLeadSequenceStep } from '../../../../api/lead_sequence_steps';
-import { notifySuccess } from '../../../../helpers';
+import { notifySuccess, renderTime } from '../../../../helpers';
 import styles from "./index.module.css"
 
 export default function LeadsShow({
@@ -60,11 +60,6 @@ export default function LeadsShow({
   const cancelEmailClick = (stepId) => () => {
     setStepIdToCancel(stepId);
     setShowCancelEmailModal(true);
-  }
-
-  const renderTime = (time) => {
-    const m = new Date(time);
-    return m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
   }
 
   const addSequenceClick = () => {

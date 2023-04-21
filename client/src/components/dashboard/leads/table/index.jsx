@@ -4,7 +4,7 @@ import LeadSequencesCreateModal from '../../lead_sequences/create_modal';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { createEmail } from '../../../../api/emails';
 import { addLeadsToSequence } from '../../../../api/sequences';
-import { notifySuccess } from '../../../../helpers';
+import { notifySuccess, renderTime } from '../../../../helpers';
 import styles from './index.module.css';
 
 export default function LeadsTable({
@@ -62,7 +62,9 @@ export default function LeadsTable({
               <th scope="col">Company Size</th>
               <th scope="col">Company Industry</th>
               <th scope="col">Sequences</th>
-              <th scope="col">Status</th>
+              <th scope="col">Last Email Sent At</th>
+              <th scope="col">Last Email Open Count</th>
+              <th scope="col">Last Email Last Opened At</th>
             </tr>
           </thead>
           <tbody>
@@ -109,8 +111,14 @@ export default function LeadsTable({
                   </td>
                   <td>
                     {
-                      lead.account_info && lead.account_info.status === 'approaching' && <span className="badge badge-info">Approaching</span>
+                      lead.account_info && lead.account_info.last_sent_email && renderTime(lead.account_info.last_sent_email.sent_at)
                     }
+                  </td>
+                  <td>
+                  { lead.account_info && lead.account_info.last_sent_email && lead.account_info.last_sent_email.open_count }
+                  </td>
+                  <td>
+                  { lead.account_info && lead.account_info.last_sent_email && renderTime(lead.account_info.last_sent_email.last_opened_at) }
                   </td>
                 </tr>
               )
