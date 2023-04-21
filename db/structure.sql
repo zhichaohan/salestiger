@@ -37,7 +37,8 @@ CREATE TABLE public.account_leads (
     lead_id bigint NOT NULL,
     status character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    last_sent_email_id bigint
 );
 
 
@@ -206,7 +207,8 @@ CREATE TABLE public.emails (
     status character varying,
     sent_at timestamp without time zone,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    open_count integer
+    open_count integer,
+    last_opened_at timestamp without time zone
 );
 
 
@@ -1160,6 +1162,13 @@ CREATE INDEX index_account_leads_on_account_id ON public.account_leads USING btr
 
 
 --
+-- Name: index_account_leads_on_last_sent_email_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_leads_on_last_sent_email_id ON public.account_leads USING btree (last_sent_email_id);
+
+
+--
 -- Name: index_account_leads_on_lead_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1521,6 +1530,14 @@ ALTER TABLE ONLY public.team_members
 
 
 --
+-- Name: account_leads fk_rails_786c037513; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_leads
+    ADD CONSTRAINT fk_rails_786c037513 FOREIGN KEY (last_sent_email_id) REFERENCES public.emails(id);
+
+
+--
 -- Name: account_leads fk_rails_81529a4071; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1653,6 +1670,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230420195859'),
 ('20230420202103'),
 ('20230420210600'),
-('20230420215555');
+('20230420215555'),
+('20230421184948'),
+('20230421185311');
 
 

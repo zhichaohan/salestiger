@@ -20,6 +20,8 @@ class Email < ApplicationRecord
     if account_lead.status.blank?
       account_lead.update!(status: 'approaching')
     end
+
+    account_lead.update!(last_sent_email: self)
   end
 
   def to_log_description
