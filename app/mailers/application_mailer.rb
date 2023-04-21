@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@salestiger.io'
+  default from: 'zhichao@salestiger.io'
   layout 'mailer'
 end
