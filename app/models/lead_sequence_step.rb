@@ -3,18 +3,25 @@ class LeadSequenceStep < ApplicationRecord
   belongs_to :sequence_step
   belongs_to :email, optional: true
 
+  include TimeHelper
+
   def schedule!
     self.set_email!
 
-    delay = if ENV['RAILS_ENV'] == 'production'
+    delay = if true # ENV['RAILS_ENV'] == 'production'
       self.sequence_step.hours_delay.hours
     else
       self.sequence_step.hours_delay.minutes
     end
 
-    self.update!(scheduled_for: Time.now + delay)
+    future_time = Time.now + delay
+    unless business_day?(future_time)
+      future_time = next_day_skip_weekends(future_time)
+    end
 
-    jid = LeadSequenceSteps::PerformWorker.perform_in(delay, self.id)
+    self.update!(scheduled_for: future_time)
+
+    jid = LeadSequenceSteps::PerformWorker.perform_at(future_time, self.id)
 
     self.update!(job_id: jid)
   end
