@@ -5,6 +5,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.9.0",
     "@stripe/stripe-js": "^1.32.0",
+    "apexcharts": "^3.40.0",
     "create-react-class": "^15.7.0",
     "date-fns": "^2.29.1",
     "fstream": "^1.0.12",
@@ -14,6 +15,7 @@
     "quill-image-upload": "^0.1.3",
     "quill-image-uploader": "^1.2.3",
     "react": "^16.8.6",
+    "react-apexcharts": "^1.4.0",
     "react-aws-s3": "^1.5.0",
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-date-picker": "^5.1.0",
@@ -25,9 +27,11 @@
     "react-scripts": "3.0.0",
     "react-select": "^5.4.0",
     "react-select2-wrapper": "^1.0.4-beta6",
+    "react-slick": "^0.29.0",
     "react-toastify": "9.0.0",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.1",
+    "slick-carousel": "^1.8.1",
     "swiper": "^8.3.1"
   },
   "scripts": {
