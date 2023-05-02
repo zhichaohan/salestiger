@@ -1,3 +1,5 @@
+import { objToQueryString } from '../helpers';
+
 export const getLead = (
     id,
     successCallback,
@@ -18,6 +20,21 @@ export const getLeadLogs = (
     successCallback
 ) => {
   fetch(`/api/v1/leads/${id}/logs`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}
+
+export const getLeads = (
+    params,
+    successCallback
+) => {
+  fetch(`/api/v1/leads?${objToQueryString(params)}`, {
     headers: {
       "Content-Type": "application/json",
     }

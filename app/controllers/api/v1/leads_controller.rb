@@ -4,7 +4,13 @@ module Api
       before_action :authenticate_user!, only: [:index, :logs, :create]
 
       def index
-        leads = Lead.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}).all
+        leads = Lead.all
+
+        if params[:order].present?
+          leads = leads.joins(:account_leads).order(params[:order])
+        end
+
+        leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}})
 
         account_leads = current_user.account.account_leads.preload(:last_sent_email).where(lead_id: leads.pluck(:id))
 
@@ -21,9 +27,11 @@ module Api
       def show
         lead = Lead.find_by(slug: params[:id])
 
+        account_leads = current_user.account.account_leads.preload(:last_sent_email).where(lead_id: [lead.id])
+
         respond_to do |format|
           format.json do
-            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }
+            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }, account_leads: account_leads
           end
         end
       end

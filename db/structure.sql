@@ -28,6 +28,40 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: account_lead_status_changes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_lead_status_changes (
+    id bigint NOT NULL,
+    account_id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    previous_status character varying NOT NULL,
+    new_status character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: account_lead_status_changes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.account_lead_status_changes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_lead_status_changes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.account_lead_status_changes_id_seq OWNED BY public.account_lead_status_changes.id;
+
+
+--
 -- Name: account_leads; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -824,6 +858,13 @@ ALTER SEQUENCE public.workflows_id_seq OWNED BY public.workflows.id;
 
 
 --
+-- Name: account_lead_status_changes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_status_changes ALTER COLUMN id SET DEFAULT nextval('public.account_lead_status_changes_id_seq'::regclass);
+
+
+--
 -- Name: account_leads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -968,6 +1009,14 @@ ALTER TABLE ONLY public.workflow_team_members ALTER COLUMN id SET DEFAULT nextva
 --
 
 ALTER TABLE ONLY public.workflows ALTER COLUMN id SET DEFAULT nextval('public.workflows_id_seq'::regclass);
+
+
+--
+-- Name: account_lead_status_changes account_lead_status_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_status_changes
+    ADD CONSTRAINT account_lead_status_changes_pkey PRIMARY KEY (id);
 
 
 --
@@ -1152,6 +1201,20 @@ ALTER TABLE ONLY public.workflow_team_members
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT workflows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_account_lead_status_changes_on_account_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_lead_status_changes_on_account_id ON public.account_lead_status_changes USING btree (account_id);
+
+
+--
+-- Name: index_account_lead_status_changes_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_lead_status_changes_on_lead_id ON public.account_lead_status_changes USING btree (lead_id);
 
 
 --
@@ -1586,6 +1649,14 @@ ALTER TABLE ONLY public.workflow_leads
 
 
 --
+-- Name: account_lead_status_changes fk_rails_b95346ea3c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_status_changes
+    ADD CONSTRAINT fk_rails_b95346ea3c FOREIGN KEY (lead_id) REFERENCES public.leads(id);
+
+
+--
 -- Name: lead_sequences fk_rails_c5bd1e0747; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1599,6 +1670,14 @@ ALTER TABLE ONLY public.lead_sequences
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT fk_rails_c93a2eb6a2 FOREIGN KEY (target_audience_id) REFERENCES public.target_audiences(id);
+
+
+--
+-- Name: account_lead_status_changes fk_rails_daa42ad6f5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_status_changes
+    ADD CONSTRAINT fk_rails_daa42ad6f5 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
 
 
 --
@@ -1672,6 +1751,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230420210600'),
 ('20230420215555'),
 ('20230421184948'),
-('20230421185311');
+('20230421185311'),
+('20230501230212');
 
 

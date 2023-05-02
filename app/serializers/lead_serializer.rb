@@ -10,7 +10,8 @@ class LeadSerializer < ActiveModel::Serializer
              :uuid,
              :account_info,
              :id,
-             :show_path
+             :show_path,
+             :slug
 
   belongs_to :company
   has_many :lead_sequences, serializer: LeadSequenceSerializer

@@ -17,6 +17,8 @@ import './App.css'
 import styles from './index.module.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const auth = new Auth(gon.current_user || {});
 

@@ -18,7 +18,7 @@ class Email < ApplicationRecord
     account_lead = self.team_member.account.account_leads.find_or_create_by!(lead: self.lead)
 
     if account_lead.status.blank?
-      account_lead.update!(status: 'approaching')
+      account_lead.update!(status: 'Engaged')
     end
 
     account_lead.update!(last_sent_email: self)

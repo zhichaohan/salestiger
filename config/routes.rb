@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       end
       resources :leads do
         get :logs, on: :member
+        resources :account_leads, only: [:create]
       end
       resources :sequences, only: [:index, :show] do
         resources :sequence_steps, only: [:create]
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
       end
       resources :sequence_steps, only: [:update]
       resources :lead_imports, only: [:create, :show]
+      resources :account_leads, only: [:update, :create]
     end
   end
 
