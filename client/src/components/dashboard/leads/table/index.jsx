@@ -17,6 +17,7 @@ export default function LeadsTable({
   const [createEmailRecipient, setCreateEmailRecipient] = useState();
   const [emailRecipientId, setEmailRecipientId] = useState();
   const [checkedLeads, setCheckAllLeads] = useState([]);
+  const hasCheckboxes = teamMembers && teamMembers.length > 0;
 
   const checkAllChecked = checkedLeads.length === leads.length;
   const checkAllClick = () => {
@@ -55,7 +56,9 @@ export default function LeadsTable({
         <table className="table table-bordernone table-hover">
           <thead>
             <tr className="border-bottom-primary">
-              <th scope="col"><input checked={checkAllChecked} onChange={checkAllClick} className="form-check-input" id="checkAll" type="checkbox"/><label className="form-check-label" for="checkAll"></label></th>
+              {
+                hasCheckboxes && <th scope="col"><input checked={checkAllChecked} onChange={checkAllClick} className="form-check-input" id="checkAll" type="checkbox"/><label className="form-check-label" for="checkAll"></label></th>
+              }
               <th scope="col">Name</th>
               <th scope="col">Title</th>
               <th scope="col">Company</th>
@@ -73,7 +76,9 @@ export default function LeadsTable({
             leads.map(lead => {
               return (
                 <tr>
-                  <td><input checked={checkedLeads.includes(lead.id)} onChange={leadClick(lead.id)} className="form-check-input" id={`check-${lead.uuid}`} type="checkbox"/><label className="form-check-label" for={`check-${lead.uuid}`}></label></td>
+                  {
+                    hasCheckboxes && <td><input checked={checkedLeads.includes(lead.id)} onChange={leadClick(lead.id)} className="form-check-input" id={`check-${lead.uuid}`} type="checkbox"/><label className="form-check-label" for={`check-${lead.uuid}`}></label></td>
+                  }
                   <td>
                     <div className={styles.name_block}><a href={lead.show_path}>{lead.name}</a></div>
                     <div>

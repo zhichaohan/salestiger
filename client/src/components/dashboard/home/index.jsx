@@ -1,7 +1,10 @@
-import React, { Component, useState, useContext } from 'react'
+import React, { Component, useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import Chart from "react-apexcharts";
 import PageTitleSection from '../page_title_section';
+import CardHeader from '../../ui_kit/card_header';
+import LeadsTable from '../leads/table';
+import { getLeads } from '../../../api/leads';
 
 export default function Home() {
   const leadsGenerated = 10431;
@@ -13,6 +16,15 @@ export default function Home() {
   const totalPipelineGenerated = meetingsBooked * asp;
   const averageSalesCycle = 13;
   const openRate = 5;
+  const [leads, setLeads] = useState([]);
+  const [view, setView] = useState('loading');
+
+  useEffect(() => {
+    getLeads({ order: 'account_leads.updated_at DESC' }, (results) => {
+      setLeads(results);
+      setView('loaded');
+    })
+  }, [])
 
   const renderSummarySection = () => {
     return (
@@ -305,6 +317,27 @@ export default function Home() {
     )
   }
 
+  const renderLastActiveLeadsSection = () => {
+    return (
+      <div className="col">
+        <div className="card">
+          <div className="ps-0">
+            <CardHeader
+              title={`Last Updated Leads`}
+              classNames={`pb-0`}
+            />
+            <div className="card-body">
+              <LeadsTable
+                leads={leads}
+                teamMembers={[]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <PageTitleSection
@@ -318,6 +351,9 @@ export default function Home() {
         <div className="row">
           { renderDetailsSection() }
           { renderSdrPerformanceSection() }
+        </div>
+        <div className="row">
+          { renderLastActiveLeadsSection() }
         </div>
       </div>
     </>
