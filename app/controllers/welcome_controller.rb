@@ -30,14 +30,14 @@ class WelcomeController < ApplicationController
                     card: "summary",
                     title: "We book the meetings. You close the deals.",
                     description: "Spend time on what's important - meeting with highly qualified leads and converting them into loyal customers. We've combined decades of sales expertise with powerful-AI to save you time and help you close more deals.",
-                    image: "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png"
+                    image: "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png"
                   },
                   og: {
                     title: "We book the meetings. You close the deals.",
                     description: "Spend time on what's important - meeting with highly qualified leads and converting them into loyal customers. We've combined decades of sales expertise with powerful-AI to save you time and help you close more deals.",
                     type: 'website',
                     url: request.original_url,
-                    image: "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png"
+                    image: "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png"
                   }
   end
 end

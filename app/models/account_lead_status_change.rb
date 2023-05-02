@@ -18,7 +18,7 @@ class AccountLeadStatusChange < ApplicationRecord
   end
 
   def self.status_indicator(status)
-    return [{ type: 'danger', label: status }] if status == 'Unsubscribe'
+    return { type: 'danger', label: status } if status == 'Unsubscribe'
 
     if status == 'New Opportunities' || status == 'Future Prospects' || status == 'Engaged' || status == 'MIA'
       return { type: 'info', label: status }

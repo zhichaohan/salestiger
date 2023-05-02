@@ -46,7 +46,7 @@ export default function SignIn() {
                       <div  className="tatsu-single-image tatsu-module align-left tatsu-image-lazyload tatsu-image-overflow  tatsu-external-image tatsu-S1oNsSytN_  " >
                         <div className="tatsu-single-image-inner ">
                           <div className="tatsu-single-image-padding-wrap"></div>
-                          <img className="tatsu-gradient-border" data-src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/03/Spyro-saas-form-hero.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
+                          <img className="tatsu-gradient-border" data-src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/03/Spyro-saas-form-hero.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
                         </div>
                       </div>
                     </div>
