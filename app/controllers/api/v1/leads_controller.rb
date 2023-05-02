@@ -21,9 +21,11 @@ module Api
       def show
         lead = Lead.find_by(slug: params[:id])
 
+        account_leads = current_user.account.account_leads.preload(:last_sent_email).where(lead_id: [lead.id])
+
         respond_to do |format|
           format.json do
-            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }
+            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }, account_leads: account_leads
           end
         end
       end

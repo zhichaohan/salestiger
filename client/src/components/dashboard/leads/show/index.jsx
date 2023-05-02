@@ -7,6 +7,7 @@ import DOMPurify from '../../../../utils/purify.min.js'
 import CardHeader from '../../../ui_kit/card_header';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { getLead, getLeadLogs } from '../../../../api/leads';
+import { updateAccountLead, createAccountLead } from '../../../../api/account_leads';
 import { getEmail } from '../../../../api/emails';
 import { getSequences } from '../../../../api/sequences';
 import { getTeamMembers } from '../../../../api/team_members';
@@ -64,6 +65,25 @@ export default function LeadsShow({
 
   const addSequenceClick = () => {
 
+  }
+
+  const statusChange = (e) => {
+    if (lead.account_info && lead.account_info.id) {
+      updateAccountLead(lead.account_info.id, {
+        status: e.target.value,
+      }, () => {
+        notifySuccess(`The status is updated`);
+        loadLead();
+      });
+    }
+    else {
+      createAccountLead(lead.slug, {
+        status: e.target.value,
+      }, () => {
+        notifySuccess(`The status is updated`);
+        loadLead();
+      })
+    }
   }
 
   if (view === 'loading') {
@@ -148,6 +168,42 @@ export default function LeadsShow({
                           )
                         })
                       }
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-xl-12">
+                  <div className="card">
+                    <div className={`card-header ${styles.workflow_attribtues_header}`}>
+                      <h5 className="mb-0">Status</h5>
+                    </div>
+                    <div className="card-body">
+                      <form className="form theme-form">
+                        <div className="row">
+                          <div className="col">
+                            <div class="mb-3">
+                            <label class="form-label" for="lead-status">Status</label>
+                            <select class="form-select" id="lead-status" onChange={statusChange}>
+                            {
+                              gon.lead_statuses.map((status) => {
+                                if (lead.account_info && lead.account_info.status === status) {
+                                  return (
+                                    <option value={status} selected>{status}</option>
+                                  )
+                                }
+
+                                return (
+                                  <option value={status}>{status}</option>
+                                )
+                              })
+                            }
+                            </select>
+                          </div>
+                          </div>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>

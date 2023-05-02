@@ -10,6 +10,7 @@ class WelcomeController < ApplicationController
     gon.s3_region = ENV['S3_REGION']
     gon.s3_key = ENV['S3_KEY']
     gon.s3_secret = ENV['S3_SECRET']
+    gon.lead_statuses = AccountLead::STATUSES
     if current_user.present?
       render layout: "dashboard"
     else

@@ -9,6 +9,7 @@ class Lead < ApplicationRecord
   has_many :lead_sequence_steps, through: :lead_sequences
   has_many :emails
   belongs_to :lead_import, optional: true
+  has_many :account_leads
 
   def self.deep_includes
     { lead_sequences: [:sequence], company: {} }
@@ -70,7 +71,9 @@ class Lead < ApplicationRecord
                            .where(lead_sequences: { lead_id: self.id })
                            .map { |step| step.to_log }
 
-    logs = email_logs + sequence_logs
+    status_logs = AccountLeadStatusChange.where(account_id: account_id, lead: self).map { |sc| sc.to_log }
+
+    logs = email_logs + sequence_logs + status_logs
 
     logs.sort! { |a, b| a[:datetime] <=> b[:datetime] }
   end

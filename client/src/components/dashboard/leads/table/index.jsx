@@ -61,6 +61,7 @@ export default function LeadsTable({
               <th scope="col">Company</th>
               <th scope="col">Company Size</th>
               <th scope="col">Company Industry</th>
+              <th scope="col">Status</th>
               <th scope="col">Sequences</th>
               <th scope="col">Last Email Sent At</th>
               <th scope="col">Last Email Open Count</th>
@@ -105,6 +106,9 @@ export default function LeadsTable({
                   </td>
                   <td>
                     { lead.company.industry }
+                  </td>
+                  <td>
+                    { lead.account_info && lead.account_info.status_indicator && <span class={`badge badge-light-${lead.account_info.status_indicator.type}`}>{lead.account_info.status_indicator.label}</span> }
                   </td>
                   <td>
                     { lead.lead_sequences.map(ls => ls.sequence.name).join(', ') }
