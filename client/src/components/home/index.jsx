@@ -94,7 +94,7 @@ export default function Home() {
                               <div  className="tatsu-single-image tatsu-module align-right tatsu-image-lazyload tatsu-image-overflow  tatsu-external-image tatsu-hV5cHO5mi  " >
                                  <div className="tatsu-single-image-inner " >
                                     <div className="tatsu-single-image-padding-wrap" ></div>
-                                    <img className="tatsu-gradient-border" data-src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
+                                    <img className="tatsu-gradient-border" data-src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/Group-6945-1.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
                                  </div>
                               </div>
                            </div>
@@ -140,7 +140,7 @@ export default function Home() {
                                                 <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-Vs_Kr-DNv  " >
                                                    <div className="tatsu-single-image-inner " >
                                                       <div className="tatsu-single-image-padding-wrap" ></div>
-                                                      <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig1.png" alt =" "  />
+                                                      <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig1.png" alt =" "  />
                                                    </div>
                                                 </div>
                                              </div>
@@ -158,7 +158,7 @@ export default function Home() {
                                                 <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-2mXf2IBSw  " >
                                                    <div className="tatsu-single-image-inner ">
                                                       <div className="tatsu-single-image-padding-wrap" ></div>
-                                                      <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig2.png" alt =" "  />
+                                                      <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig2.png" alt =" "  />
                                                    </div>
                                                 </div>
                                              </div>
@@ -176,7 +176,7 @@ export default function Home() {
                                                 <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-wK8exs4pE  " >
                                                    <div className="tatsu-single-image-inner " >
                                                       <div className="tatsu-single-image-padding-wrap" ></div>
-                                                      <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig3.png" alt =" "  />
+                                                      <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig3.png" alt =" "  />
                                                    </div>
                                                 </div>
                                              </div>
@@ -194,7 +194,7 @@ export default function Home() {
                                                 <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-4GeQ4RvIU  " >
                                                    <div className="tatsu-single-image-inner ">
                                                       <div className="tatsu-single-image-padding-wrap" ></div>
-                                                      <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig4.png" alt =" "  />
+                                                      <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig4.png" alt =" "  />
                                                    </div>
                                                 </div>
                                              </div>
@@ -212,7 +212,7 @@ export default function Home() {
                                                 <div  className="tatsu-single-image tatsu-module align-center tatsu-external-image tatsu-bJcW9QNkp  " >
                                                    <div className="tatsu-single-image-inner " >
                                                       <div className="tatsu-single-image-padding-wrap" ></div>
-                                                      <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig5.png" alt =" "  />
+                                                      <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/iconbig5.png" alt =" "  />
                                                    </div>
                                                 </div>
                                              </div>
@@ -257,7 +257,7 @@ export default function Home() {
                               <div  className="tatsu-single-image tatsu-module tatsu-external-image tatsu-rHuC9Zt32Y  " >
                                  <div className="tatsu-single-image-inner ">
                                     <div className="tatsu-single-image-padding-wrap" ></div>
-                                    <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/06/saas-scale-your-busines-img.jpg" alt =" "  />
+                                    <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/06/saas-scale-your-busines-img.jpg" alt =" "  />
                                  </div>
                               </div>
                            </div>
@@ -1035,7 +1035,7 @@ export default function Home() {
                               <div  className="tatsu-single-image tatsu-module align-right tatsu-external-image tatsu-rNDRyRkdo   tatsu-hide-tablet tatsu-hide-mobile" >
                                  <div className="tatsu-single-image-inner ">
                                     <div className="tatsu-single-image-padding-wrap"></div>
-                                    <img className="tatsu-gradient-border" src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/imgbusinessperson.png" alt =" "  />
+                                    <img className="tatsu-gradient-border" src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2020/12/imgbusinessperson.png" alt =" "  />
                                  </div>
                               </div>
                            </div>
@@ -1071,7 +1071,7 @@ export default function Home() {
                         <div  className="tatsu-single-image tatsu-module align-left tatsu-image-lazyload tatsu-image-overflow  tatsu-external-image tatsu-S1oNsSytN_  " >
                           <div className="tatsu-single-image-inner ">
                             <div class = "tatsu-single-image-padding-wrap"></div>
-                            <img class = "tatsu-gradient-border" data-src = "https://spyrowptheme1.wpengine.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/03/Spyro-saas-form-hero.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
+                            <img class = "tatsu-gradient-border" data-src = "https://salestiger-assets.s3.us-west-2.amazonaws.com/saas-clickthrough-new/wp-content/uploads/sites/17/2021/03/Spyro-saas-form-hero.png" alt =" "  src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  />
                           </div>
                         </div>
                       </div>
