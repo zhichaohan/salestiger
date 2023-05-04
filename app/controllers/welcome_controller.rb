@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
     if current_user.present?
       render layout: "dashboard"
     else
-      render layout: "application"
+      render layout: "application_v2"
     end
   end
 

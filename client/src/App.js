@@ -5,10 +5,11 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import Home from './components/home';
+import Home from './components/home_v2';
 import Terms from './components/terms';
 import SignIn from './components/sign_in';
-import Header from './components/header';
+import Loader from './components/loader';
+import Header from './components/header_v2';
 import Footer from './components/footer';
 import Dashboard from './components/dashboard';
 import Context from "./utils/context";
@@ -80,11 +81,17 @@ const PrivateRoute = ({ component: Component, auth, path, layout: Layout }) => {
 };
 
 const PublicLayout = (props) => (
+  // <>
+  //   <ToastContainer />
+  //   <Header />
+  //   {props.children}
+  //   <Footer />
+  // </>
   <>
     <ToastContainer />
+    <Loader/>
     <Header />
     {props.children}
-    <Footer />
   </>
 )
 
