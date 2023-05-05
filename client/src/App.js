@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Home from './components/home_v2';
 import Terms from './components/terms';
-import SignIn from './components/sign_in';
+import SignIn from './components/sign_in_v2';
 import Loader from './components/loader';
 import Header from './components/header_v2';
 import Footer from './components/footer';

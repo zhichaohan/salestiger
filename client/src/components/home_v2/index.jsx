@@ -277,7 +277,7 @@ export default function Home() {
        </div>
      </section>
 
-      <div className="section-box box-gray-100 mt-120 mb-20">
+      <div id="get-started" className="section-box box-gray-100 mt-120 mb-20">
         <div className="container">
           <div className="icon-wave">
             <div className="row">
