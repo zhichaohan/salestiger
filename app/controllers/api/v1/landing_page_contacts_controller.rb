@@ -4,6 +4,8 @@ module Api
       def create
         contact = LandingPageContact.create!(landing_page_contact_params)
 
+        contact.notify_slack!
+        
         respond_to do |format|
           format.json do
             render json: { contact: contact }
@@ -16,7 +18,8 @@ module Api
           :first_name,
           :last_name,
           :email,
-          :company_name
+          :company_name,
+          :extra_info
         )
       end
     end
