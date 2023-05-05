@@ -60,3 +60,10 @@ export const objToQueryString = (obj, prefix) => {
   }
   return str.join("&");
 }
+
+export const scrollWithOffset = (id, offset) => {
+	var element = document.getElementById(id);
+	var y = element.getBoundingClientRect().top + window.pageYOffset + offset;
+
+	window.scrollTo({top: y, behavior: 'smooth'});
+}

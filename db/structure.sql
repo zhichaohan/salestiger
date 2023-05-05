@@ -276,7 +276,8 @@ CREATE TABLE public.landing_page_contacts (
     last_name character varying,
     company_name character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    extra_info character varying
 );
 
 
@@ -1752,6 +1753,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230420215555'),
 ('20230421184948'),
 ('20230421185311'),
-('20230501230212');
+('20230501230212'),
+('20230505212349');
 
 

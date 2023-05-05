@@ -4,12 +4,20 @@ import styles from './index.module.css';
 
 export default function Loader() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowing, setIsShowing] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(true);
+      setTimeout(() => {
+        setIsShowing(false);
+      }, 1000);
     }, 1000);
   }, [])
+
+  if (!isShowing) {
+    return <></>
+  }
 
   return (
     <div className={isLoading ? styles.fade_out : ''}>

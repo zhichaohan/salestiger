@@ -3,8 +3,36 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css'
 import styles from './index.module.css';
+import { createLandingPageContacts } from '../../api/landing_page_contacts';
+import { notifySuccess, notifyError, scrollWithOffset } from '../../helpers';
 
 export default function Home() {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [companyName, setCompanyName] = useState();
+  const [extraInfo, setExtraInfo] = useState();
+
+  const contactUsClick = (e) => {
+    e.preventDefault();
+    scrollWithOffset('get-started', 0);
+    createLandingPageContacts({
+      email: email,
+    }, () => {
+    });
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createLandingPageContacts({
+      first_name: firstName,
+      email: email,
+      extra_info: extraInfo,
+    }, () => {
+      notifySuccess("Thank you for your submission. We will reach out to you within 24 hours!")
+    });
+  }
+
   return (
     <main className="main">
       <div className="section-box">
@@ -84,8 +112,8 @@ export default function Home() {
                   <p className="text-body-text">We have worked with our clients to close large and small deals</p>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12 pr-mb-70 mb-30">
-                  <h3 className="text-display-3"><span className="count">5</span>M+</h3><span className="text-body-quote">Revenue Closed</span>
-                  <p className="text-body-text">We have worked with our clients to close large and small deals</p>
+                  <h3 className="text-display-3"><span className="count">500</span>+</h3><span className="text-body-quote">New Customers</span>
+                  <p className="text-body-text">We turn emails and phone numbers to new, lasting relationships</p>
                 </div>
               </div>
             </div>
@@ -94,8 +122,8 @@ export default function Home() {
               <div className="mt-40 box-mw-610">
                 <div className="form-newsletter-2">
                   <form>
-                    <input className="input-newsletter" type="text" value="" placeholder="Enter your email ..." />
-                    <button className="btn btn-newsletter icon-arrow-right-white" type="submit">Contact Us</button>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="input-newsletter" type="text" placeholder="Enter your email ..." />
+                    <button className="btn btn-newsletter icon-arrow-right-white" type="submit" onClick={contactUsClick}>Contact Us</button>
                   </form>
                 </div>
               </div>
@@ -186,7 +214,7 @@ export default function Home() {
                       <div className="card-grid-style-2 hover-up">
                         <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/cognity.svg" /></div>
                         <h3 className="text-heading-5 mt-20">Sales strategy and research</h3>
-                        <p className="text-body-text color-gray-600 mt-20">Work with our sales leaders to create a plan and execute.???</p>
+                        <p className="text-body-text color-gray-600 mt-20">Our experienced team offers a wide range of services, from strategy development to implementation and execution, to help you optimize your sales performance and drive revenue growth.</p>
                       </div>
                     </SwiperSlide>
                   </div>
@@ -204,19 +232,19 @@ export default function Home() {
             <div className="col-xl-5 col-lg-6 col-sm-12 mb-30"><img className="bdrd-16 img-responsive" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/images/chrisimg.jpg" alt="Agon" /></div>
             <div className="col-xl-7 col-lg-6 col-sm-12 block-we-do"><span className="tag-1 bg-6 color-green-900">Chris Hedum, CEO</span>
               <h3 className="text-heading-1 mt-20">Meet our leadership</h3>
-              <p className="text-body-lead-large color-gray-600 mt-30">Chris is a sales industry leader etc etc .</p>
+              <p className="text-body-lead-large color-gray-600 mt-30">Chris Hedum is a dedicated husband, girl dad, & athlete with a passion for building high-performing teams. The success of these teams has allowed him to navigate through seed, Series A, B, & C rounds of funding and develop a model and definitive blueprint on what is required to scale a high-performing team.</p>
               <div className="row mt-20">
                 <div className="col-lg-6 col-sm-6 col-12 mt-20">
-                  <h4 className="text-heading-6 icon-leaf">$XX revenue booked</h4>
+                  <h4 className="text-heading-6 icon-leaf">$21,000,000+ In Revenue</h4>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-12 mt-20">
-                  <h4 className="text-heading-6 icon-leaf">Helped startups raise over $XXM</h4>
+                  <h4 className="text-heading-6 icon-leaf">$140,000,000+ in Funding</h4>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-12 mt-20">
-                  <h4 className="text-heading-6 icon-leaf">Hired and trained over X sales team members</h4>
+                  <h4 className="text-heading-6 icon-leaf">Seed Round, Series A, Series B, Series C</h4>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-12 mt-20">
-                  <h4 className="text-heading-6 icon-leaf">???</h4>
+                  <h4 className="text-heading-6 icon-leaf">Development of teams in US, Canada, & Mexico</h4>
                 </div>
               </div>
             </div>
@@ -265,7 +293,7 @@ export default function Home() {
                  <div className="card-grid-style-2 card-square hover-up mb-20">
                    <p className="text-body-text color-gray-600 text-comment">&quot;Chris's energy, drive, team-first mentality, and his intentional decision to bring positivity every day was just as great as the tangible impacts he made to our team's overall revenue.&quot;</p>
                    <div className="box-img-user">
-                     <div className="img-user img-user-round"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage2/user-4.png" /></div>
+                     <div className="img-user img-user-round"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage2/user-2.png" /></div>
                      <h4 className="text-body-lead color-gray-900 mb-5">Jenny Wilson</h4>
                      <p className="text-body-text-md">Sales Rep @HouseCallPro</p>
                    </div>
@@ -282,91 +310,32 @@ export default function Home() {
           <div className="icon-wave">
             <div className="row">
               <div className="col-lg-12 mb-60"><span className="text-body-capitalized text-uppercase">Contact us</span>
-                <h2 className="text-heading-3 color-gray-900 mt-10">Have an prject in mind?</h2>
-                <p className="text-body-text color-gray-600 mt-20">The right move at the right time saves your investment.<br className="d-lg-block d-none" /> live the dream of expanding your business.</p>
+                <h2 className="text-heading-3 color-gray-900 mt-10">Ready to crush your sales targets?</h2>
+                <p className="text-body-text color-gray-600 mt-20">Learn how we are revolutionizing the sales game.<br className="d-lg-block d-none" />Get your cyber sales team today.</p>
               </div>
               <div className="col-lg-4 mb-40">
-                <h4 className="text-heading-6 color-gray-900 icon-home mb-10 mt-10">Agon Studio</h4>
-                <p className="text-body-text color-gray-600">4517 Washington Ave. <br />Manchester, Kentucky 39495</p>
-                <p className="text-body-text color-gray-600">(239) 555-0108</p>
-                <p className="text-body-text color-gray-600"><a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="52313d3c263331261233353d3c7c313d3f">[email&#160;protected]</a></p>
               </div>
               <div className="col-lg-8">
                 <div className="row">
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <input className="form-control" type="text" value="" placeholder="Enter your name" />
+                      <input className="form-control" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Enter your name" />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <input className="form-control" type="text" value="" placeholder="Comapy (optioanl)" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input className="form-control" type="text" value="" placeholder="Your email" />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group">
-                      <input className="form-control" type="text" value="" placeholder="Phone number" />
+                      <input className="form-control" type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email" />
                     </div>
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <textarea className="form-control" placeholder="Tell us about yourself"></textarea>
+                      <textarea value={extraInfo} onChange={(e) => setExtraInfo(e.target.value)} className="form-control" placeholder="Tell us what you are looking for"></textarea>
                     </div>
                   </div>
                   <div className="col-lg-12 mt-15">
-                    <button className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">Send Message</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">By clicking contact us button, you agree our terms and policy,</span>
+                    <button onClick={onSubmit} className="btn btn-black icon-arrow-right-white mr-40 mb-20" type="submit">Send Message</button><br className="d-lg-none d-block" /><span className="text-body-text-md color-gray-500 mb-20">By clicking contact us button, you agree our terms and policy,</span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="section-box">
-        <div className="container mt-100">
-          <div className="row">
-            <div className="col-lg-8">
-              <h3 className="text-heading-1 mb-10">Latest News</h3>
-              <p className="text-body-lead-large color-gray-600">From Our blog and Event fanpage</p>
-            </div>
-            <div className="col-lg-4 text-lg-end text-start pt-30"><a className="btn btn-black icon-arrow-right-white" href="#">View More</a></div>
-          </div>
-        </div>
-        <div className="container mt-90">
-          <div className="row">
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Company</span><a className="text-heading-4" href="#">We can blend colors multiple ways, the most common</a>
-                <div className="grid-4-img"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-1.png" alt="Agon" /></a></div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Marketing Event</span><a className="text-heading-4" href="#">How To Blow Through Capital At An Incredible Rate</a>
-                <div className="grid-4-img"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-2.png" alt="Agon"/></a></div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Customer Services</span><a className="text-heading-4" href="#">Design Studios That Everyone Should Know About?</a>
-                <div className="grid-4-img color-bg-4"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-3.png" alt="Agon"/></a></div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Company</span><a className="text-heading-4" href="#">We can blend colors multiple ways, the most common</a>
-                <div className="grid-4-img"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-4.png" alt="Agon" /></a></div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Marketing Event</span><a className="text-heading-4" href="#">How To Blow Through Capital At An Incredible Rate</a>
-                <div className="grid-4-img"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-5.png" alt="Agon" /></a></div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-sm-12 pr-30">
-              <div className="card-grid-style-4"><span className="tag-dot">Customer Services</span><a className="text-heading-4" href="#">Design Studios That Everyone Should Know About?</a>
-                <div className="grid-4-img color-bg-4"><a href="#"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/img-news-6.png" alt="Agon" /></a></div>
               </div>
             </div>
           </div>
