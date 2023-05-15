@@ -1,3 +1,5 @@
+return
+
 require 'puppeteer-ruby'
 
 def connect(page, name, linkedin_url)

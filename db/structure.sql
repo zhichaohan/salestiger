@@ -242,7 +242,10 @@ CREATE TABLE public.emails (
     sent_at timestamp without time zone,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     open_count integer,
-    last_opened_at timestamp without time zone
+    last_opened_at timestamp without time zone,
+    gmail_thread_id character varying,
+    "from" character varying,
+    snippet character varying
 );
 
 
@@ -655,7 +658,8 @@ CREATE TABLE public.team_members (
     linkedin_url character varying,
     auth_token_id bigint,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    email_signature text
+    email_signature text,
+    gmail_history_id integer
 );
 
 
@@ -1754,6 +1758,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230421184948'),
 ('20230421185311'),
 ('20230501230212'),
-('20230505212349');
+('20230505212349'),
+('20230515211113'),
+('20230515212443'),
+('20230515225442'),
+('20230515231911');
 
 

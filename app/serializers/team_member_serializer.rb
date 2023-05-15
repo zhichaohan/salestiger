@@ -11,7 +11,8 @@ class TeamMemberSerializer < ActiveModel::Serializer
              :show_path,
              :auth_token_id,
              :uuid,
-             :email_signature
+             :email_signature,
+             :connected_gmail
 
   has_many :team_member_infos, each_serializer: TeamMemberInfoSerializer
 end

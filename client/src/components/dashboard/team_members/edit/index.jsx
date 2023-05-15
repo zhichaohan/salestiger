@@ -68,7 +68,7 @@ export default function TeamMembersEdit({
                     </div>
                   </div>
                   <div className="form-footer">
-                    <button type="submit" className="btn btn-primary btn-block">Connect Gmail Account</button>
+                    <button type="submit" className="btn btn-primary btn-block">{teamMember.connected_gmail ? 'Reconnect' : 'Connect'} Gmail Account</button>
                   </div>
                 </form>
 

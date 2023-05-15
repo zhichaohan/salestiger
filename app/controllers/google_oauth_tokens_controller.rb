@@ -13,6 +13,8 @@ class GoogleOauthTokensController < ApplicationController
     team_member = TeamMember.find_by(gmail: request.env["omniauth.auth"]['info']['email'])
     if team_member.present?
       team_member.update!(auth_token: token)
+      team_member.reload
+      team_member.setup_gmail_watcher!
     end
 
     if team_member.present?

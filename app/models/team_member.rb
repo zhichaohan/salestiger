@@ -1,3 +1,6 @@
+require 'google/apis/gmail_v1'
+require "google/cloud/pubsub"
+
 class TeamMember < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -10,6 +13,8 @@ class TeamMember < ApplicationRecord
   include Routable
 
   scope :email_activated, -> { where.not(auth_token_id: nil) }
+
+  Gmail = Google::Apis::GmailV1
 
   def show_path
     "/team_members/#{self.slug}"
@@ -31,5 +36,63 @@ class TeamMember < ApplicationRecord
     return name.split.last if name.split.count > 1
 
     ""
+  end
+
+  def setup_gmail_watcher!
+    pubsub = Google::Cloud::PubSub.new
+
+    # create the topic
+    topic = pubsub.topic(gmail_topic_name)
+    if topic.blank?
+      topic = pubsub.create_topic(gmail_topic_name)
+    end
+
+    # set the policy
+    topic.policy do |p|
+      p.roles['roles/pubsub.admin'] = ['allAuthenticatedUsers']
+    end
+
+    # create the subscription
+    sub = topic.subscription(gmail_subscription_name)
+    if sub.blank?
+      push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: gmail_subscription_endpoint
+      sub = topic.subscribe gmail_subscription_name, push_config: push_config
+    end
+
+    # update the endpoint
+    sub.endpoint = gmail_subscription_endpoint
+
+    # set the watcher
+    gmail = Gmail::GmailService.new
+    gmail.authorization = self.auth_token.as_credentials!
+    watch_request = Gmail::WatchRequest.new
+    watch_request.label_filter_action = 'include'
+    watch_request.label_ids = ['UNREAD']
+    watch_request.topic_name = topic.name
+    watch_response = gmail.watch_user('me', watch_request)
+
+    if watch_response.present? && watch_response.history_id.present?
+      self.update!(gmail_history_id: watch_response.history_id)
+      return true
+    end
+
+    false
+  end
+
+  def gmail_topic_name
+    "gmail-#{self.uuid}"
+  end
+
+  def gmail_subscription_name
+    "gmail-sub-#{self.uuid}"
+  end
+
+  def gmail_subscription_endpoint
+    "#{root_url}api/v1/team_members/#{self.uuid}/gmail_callback"
+    # "https://8cf2-172-117-162-246.ngrok.io/api/v1/team_members/#{self.uuid}/gmail_callback"
+  end
+
+  def connected_gmail
+    self.auth_token.present? && self.gmail_history_id.present?
   end
 end

@@ -63,7 +63,7 @@ class Lead < ApplicationRecord
   end
 
   def logs(account_id)
-    email_logs = self.emails.sent.not_in_sequence.map { |e| e.to_log }
+    email_logs = self.emails.sent_or_received.not_in_sequence.map { |e| e.to_log }
 
     sequence_logs = Account.find(account_id)
                            .lead_sequence_steps
