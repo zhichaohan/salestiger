@@ -41,21 +41,25 @@ class Emails::UpdateFromHistoryWorker
                   sent_at = headers.any? { |h| h.name == 'Date' } ? headers.find { |h| h.name == 'Date' }.value : ''
                   snippet = gmail_message.snippet
 
-                  email = team_member.emails.create!(
-                    lead: lead,
-                    subject: subject,
-                    body_html: body_html.encode("UTF-8", invalid: :replace, undef: :replace, replace: ""),
-                    recipient: recipient,
-                    gmail_id: gmail_message.id,
-                    status: 'received',
-                    sent_at: sent_at,
-                    gmail_thread_id: gmail_message.thread_id,
-                    from: from,
-                    snippet: snippet
-                  )
+                  if subject == 'Delivery Status Notification (Failure)'
+                    team_member.account.account_leads.find_by(lead: lead).update!(status: 'Email Bounced')
+                  else
+                    email = team_member.emails.create!(
+                      lead: lead,
+                      subject: subject,
+                      body_html: body_html.encode("UTF-8", invalid: :replace, undef: :replace, replace: ""),
+                      recipient: recipient,
+                      gmail_id: gmail_message.id,
+                      status: 'received',
+                      sent_at: sent_at,
+                      gmail_thread_id: gmail_message.thread_id,
+                      from: from,
+                      snippet: snippet
+                    )
 
-                  account_lead = team_member.account.account_leads.find_by(lead: lead)
-                  account_lead.sync_last_sent_email!
+                    account_lead = team_member.account.account_leads.find_by(lead: lead)
+                    account_lead.sync_last_sent_email!
+                  end
 
                   team_member.account.lead_sequence_steps.where(lead_sequences: { lead_id: lead.id }).each do |step|
                     step.cancel! if step.incomplete?

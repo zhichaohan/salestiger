@@ -14,7 +14,8 @@ class AccountLead < ApplicationRecord
     'MIA',
     'Redzone',
     'Future Prospects',
-    'Unsubscribe'
+    'Unsubscribe',
+    'Email Bounced'
   ]
 
   def sync_last_sent_email!
