@@ -100,6 +100,6 @@ class Email < ApplicationRecord
   def notify_slack_after_create!
     return unless self.status == 'received'
 
-    SlackService.notify_product_notifications("New Email Reply:\nFrom: #{self.from}\nTo: #{self.recipient}\nSubject: #{self.subject}\nBody: #{self.body_html}")
+    SlackService.notify_product_notifications("New Email Reply:\nFrom: #{self.from}\nTo: #{self.recipient}\nSubject: #{self.subject}\nSnippet: #{self.snippet}")
   end
 end
