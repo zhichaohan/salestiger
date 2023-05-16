@@ -66,6 +66,8 @@ export default function LeadsIndex() {
       <div className="container-fluid">
         <div className="email-wrap bookmark-wrap">
           <div className="row">
+          {
+            /*
             <div className="col-xl-2 box-col-3 xl-25 box-col-25">
               <div className="md-sidebar email-sidebar"><a className="btn btn-primary md-sidebar-toggle" href="javascript:void(0)">bookmark filter</a>
                 <div className="md-sidebar-aside email-left-aside">
@@ -95,7 +97,9 @@ export default function LeadsIndex() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-10 col-md-9 box-col-9 xl-75 box-col-75">
+            */
+          }
+            <div className="col">
               <div className="email-right-aside bookmark-tabcontent">
                 <div className="card email-body">
                   <div className="ps-0">

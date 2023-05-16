@@ -55,6 +55,7 @@ module Api
         if email.present? && email.created_at < 2.minutes.ago
           email.increment!(:open_count)
           email.update!(last_opened_at: Time.now)
+          email.account_lead.increment!(:sent_email_open_count) if email.sent?
         end
 
         send_data(Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="), :type => "image/gif", :disposition => "inline")

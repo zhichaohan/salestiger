@@ -6,24 +6,29 @@ class Email < ApplicationRecord
   has_many :lead_sequence_steps
 
   scope :sent_or_received, -> { where(status: ['sent', 'received']).where.not(sent_at: nil) }
+  scope :sent, -> { where(status: ['sent']).where.not(sent_at: nil) }
+  scope :received, -> { where(status: ['received']).where.not(sent_at: nil) }
   scope :not_in_sequence, -> { left_outer_joins(:lead_sequence_steps).where(lead_sequence_steps: { id: nil }) }
 
   after_create :notify_slack_after_create!
 
   def final_recipient
-    return self.recipient if true # ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
+    return self.recipient if ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
 
     "zhichao+lead-#{self.lead.uuid}@salestiger.io"
   end
 
   def update_account_lead_status!
-    account_lead = self.team_member.account.account_leads.find_or_create_by!(lead: self.lead)
-
     if account_lead.status.blank?
       account_lead.update!(status: 'Engaged')
     end
 
     account_lead.update!(last_sent_email: self)
+    account_lead.increment!(:sent_email_count)
+  end
+
+  def account_lead
+    @account_lead ||= self.team_member.account.account_leads.find_or_create_by!(lead: self.lead)
   end
 
   def to_log_description

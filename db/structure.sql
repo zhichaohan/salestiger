@@ -72,7 +72,10 @@ CREATE TABLE public.account_leads (
     status character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    last_sent_email_id bigint
+    last_sent_email_id bigint,
+    sent_email_count integer DEFAULT 0,
+    sent_email_open_count integer DEFAULT 0,
+    received_email_count integer DEFAULT 0
 );
 
 
@@ -1762,6 +1765,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230515211113'),
 ('20230515212443'),
 ('20230515225442'),
-('20230515231911');
+('20230515231911'),
+('20230516180203');
 
 

@@ -24,6 +24,17 @@ class AccountLead < ApplicationRecord
     self.update!(last_sent_email: self.lead.emails.sent_or_received.where(team_member: account_team_members).newest_first.first)
   end
 
+  def sync_email_counts!
+    account_team_members = self.account.team_members
+    account_emails = self.lead.emails.where(team_member: account_team_members)
+
+    self.update!(
+      sent_email_count: account_emails.sent.count,
+      sent_email_open_count: account_emails.sent.sum(:open_count),
+      received_email_count: account_emails.received.count
+    )
+  end
+
   def log_status_change!
     p_status_changes = []
 

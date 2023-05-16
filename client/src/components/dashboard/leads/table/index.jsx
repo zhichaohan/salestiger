@@ -67,8 +67,9 @@ export default function LeadsTable({
               <th scope="col">Status</th>
               <th scope="col">Sequences</th>
               <th scope="col">Last Email Sent At</th>
-              <th scope="col">Last Email Open Count</th>
-              <th scope="col">Last Email Last Opened At</th>
+              <th scope="col">Sent Email Count</th>
+              <th scope="col">Sent Email Open Count</th>
+              <th scope="col">Received Email Count</th>
             </tr>
           </thead>
           <tbody>
@@ -124,10 +125,13 @@ export default function LeadsTable({
                     }
                   </td>
                   <td>
-                  { lead.account_info && lead.account_info.last_sent_email && lead.account_info.last_sent_email.open_count }
+                  { lead.account_info && lead.account_info.sent_email_count }
                   </td>
                   <td>
-                  { lead.account_info && lead.account_info.last_sent_email && renderTime(lead.account_info.last_sent_email.last_opened_at) }
+                  { lead.account_info && lead.account_info.sent_email_open_count }
+                  </td>
+                  <td>
+                  { lead.account_info && lead.account_info.received_email_count }
                   </td>
                 </tr>
               )

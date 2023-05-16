@@ -57,8 +57,7 @@ class Emails::UpdateFromHistoryWorker
                       snippet: snippet
                     )
 
-                    account_lead = team_member.account.account_leads.find_by(lead: lead)
-                    account_lead.sync_last_sent_email!
+                    email.account_lead.increment!(:received_email_count)
                   end
 
                   team_member.account.lead_sequence_steps.where(lead_sequences: { lead_id: lead.id }).each do |step|
