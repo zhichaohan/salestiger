@@ -664,7 +664,8 @@ CREATE TABLE public.team_members (
     email_signature text,
     gmail_history_id integer,
     linkedin_email character varying,
-    linkedin_password character varying
+    linkedin_password character varying,
+    linkedin_verified boolean
 );
 
 
