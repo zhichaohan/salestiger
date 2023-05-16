@@ -10,10 +10,31 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: heroku_ext; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA heroku_ext;
+
+
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA heroku_ext;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
+--
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA heroku_ext;
 
 
 --
@@ -243,7 +264,7 @@ CREATE TABLE public.emails (
     gmail_id character varying,
     status character varying,
     sent_at timestamp without time zone,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    uuid uuid DEFAULT heroku_ext.uuid_generate_v4() NOT NULL,
     open_count integer,
     last_opened_at timestamp without time zone,
     gmail_thread_id character varying,
@@ -318,7 +339,7 @@ CREATE TABLE public.lead_imports (
     error_count integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    uuid uuid DEFAULT heroku_ext.uuid_generate_v4() NOT NULL,
     status character varying,
     duplicate_count integer
 );
@@ -428,7 +449,7 @@ CREATE TABLE public.leads (
     twitter_url character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    uuid uuid DEFAULT heroku_ext.uuid_generate_v4() NOT NULL,
     slug character varying,
     apollo_id character varying,
     seniority character varying,
@@ -660,9 +681,12 @@ CREATE TABLE public.team_members (
     instagram_url character varying,
     linkedin_url character varying,
     auth_token_id bigint,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    uuid uuid DEFAULT heroku_ext.uuid_generate_v4() NOT NULL,
     email_signature text,
-    gmail_history_id integer
+    gmail_history_id integer,
+    linkedin_email character varying,
+    linkedin_password character varying,
+    linkedin_verified boolean
 );
 
 
@@ -1708,7 +1732,7 @@ ALTER TABLE ONLY public.leads
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO "$user", public, heroku_ext;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20190503170520'),
@@ -1766,6 +1790,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230515212443'),
 ('20230515225442'),
 ('20230515231911'),
-('20230516180203');
+('20230516180203'),
+('20230516213437');
 
 

@@ -10,11 +10,15 @@ export default function TeamMembersEdit({
   let id = match.params.id;
   const [teamMember, setTeamMember] = useState();
   const [signatureHtml, setSignatureHtml] = useState();
+  const [linkedinEmail, setLinkedinEmail] = useState();
+  const [linkedinPassword, setLinkedinPassword] = useState();
 
   useEffect(() => {
     getTeamMember(id, (r) => {
       setTeamMember(r);
       setSignatureHtml(r.email_signature);
+      setLinkedinEmail(r.linkedin_email);
+      setLinkedinPassword(r.linkedin_password);
     }, () => {
       console.log("an error has occurred");
     })
@@ -28,6 +32,16 @@ export default function TeamMembersEdit({
     }, () => {
       notifySuccess(`${teamMember.name}'s email settings have been updated'`);
     });
+  }
+
+  const updateLinkedinClick = (e) => {
+    e.preventDefault();
+    updateTeamMember(id, {
+      linkedin_email: linkedinEmail,
+      linkedin_password: linkedinPassword,
+    }, () => {
+      notifySuccess(`${teamMember.name}'s LinkedIn login have been updated. We will verify these credentials shortly'`)
+    })
   }
 
   if (!teamMember) {
@@ -48,51 +62,79 @@ export default function TeamMembersEdit({
       <div className="container-fluid edit-profile">
         <div className="row">
           <div className="col-lg-4">
-            <div className="card">
-              <div className="card-header pb-0">
-                <h4 className="card-title mb-0">My Profile</h4>
-                <div className="card-options"><a className="card-options-collapse" href="javascript:void(0)" data-bs-toggle="card-collapse"><i className="fe fe-chevron-up"></i></a><a className="card-options-remove" href="javascript:void(0)" data-bs-toggle="card-remove"><i className="fe fe-x"></i></a></div>
-              </div>
-              <div className="card-body">
-                <form method="post" action="/auth/google_oauth2">
-                  <input type="hidden" name="authenticity_token" value={gon.authenticity_token}/>
-                  <div className="row mb-2">
-                    <div className="profile-title">
-                      <div className="d-flex">
-                      <img className="img-70 rounded-circle" alt="" src={teamMember.photo_url} />
-                        <div className="flex-grow-1 ms-3"><a href="user-profile.html">
-                            <h3 className="mb-1 f-20 txt-primary">{teamMember.name}</h3></a>
-                          <p className="f-12">{teamMember.title}</p>
-                        </div>
-                      </div>
-                    </div>
+            <div className="row">
+              <div className="col">
+                <div className="card">
+                  <div className="card-header pb-0">
+                    <h4 className="card-title mb-0">My Profile</h4>
+                    <div className="card-options"><a className="card-options-collapse" href="javascript:void(0)" data-bs-toggle="card-collapse"><i className="fe fe-chevron-up"></i></a><a className="card-options-remove" href="javascript:void(0)" data-bs-toggle="card-remove"><i className="fe fe-x"></i></a></div>
                   </div>
-                  <div className="form-footer">
-                    <button type="submit" className="btn btn-primary btn-block">{teamMember.connected_gmail ? 'Reconnect' : 'Connect'} Gmail Account</button>
-                  </div>
-                </form>
-
-                {
-                  /*
-                  <form method="post" action="/auth/linkedin">
-                    <input type="hidden" name="authenticity_token" value={gon.authenticity_token}/>
-                    <div className="row mb-2">
-                      <div className="profile-title">
-                        <div className="d-flex">
-                        <img className="img-70 rounded-circle" alt="" src={teamMember.photo_url} />
-                          <div className="flex-grow-1 ms-3"><a href="user-profile.html">
-                              <h3 className="mb-1 f-20 txt-primary">{teamMember.name}</h3></a>
-                            <p className="f-12">{teamMember.title}</p>
+                  <div className="card-body">
+                    <form method="post" action="/auth/google_oauth2">
+                      <input type="hidden" name="authenticity_token" value={gon.authenticity_token}/>
+                      <div className="row mb-2">
+                        <div className="profile-title">
+                          <div className="d-flex">
+                          <img className="img-70 rounded-circle" alt="" src={teamMember.photo_url} />
+                            <div className="flex-grow-1 ms-3"><a href="user-profile.html">
+                                <h3 className="mb-1 f-20 txt-primary">{teamMember.name}</h3></a>
+                              <p className="f-12">{teamMember.title}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="form-footer">
-                      <button type="submit" className="btn btn-primary btn-block">Connect Linkedin</button>
-                    </div>
-                  </form>
-                  */
-                }
+                      <div className="form-footer">
+                        <button type="submit" className="btn btn-primary btn-block">{teamMember.connected_gmail ? 'Reconnect' : 'Connect'} Gmail Account</button>
+                      </div>
+                    </form>
+
+                    {
+                      /*
+                      <form method="post" action="/auth/linkedin">
+                        <input type="hidden" name="authenticity_token" value={gon.authenticity_token}/>
+                        <div className="row mb-2">
+                          <div className="profile-title">
+                            <div className="d-flex">
+                            <img className="img-70 rounded-circle" alt="" src={teamMember.photo_url} />
+                              <div className="flex-grow-1 ms-3"><a href="user-profile.html">
+                                  <h3 className="mb-1 f-20 txt-primary">{teamMember.name}</h3></a>
+                                <p className="f-12">{teamMember.title}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-footer">
+                          <button type="submit" className="btn btn-primary btn-block">Connect Linkedin</button>
+                        </div>
+                      </form>
+                      */
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <div className="card">
+                  <div className="card-header pb-0">
+                    <h4 className="card-title mb-0">LinkedIn</h4>
+                  </div>
+                  <div className="card-body">
+                    <form>
+                      <div className="row mb-3">
+                        <label className="form-label">Email Address</label>
+                        <input value={linkedinEmail} onChange={(e) => setLinkedinEmail(e.target.value)} type="text" className="form-control" placeholder="your-email@domain.com" />
+                      </div>
+                        <div className="row mb-3">
+                          <label className="form-label">Password</label>
+                          <input value={linkedinPassword} onChange={(e) => setLinkedinPassword(e.target.value)} type="password" className="form-control" />
+                        </div>
+                      <div className="form-footer">
+                        <button type="submit" className="btn btn-primary btn-block" onClick={updateLinkedinClick}>Update LinkedIn Login</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
