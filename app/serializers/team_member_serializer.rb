@@ -12,7 +12,9 @@ class TeamMemberSerializer < ActiveModel::Serializer
              :auth_token_id,
              :uuid,
              :email_signature,
-             :connected_gmail
+             :connected_gmail,
+             :linkedin_email,
+             :linkedin_password
 
   has_many :team_member_infos, each_serializer: TeamMemberInfoSerializer
 end

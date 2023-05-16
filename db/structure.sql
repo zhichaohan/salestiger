@@ -662,7 +662,10 @@ CREATE TABLE public.team_members (
     auth_token_id bigint,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     email_signature text,
-    gmail_history_id integer
+    gmail_history_id integer,
+    linkedin_email character varying,
+    linkedin_password character varying,
+    linkedin_verified boolean
 );
 
 
@@ -1766,6 +1769,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230515212443'),
 ('20230515225442'),
 ('20230515231911'),
-('20230516180203');
+('20230516180203'),
+('20230516213437');
 
 

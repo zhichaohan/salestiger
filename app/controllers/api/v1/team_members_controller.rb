@@ -50,7 +50,7 @@ module Api
       end
 
       def team_member_params
-        params.permit(:email_signature)
+        params.permit(:email_signature, :linkedin_email, :linkedin_password)
       end
     end
   end
