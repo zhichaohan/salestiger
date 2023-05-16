@@ -68,6 +68,10 @@ class Email < ApplicationRecord
     self.update(status: 'canceled')
   end
 
+  def sent?
+    status == 'sent'
+  end
+
   def to_log
     {
       id: self.id,

@@ -41,7 +41,7 @@ class Emails::UpdateFromHistoryWorker
                   sent_at = headers.any? { |h| h.name == 'Date' } ? headers.find { |h| h.name == 'Date' }.value : ''
                   snippet = gmail_message.snippet
 
-                  team_member.emails.create!(
+                  email = team_member.emails.create!(
                     lead: lead,
                     subject: subject,
                     body_html: body_html.encode("UTF-8", invalid: :replace, undef: :replace, replace: ""),
@@ -53,6 +53,13 @@ class Emails::UpdateFromHistoryWorker
                     from: from,
                     snippet: snippet
                   )
+
+                  account_lead = team_member.account.account_leads.find_by(lead: lead)
+                  account_lead.sync_last_sent_email!
+
+                  team_member.account.lead_sequence_steps.where(lead_sequences: { lead_id: lead.id }).each do |step|
+                    step.cancel! if step.incomplete?
+                  end
                 end
               end
             end
