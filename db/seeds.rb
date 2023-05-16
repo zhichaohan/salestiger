@@ -182,7 +182,7 @@ c.update!(
 l = c.leads.find_or_create_by!(name: 'Zhichao Han')
 l.update!(
   title: 'Chief Technology Officer',
-  business_email: 'zhichao@salestiger.io',
+  business_email: 'zhichao.han.89@gmail.com',
   location: 'San Diego, California',
   linkedin_url: 'https://www.linkedin.com/in/zhichao-han-49366315/',
   phone: '+1-703-220-3824'

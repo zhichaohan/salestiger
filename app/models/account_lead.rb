@@ -14,13 +14,14 @@ class AccountLead < ApplicationRecord
     'MIA',
     'Redzone',
     'Future Prospects',
-    'Unsubscribe'
+    'Unsubscribe',
+    'Email Bounced'
   ]
 
   def sync_last_sent_email!
     account_team_members = self.account.team_members
 
-    self.update!(last_sent_email: self.lead.emails.sent.where(team_member: account_team_members).newest_first.first)
+    self.update!(last_sent_email: self.lead.emails.sent_or_received.where(team_member: account_team_members).newest_first.first)
   end
 
   def log_status_change!

@@ -90,6 +90,14 @@ class LeadSequenceStep < ApplicationRecord
     }
   end
 
+  def complete?
+    self.email&.sent? || false
+  end
+
+  def incomplete?
+    !self.complete?
+  end
+
   def cancel!
     return unless self.job_id.present?
 

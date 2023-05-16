@@ -41,7 +41,9 @@ class Emails::SendWorker
     email.update!(
       gmail_id: r.id,
       status: 'sent',
-      sent_at: DateTime.now
+      sent_at: DateTime.now,
+      gmail_thread_id: r.thread_id,
+      snippet: r.snippet
     )
     email.update_account_lead_status!
   end

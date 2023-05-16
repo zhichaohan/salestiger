@@ -5,11 +5,13 @@ class Email < ApplicationRecord
   belongs_to :lead
   has_many :lead_sequence_steps
 
-  scope :sent, -> { where(status: 'sent').where.not(sent_at: nil) }
+  scope :sent_or_received, -> { where(status: ['sent', 'received']).where.not(sent_at: nil) }
   scope :not_in_sequence, -> { left_outer_joins(:lead_sequence_steps).where(lead_sequence_steps: { id: nil }) }
 
+  after_create :notify_slack_after_create!
+
   def final_recipient
-    return self.recipient if ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
+    return self.recipient if true # ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
 
     "zhichao+lead-#{self.lead.uuid}@salestiger.io"
   end
@@ -25,7 +27,7 @@ class Email < ApplicationRecord
   end
 
   def to_log_description
-    "<b>#{self.subject}</b> - #{self.sanitized_body_html[0, 20]}"
+    "<b>#{self.subject}</b> - #{self.snippet || self.sanitized_body_html[0, 20]}"
   end
 
   def to_log_statuses
@@ -35,6 +37,12 @@ class Email < ApplicationRecord
       if self.open_count.present? && self.open_count  > 0
         log_statuses.push({ type: 'info', label: "opened #{self.open_count} times" })
       end
+
+      return log_statuses
+    end
+
+    if self.status == 'received'
+      log_statuses = [{ type: 'success', label: 'received' }]
 
       return log_statuses
     end
@@ -49,22 +57,26 @@ class Email < ApplicationRecord
   end
 
   def can_edit?
-    self.status != 'sent' && self.status != 'canceled'
+    self.status != 'sent' && self.status != 'canceled' && self.status != 'received'
   end
 
   def can_cancel?
-    self.status != 'sent' && self.status != 'canceled'
+    self.status != 'sent' && self.status != 'canceled' && self.status != 'received'
   end
 
   def cancel!
     self.update(status: 'canceled')
   end
 
+  def sent?
+    status == 'sent'
+  end
+
   def to_log
     {
       id: self.id,
       type: "Email",
-      title: "Individual Email",
+      title: self.status == 'sent' ? "Individual Email" : 'Lead Replied',
       subtitle: "Sequence",
       description: self.to_log_description || "",
       statuses: self.to_log_statuses || [],
@@ -83,5 +95,11 @@ class Email < ApplicationRecord
 
   def opened_email_pixel_url
     opened_email_pixel_url_api_v1_email_url(id: self.uuid)
+  end
+
+  def notify_slack_after_create!
+    return unless self.status == 'received'
+
+    SlackService.notify_product_notifications("New Email Reply:\nFrom: #{self.from}\nTo: #{self.recipient}\nSubject: #{self.subject}\nBody: #{self.body_html}")
   end
 end
