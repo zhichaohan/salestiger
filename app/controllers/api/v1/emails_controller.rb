@@ -52,7 +52,7 @@ module Api
       def opened_email_pixel_url
         email = Email.find_by(uuid: params[:id])
 
-        if email.present?
+        if email.present? && email.created_at < 2.minutes.ago
           email.increment!(:open_count)
           email.update!(last_opened_at: Time.now)
         end
