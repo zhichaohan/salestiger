@@ -14,7 +14,8 @@ class TeamMemberSerializer < ActiveModel::Serializer
              :email_signature,
              :connected_gmail,
              :linkedin_email,
-             :linkedin_password
+             :linkedin_password,
+             :linkedin_verified
 
   has_many :team_member_infos, each_serializer: TeamMemberInfoSerializer
 end

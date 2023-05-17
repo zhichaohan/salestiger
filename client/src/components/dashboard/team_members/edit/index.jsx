@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import { getTeamMember, updateTeamMember } from '../../../../api/team_members';
@@ -12,6 +13,7 @@ export default function TeamMembersEdit({
   const [signatureHtml, setSignatureHtml] = useState();
   const [linkedinEmail, setLinkedinEmail] = useState();
   const [linkedinPassword, setLinkedinPassword] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     getTeamMember(id, (r) => {
@@ -40,7 +42,8 @@ export default function TeamMembersEdit({
       linkedin_email: linkedinEmail,
       linkedin_password: linkedinPassword,
     }, () => {
-      notifySuccess(`${teamMember.name}'s LinkedIn login have been updated. We will verify these credentials shortly'`)
+      notifySuccess(`${teamMember.name}'s LinkedIn login have been updated.'`)
+      history.push(`/team_members/${id}/verify_linkedin`);
     })
   }
 
