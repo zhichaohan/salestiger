@@ -10,9 +10,9 @@ module Api
           leads = leads.joins(:account_leads).order(params[:order])
         end
 
-        leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}})
+        leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}, lead_linkedin_sequences: :linkedin_sequence)
 
-        account_leads = current_user.account.account_leads.preload(:last_sent_email).where(lead_id: leads.pluck(:id))
+        account_leads = current_user.account.account_leads.preload(:last_sent_email, account_lead_team_members: :team_member).where(lead_id: leads.pluck(:id))
 
         respond_to do |format|
           format.json do

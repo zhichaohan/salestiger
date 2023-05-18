@@ -7,12 +7,13 @@ class Lead < ApplicationRecord
   belongs_to :company
   has_many :lead_sequences
   has_many :lead_sequence_steps, through: :lead_sequences
+  has_many :lead_linkedin_sequences
   has_many :emails
   belongs_to :lead_import, optional: true
   has_many :account_leads
 
   def self.deep_includes
-    { lead_sequences: [:sequence], company: {} }
+    { lead_sequences: [:sequence], company: {}, lead_linkedin_sequences: [:linkedin_sequence] }
   end
 
   def email_sendable?

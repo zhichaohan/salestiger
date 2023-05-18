@@ -41,7 +41,8 @@ module Api
                      workflow_team_members: :team_member,
                      workflow_leads: { lead: [:company, { lead_sequences: [:sequence, :team_member] }] },
                      sequences: [],
-                     workflow_attributes: []
+                     workflow_attributes: [],
+                     linkedin_sequences: []
                    }
           end
         end

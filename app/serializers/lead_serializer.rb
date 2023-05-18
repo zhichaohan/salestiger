@@ -15,6 +15,7 @@ class LeadSerializer < ActiveModel::Serializer
 
   belongs_to :company
   has_many :lead_sequences, serializer: LeadSequenceSerializer
+  has_many :lead_linkedin_sequences, serializer: LeadLinkedinSequenceSerializer
 
   def account_info
     return unless @instance_options[:account_leads].present?

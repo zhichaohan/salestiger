@@ -10,6 +10,7 @@ class Workflow < ApplicationRecord
   has_many :leads, through: :workflow_leads
   has_many :sequences
   has_many :workflow_attributes
+  has_many :linkedin_sequences
 
   def process_merge_keys(text)
     str = text

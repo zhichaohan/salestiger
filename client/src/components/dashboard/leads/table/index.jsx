@@ -1,7 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
 import EmailsCreateModal from '../../emails/create_modal';
-import LeadSequencesCreateModal from '../../lead_sequences/create_modal';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
+import LeadLinkedinSequencesCreateButton from '../../lead_linkedin_sequences/create_button';
 import { createEmail } from '../../../../api/emails';
 import { addLeadsToSequence } from '../../../../api/sequences';
 import { notifySuccess, renderTime } from '../../../../helpers';
@@ -46,12 +46,28 @@ export default function LeadsTable({
 
   return (
     <>
-      <LeadSequencesCreateButton
-        sequences={sequences}
-        leads={checkedLeads}
-        teamMembers={teamMembers}
-        reload={reload}
-      />
+      <div className="container-fluid">
+        <div className="row">
+          <div className={`col ${styles.button_bar}`}>
+            <div className={styles.button_wrapper}>
+              <LeadSequencesCreateButton
+                sequences={sequences}
+                leads={checkedLeads}
+                teamMembers={teamMembers}
+                reload={reload}
+              />
+            </div>
+            <div className={styles.button_wrapper}>
+              <LeadLinkedinSequencesCreateButton
+                sequences={gon.linkedin_sequences}
+                leads={checkedLeads}
+                teamMembers={teamMembers}
+                reload={reload}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="table-responsive">
         <table className="table table-bordernone table-hover">
           <thead>
@@ -70,6 +86,7 @@ export default function LeadsTable({
               <th scope="col">Sent Email Count</th>
               <th scope="col">Sent Email Open Count</th>
               <th scope="col">Received Email Count</th>
+              <th scope="col">Linkedin Status</th>
             </tr>
           </thead>
           <tbody>
@@ -117,7 +134,7 @@ export default function LeadsTable({
                     { lead.account_info && lead.account_info.status_indicator && <span class={`badge badge-light-${lead.account_info.status_indicator.type}`}>{lead.account_info.status_indicator.label}</span> }
                   </td>
                   <td>
-                    { lead.lead_sequences.map(ls => ls.sequence.name).join(', ') }
+                    { lead.lead_sequences.map(ls => ls.sequence.name).concat(lead.lead_linkedin_sequences.map(ls => ls.linkedin_sequence.name)).join(', ') }
                   </td>
                   <td>
                     {
@@ -132,6 +149,9 @@ export default function LeadsTable({
                   </td>
                   <td>
                   { lead.account_info && lead.account_info.received_email_count }
+                  </td>
+                  <td>
+                    { lead.account_info && lead.account_info && lead.account_info.account_lead_team_members.map(al => <span class={`badge badge-light-${al.linkedin_status_indicator.type}`}>{al.linkedin_status_indicator.label}</span> ) }
                   </td>
                 </tr>
               )

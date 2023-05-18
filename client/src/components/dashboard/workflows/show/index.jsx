@@ -2,8 +2,10 @@ import React, { Component, useState, useContext, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import LeadsTable from '../../leads/table';
 import SequencesTable from '../../sequences/table';
+import LinkedinSequencesTable from '../../linkedin_sequences/table';
 import WorkflowAttributesCreateModal from '../../workflow_attributes/create_modal';
 import SequencesCreateModal from '../../sequences/create_modal';
+import LinkedinSequencesCreateModal from '../../linkedin_sequences/create_modal';
 import CardHeader from '../../../ui_kit/card_header';
 import { getWorkflow } from '../../../../api/workflows';
 import { notifySuccess } from '../../../../helpers';
@@ -16,6 +18,7 @@ export default function WorkflowsShow({
   const [workflow, setWorkflow] = useState();
   const [showCreateAttributeModal, setShowCreateAttributeModal] = useState(false);
   const [showCreateSequenceModal, setShowCreateSequenceModal] = useState(false);
+  const [showCreateLinkedinSequenceModal, setShowCreateLinkedinSequenceModal] = useState(false);
 
   const loadWorkflow = () => {
     getWorkflow(id, (data) => {
@@ -35,6 +38,10 @@ export default function WorkflowsShow({
 
   const addSequenceClick = () => {
     setShowCreateSequenceModal(true);
+  }
+
+  const addLinkedinSequenceClick = () => {
+    setShowCreateLinkedinSequenceModal(true);
   }
 
   if (!workflow) {
@@ -286,6 +293,38 @@ export default function WorkflowsShow({
     )
   }
 
+  const renderLinkedinSequences = () => {
+    return (
+      <div className="col-xl-12 col-lg-12">
+        <div className="card">
+          <CardHeader
+            title={`Linkedin Sequences`}
+            addObj={`Linkedin sequence`}
+            addObjOnClick={addLinkedinSequenceClick}
+          />
+          <div className="card-body">
+            <LinkedinSequencesTable
+              workflow={workflow}
+              sequences={workflow.linkedin_sequences}
+            />
+          </div>
+        </div>
+        {
+          showCreateLinkedinSequenceModal &&
+          <LinkedinSequencesCreateModal
+            showModal={showCreateLinkedinSequenceModal}
+            setShowModal={setShowCreateLinkedinSequenceModal}
+            workflow={workflow}
+            onSubmit={() => {
+              loadWorkflow();
+              notifySuccess(`A new Linkedin sequence is created`)
+            }}
+          />
+        }
+      </div>
+    )
+  }
+
   const renderWorkflowInformation = () => {
     return (
       <>
@@ -399,6 +438,9 @@ export default function WorkflowsShow({
         </div>
         <div className="row">
           { renderSequences() }
+        </div>
+        <div className="row">
+          { renderLinkedinSequences() }
         </div>
       </div>
     </>

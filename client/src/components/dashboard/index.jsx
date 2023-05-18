@@ -20,6 +20,7 @@ import LeadsNew from './leads/new';
 import LeadImportsNew from './lead_imports/new';
 import LeadImportsShow from './lead_imports/show';
 import SequencesShow from './sequences/show';
+import LinkedinSequencesShow from './linkedin_sequences/show';
 import Home from './home';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,6 +51,7 @@ function Dashboard() {
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:workflowId/sequences/:sequenceId" component={SequencesShow} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/workflows/:workflowId/linkedin_sequences/:sequenceId" component={LinkedinSequencesShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:id" component={WorkflowsShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows" component={WorkflowsIndex} layout={DashboardLayout} />
         <RouteWithLayout exact path="/team_members/new" component={TeamMembersNew} layout={DashboardLayout} />
