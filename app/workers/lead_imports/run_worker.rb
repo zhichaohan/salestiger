@@ -70,6 +70,8 @@ class LeadImports::RunWorker
           else
             duplicate_count = duplicate_count + 1
           end
+
+          al = account.account_leads.find_or_create_by!(lead: lead)
         end
       rescue => error
         error_count = error_count + 1

@@ -20,7 +20,7 @@ export default function Home() {
   const [view, setView] = useState('loading');
 
   useEffect(() => {
-    getLeads({ order: 'account_leads.updated_at DESC' }, (results) => {
+    getLeads({ order: 'account_leads.score DESC', limit: 10 }, (results) => {
       setLeads(results);
       setView('loaded');
     })
@@ -323,7 +323,7 @@ export default function Home() {
         <div className="card">
           <div className="ps-0">
             <CardHeader
-              title={`Last Updated Leads`}
+              title={`Hottest Leads`}
               classNames={`pb-0`}
             />
             <div className="card-body">
