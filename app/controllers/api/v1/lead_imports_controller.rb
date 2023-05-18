@@ -28,7 +28,8 @@ module Api
             render json: lead_import,
                    serializer: LeadImportSerializer,
                    account_leads: account_leads,
-                   include: { leads: Lead.deep_includes }
+                   include: { leads: Lead.deep_includes },
+                   account_id: current_user.account_id
           end
         end
       end
