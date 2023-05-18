@@ -28,7 +28,7 @@ class LeadSerializer < ActiveModel::Serializer
   end
 
   def lead_sequences
-    object.lead_sequences.select { |ls| ls.sequence.worflow.account_id == @instance_options[:account_id] }
+    object.lead_sequences.select { |ls| ls.sequence.workflow.account_id == @instance_options[:account_id] }
       .map{ |ls| LeadSequenceSerializer.new(ls).to_h }
   end
 
