@@ -108,7 +108,8 @@ CREATE TABLE public.account_leads (
     last_sent_email_id bigint,
     sent_email_count integer DEFAULT 0,
     sent_email_open_count integer DEFAULT 0,
-    received_email_count integer DEFAULT 0
+    received_email_count integer DEFAULT 0,
+    score integer
 );
 
 
@@ -602,7 +603,8 @@ CREATE TABLE public.products (
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    description character varying
+    description character varying,
+    average_selling_price integer
 );
 
 
@@ -2073,6 +2075,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230517213901'),
 ('20230517214443'),
 ('20230517232543'),
-('20230518035946');
+('20230518035946'),
+('20230518164540'),
+('20230518180834');
 
 

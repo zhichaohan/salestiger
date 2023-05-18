@@ -338,6 +338,7 @@ export default function WorkflowsShow({
               </div>
               <div className="card-body">
                 <p className="mb-0">{workflow.product.description}</p>
+                <p className="mb-0"><b>Average Selling Price: ${workflow.product.average_selling_price}</b></p>
               </div>
             </div>
           </div>
@@ -431,10 +432,10 @@ export default function WorkflowsShow({
         { renderWorkflowInformation() }
         <div className="row">
           { renderTeamMemberStatistic() }
-          { renderUpcomingMeetings() }
+          { /* renderUpcomingMeetings() */ }
         </div>
         <div className="row">
-          { renderLeads() }
+          { /* renderLeads() */ }
         </div>
         <div className="row">
           { renderSequences() }

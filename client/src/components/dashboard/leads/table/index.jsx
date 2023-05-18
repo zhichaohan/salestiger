@@ -14,6 +14,7 @@ export default function LeadsTable({
   reload
 }) {
   const [showCreateEmailModal, setShowCreateEmailModal] = useState(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [createEmailRecipient, setCreateEmailRecipient] = useState();
   const [emailRecipientId, setEmailRecipientId] = useState();
   const [checkedLeads, setCheckAllLeads] = useState([]);
@@ -42,6 +43,10 @@ export default function LeadsTable({
     setCreateEmailRecipient(email);
     setEmailRecipientId(lead.uuid);
     setShowCreateEmailModal(true);
+  }
+
+  const phoneOnClick = (lead) => () => {
+    setShowPhoneModal(true);
   }
 
   return (
@@ -87,6 +92,7 @@ export default function LeadsTable({
               <th scope="col">Sent Email Open Count</th>
               <th scope="col">Received Email Count</th>
               <th scope="col">Linkedin Status</th>
+              <th scope="col">Hot Lead?</th>
             </tr>
           </thead>
           <tbody>
@@ -107,6 +113,9 @@ export default function LeadsTable({
                         { lead.twitter_url && <li><a href={lead.twitter_url} target="_blank"><i className="fa fa-twitter-square"></i></a></li> }
                       </ul>
                     </div>
+                    {
+                      lead.phone && <div className={styles.phone_block}>{lead.phone}</div>
+                    }
                   </td>
                   <td>{lead.title}</td>
                   <td>
@@ -153,6 +162,9 @@ export default function LeadsTable({
                   <td>
                     { lead.account_info && lead.account_info && lead.account_info.account_lead_team_members.map(al => <span class={`badge badge-light-${al.linkedin_status_indicator.type}`}>{al.linkedin_status_indicator.label}</span> ) }
                   </td>
+                  <td>
+                    { lead.account_info && lead.account_info.score > 5 && <img width="25" src="https://png.pngtree.com/png-vector/20190226/ourmid/pngtree-fire-logo-icon-design-template-vector-png-image_705402.jpg" /> }
+                  </td>
                 </tr>
               )
             })
@@ -176,6 +188,9 @@ export default function LeadsTable({
               })
             }}
           />
+        }
+        {
+
         }
       </div>
     </>

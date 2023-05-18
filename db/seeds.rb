@@ -193,3 +193,40 @@ s = w.sequences.find_or_create_by!(name: 'Sales Method: SPIN')
 s.update(
   active: true
 )
+
+
+Account.setup_new!(
+  'Volt Wave',
+  'https://www.voltwave.io/hosted/images/b8/34399f44bf44ebb0a586e4c4cc3825/Screen-Shot-2023-04-10-at-4.16.39-PM.png',
+  [
+    { name: 'Zhichao Han', email: 'zhichao+voltwave@salestiger.io', password: 'zhichao+voltwave@salestiger.io' },
+    { name: 'Chris Hedum', email: 'chris+voltwave@salestiger.io', password: 'chris+voltwave@salestiger.io' },
+    { name: 'Brooke Brennan', email: 'brooke@voltwave.io', password: 'brooke@voltwave.io' },
+  ],
+  [
+    {
+      name: 'Brooke Brennan',
+      title: 'CEO',
+      photo_url: 'https://www.voltwave.io/hosted/images/9c/fc8187cea9440a96b6d7ed57b4adcf/Screen-Shot-2023-04-10-at-11.37.50-AM.png',
+      gmail: 'brooke@voltwave.io',
+      linkedin_url: 'https://www.linkedin.com/in/brookebrennansales/'
+    }
+  ],
+  [{
+    name: 'Initial Workflow',
+    motivation: 'Specializing in one service for growing B2B tech companies is the key to our success, allowing us to provide unmatched expertise and results.',
+    target_audience: {
+      name: 'B2B SAAS',
+      titles: ['CEO', 'CRO', 'VP of Sales', 'Head of Sales', 'VP Business Development/Head of Business Development'],
+      industry: 'SAAS',
+      company_size: '5-100',
+      location: 'United States'
+    },
+    product: {
+      name: 'Appointment Setter',
+      description: 'Our agency helps growing B2B tech companies achieve their revenue goals by providing expert appointment setting services. We understand that in today''s competitive market, it''s not enough to have a great product or service - you need to get as many at-bats with the right people at the right time. That''s where we come in.',
+      average_selling_price: '10000'
+    }
+  }],
+  'https://www.voltwave.io/'
+)
