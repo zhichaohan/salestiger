@@ -44,3 +44,13 @@ ul.social_list li a i {
     font-size: 14px;
     color: #3e5fce;
 }
+.button_bar {
+  display: flex;
+}
+.button_wrapper {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.phone_block {
+  padding-top: 5px;
+}

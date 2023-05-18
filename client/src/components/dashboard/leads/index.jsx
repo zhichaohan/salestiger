@@ -115,6 +115,7 @@ export default function LeadsIndex() {
                             <LeadsTable
                               leads={leads}
                               teamMembers={teamMembers}
+                              sequences={gon.sequences}
                             />
                           </div>
                         </div>

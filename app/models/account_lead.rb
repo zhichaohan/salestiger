@@ -3,6 +3,7 @@ class AccountLead < ApplicationRecord
   belongs_to :lead
 
   belongs_to :last_sent_email, class_name: "Email", optional: true
+  has_many :account_lead_team_members
 
   around_update :log_status_change!
 

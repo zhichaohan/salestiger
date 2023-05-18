@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :workflows do
         resources :workflow_attributes, only: [:create]
         resources :sequences, only: [:create]
+        resources :linkedin_sequences, only: [:create]
       end
       resources :emails do
         post :cancel, on: :member
@@ -30,10 +31,16 @@ Rails.application.routes.draw do
 
         post :add_leads, on: :member
       end
+      resources :linkedin_sequences, only: [:show] do
+        resources :linkedin_sequence_steps, only: [:create]
+        
+        post :add_leads, on: :member
+      end
       resources :lead_sequence_steps do
         post :cancel, on: :member
       end
       resources :sequence_steps, only: [:update]
+      resources :linkedin_sequence_steps, only: [:update]
       resources :lead_imports, only: [:create, :show]
       resources :account_leads, only: [:update, :create]
     end

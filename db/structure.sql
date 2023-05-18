@@ -62,6 +62,39 @@ ALTER SEQUENCE public.account_lead_status_changes_id_seq OWNED BY public.account
 
 
 --
+-- Name: account_lead_team_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.account_lead_team_members (
+    id bigint NOT NULL,
+    account_lead_id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    linkedin_status character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: account_lead_team_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.account_lead_team_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_lead_team_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.account_lead_team_members_id_seq OWNED BY public.account_lead_team_members.id;
+
+
+--
 -- Name: account_leads; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -75,7 +108,8 @@ CREATE TABLE public.account_leads (
     last_sent_email_id bigint,
     sent_email_count integer DEFAULT 0,
     sent_email_open_count integer DEFAULT 0,
-    received_email_count integer DEFAULT 0
+    received_email_count integer DEFAULT 0,
+    score integer
 );
 
 
@@ -344,6 +378,39 @@ ALTER SEQUENCE public.lead_imports_id_seq OWNED BY public.lead_imports.id;
 
 
 --
+-- Name: lead_linkedin_sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lead_linkedin_sequences (
+    id bigint NOT NULL,
+    lead_id bigint NOT NULL,
+    linkedin_sequence_id bigint NOT NULL,
+    team_member_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lead_linkedin_sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.lead_linkedin_sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_linkedin_sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.lead_linkedin_sequences_id_seq OWNED BY public.lead_linkedin_sequences.id;
+
+
+--
 -- Name: lead_sequence_steps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -459,6 +526,74 @@ ALTER SEQUENCE public.leads_id_seq OWNED BY public.leads.id;
 
 
 --
+-- Name: linkedin_sequence_steps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.linkedin_sequence_steps (
+    id bigint NOT NULL,
+    linkedin_sequence_id bigint NOT NULL,
+    hours_delay integer NOT NULL,
+    message character varying,
+    order_index integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: linkedin_sequence_steps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.linkedin_sequence_steps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: linkedin_sequence_steps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.linkedin_sequence_steps_id_seq OWNED BY public.linkedin_sequence_steps.id;
+
+
+--
+-- Name: linkedin_sequences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.linkedin_sequences (
+    id bigint NOT NULL,
+    workflow_id bigint NOT NULL,
+    name character varying,
+    invitation_note character varying,
+    slug character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: linkedin_sequences_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.linkedin_sequences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: linkedin_sequences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.linkedin_sequences_id_seq OWNED BY public.linkedin_sequences.id;
+
+
+--
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -468,7 +603,8 @@ CREATE TABLE public.products (
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    description character varying
+    description character varying,
+    average_selling_price integer
 );
 
 
@@ -876,6 +1012,13 @@ ALTER TABLE ONLY public.account_lead_status_changes ALTER COLUMN id SET DEFAULT 
 
 
 --
+-- Name: account_lead_team_members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_team_members ALTER COLUMN id SET DEFAULT nextval('public.account_lead_team_members_id_seq'::regclass);
+
+
+--
 -- Name: account_leads id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -925,6 +1068,13 @@ ALTER TABLE ONLY public.lead_imports ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: lead_linkedin_sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_linkedin_sequences ALTER COLUMN id SET DEFAULT nextval('public.lead_linkedin_sequences_id_seq'::regclass);
+
+
+--
 -- Name: lead_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -943,6 +1093,20 @@ ALTER TABLE ONLY public.lead_sequences ALTER COLUMN id SET DEFAULT nextval('publ
 --
 
 ALTER TABLE ONLY public.leads ALTER COLUMN id SET DEFAULT nextval('public.leads_id_seq'::regclass);
+
+
+--
+-- Name: linkedin_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequence_steps ALTER COLUMN id SET DEFAULT nextval('public.linkedin_sequence_steps_id_seq'::regclass);
+
+
+--
+-- Name: linkedin_sequences id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequences ALTER COLUMN id SET DEFAULT nextval('public.linkedin_sequences_id_seq'::regclass);
 
 
 --
@@ -1031,6 +1195,14 @@ ALTER TABLE ONLY public.account_lead_status_changes
 
 
 --
+-- Name: account_lead_team_members account_lead_team_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_team_members
+    ADD CONSTRAINT account_lead_team_members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: account_leads account_leads_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1095,6 +1267,14 @@ ALTER TABLE ONLY public.lead_imports
 
 
 --
+-- Name: lead_linkedin_sequences lead_linkedin_sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_linkedin_sequences
+    ADD CONSTRAINT lead_linkedin_sequences_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lead_sequence_steps lead_sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1116,6 +1296,22 @@ ALTER TABLE ONLY public.lead_sequences
 
 ALTER TABLE ONLY public.leads
     ADD CONSTRAINT leads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: linkedin_sequence_steps linkedin_sequence_steps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequence_steps
+    ADD CONSTRAINT linkedin_sequence_steps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: linkedin_sequences linkedin_sequences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequences
+    ADD CONSTRAINT linkedin_sequences_pkey PRIMARY KEY (id);
 
 
 --
@@ -1229,6 +1425,20 @@ CREATE INDEX index_account_lead_status_changes_on_lead_id ON public.account_lead
 
 
 --
+-- Name: index_account_lead_team_members_on_account_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_lead_team_members_on_account_lead_id ON public.account_lead_team_members USING btree (account_lead_id);
+
+
+--
+-- Name: index_account_lead_team_members_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_account_lead_team_members_on_team_member_id ON public.account_lead_team_members USING btree (team_member_id);
+
+
+--
 -- Name: index_account_leads_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1268,6 +1478,27 @@ CREATE INDEX index_emails_on_team_member_id ON public.emails USING btree (team_m
 --
 
 CREATE INDEX index_lead_imports_on_user_id ON public.lead_imports USING btree (user_id);
+
+
+--
+-- Name: index_lead_linkedin_sequences_on_lead_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_linkedin_sequences_on_lead_id ON public.lead_linkedin_sequences USING btree (lead_id);
+
+
+--
+-- Name: index_lead_linkedin_sequences_on_linkedin_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_linkedin_sequences_on_linkedin_sequence_id ON public.lead_linkedin_sequences USING btree (linkedin_sequence_id);
+
+
+--
+-- Name: index_lead_linkedin_sequences_on_team_member_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lead_linkedin_sequences_on_team_member_id ON public.lead_linkedin_sequences USING btree (team_member_id);
 
 
 --
@@ -1331,6 +1562,20 @@ CREATE INDEX index_leads_on_company_id ON public.leads USING btree (company_id);
 --
 
 CREATE INDEX index_leads_on_lead_import_id ON public.leads USING btree (lead_import_id);
+
+
+--
+-- Name: index_linkedin_sequence_steps_on_linkedin_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_linkedin_sequence_steps_on_linkedin_sequence_id ON public.linkedin_sequence_steps USING btree (linkedin_sequence_id);
+
+
+--
+-- Name: index_linkedin_sequences_on_workflow_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_linkedin_sequences_on_workflow_id ON public.linkedin_sequences USING btree (workflow_id);
 
 
 --
@@ -1484,6 +1729,14 @@ ALTER TABLE ONLY public.lead_sequences
 
 
 --
+-- Name: lead_linkedin_sequences fk_rails_1833c2b690; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_linkedin_sequences
+    ADD CONSTRAINT fk_rails_1833c2b690 FOREIGN KEY (linkedin_sequence_id) REFERENCES public.linkedin_sequences(id);
+
+
+--
 -- Name: lead_sequence_steps fk_rails_1d47b0be48; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1553,6 +1806,14 @@ ALTER TABLE ONLY public.lead_sequence_steps
 
 ALTER TABLE ONLY public.emails
     ADD CONSTRAINT fk_rails_470ffccb45 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
+
+
+--
+-- Name: lead_linkedin_sequences fk_rails_48ab845ba3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_linkedin_sequences
+    ADD CONSTRAINT fk_rails_48ab845ba3 FOREIGN KEY (lead_id) REFERENCES public.leads(id);
 
 
 --
@@ -1644,11 +1905,35 @@ ALTER TABLE ONLY public.account_leads
 
 
 --
+-- Name: linkedin_sequence_steps fk_rails_9ac481af20; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequence_steps
+    ADD CONSTRAINT fk_rails_9ac481af20 FOREIGN KEY (linkedin_sequence_id) REFERENCES public.linkedin_sequences(id);
+
+
+--
+-- Name: account_lead_team_members fk_rails_9e05ce2bb5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_team_members
+    ADD CONSTRAINT fk_rails_9e05ce2bb5 FOREIGN KEY (account_lead_id) REFERENCES public.account_leads(id);
+
+
+--
 -- Name: lead_sequence_steps fk_rails_a774ebfaf2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.lead_sequence_steps
     ADD CONSTRAINT fk_rails_a774ebfaf2 FOREIGN KEY (lead_sequence_id) REFERENCES public.lead_sequences(id);
+
+
+--
+-- Name: account_lead_team_members fk_rails_a7983d4261; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.account_lead_team_members
+    ADD CONSTRAINT fk_rails_a7983d4261 FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
 
 
 --
@@ -1681,6 +1966,22 @@ ALTER TABLE ONLY public.lead_sequences
 
 ALTER TABLE ONLY public.workflows
     ADD CONSTRAINT fk_rails_c93a2eb6a2 FOREIGN KEY (target_audience_id) REFERENCES public.target_audiences(id);
+
+
+--
+-- Name: linkedin_sequences fk_rails_d47baa4100; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_sequences
+    ADD CONSTRAINT fk_rails_d47baa4100 FOREIGN KEY (workflow_id) REFERENCES public.workflows(id);
+
+
+--
+-- Name: lead_linkedin_sequences fk_rails_d5732875ab; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lead_linkedin_sequences
+    ADD CONSTRAINT fk_rails_d5732875ab FOREIGN KEY (team_member_id) REFERENCES public.team_members(id);
 
 
 --
@@ -1770,6 +2071,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230515225442'),
 ('20230515231911'),
 ('20230516180203'),
-('20230516213437');
+('20230516213437'),
+('20230517213901'),
+('20230517214443'),
+('20230517232543'),
+('20230518035946'),
+('20230518164540'),
+('20230518180834');
 
 

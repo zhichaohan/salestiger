@@ -15,4 +15,5 @@ class WorkflowSerializer < ActiveModel::Serializer
   has_many :workflow_leads, serializer: WorkflowLeadSerializer
   has_many :sequences
   has_many :workflow_attributes
+  has_many :linkedin_sequences
 end

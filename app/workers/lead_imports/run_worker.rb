@@ -9,6 +9,7 @@ class LeadImports::RunWorker
     # return if lead_import.status.present?
 
     lead_import.update!(status: 'in progress')
+    account = lead_import.user.account
 
     success_count = 0
     error_count = 0
@@ -62,6 +63,8 @@ class LeadImports::RunWorker
               lead_import: lead_import,
               business_email: line["Email"]
             )
+
+            al = account.account_leads.create!(lead: lead)
 
             success_count = success_count + 1
           else

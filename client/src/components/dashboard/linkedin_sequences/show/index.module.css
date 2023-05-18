@@ -1,0 +1,16 @@
+.card_header {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #eeeeee !important;
+}
+.plus_icon {
+  padding-right: 8px;
+}
+.step_title {
+  display: flex;
+  justify-content: space-between;
+}
