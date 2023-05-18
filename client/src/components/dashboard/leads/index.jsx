@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import PageTitleSection from '../page_title_section';
 import CardHeader from '../../ui_kit/card_header';
 import LeadsTable from './table';
+import { objToQueryString } from '../../../helpers';
 import { toast } from 'react-toastify';
 
 export default function LeadsIndex() {
@@ -27,7 +28,7 @@ export default function LeadsIndex() {
       setTeamMembers(d1);
 
       const r2 = toast.promise(
-        fetch(`/api/v1/leads`, {
+        fetch(`/api/v1/leads?${objToQueryString({ order: 'COALESCE(account_leads.score, 0) DESC', })}`, {
           headers: {
             "Content-Type": "application/json",
           }

@@ -20,7 +20,7 @@ export default function Home() {
   const [view, setView] = useState('loading');
 
   useEffect(() => {
-    getLeads({ order: 'account_leads.score DESC', limit: 10 }, (results) => {
+    getLeads({ order: 'COALESCE(account_leads.score, 0) DESC', limit: 10 }, (results) => {
       setLeads(results);
       setView('loaded');
     })
