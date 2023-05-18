@@ -23,7 +23,8 @@ module Api
             render json: leads,
                    each_serializer: LeadSerializer,
                    account_leads: account_leads,
-                   include: Lead.deep_includes
+                   include: Lead.deep_includes,
+                   account_id: current_user.account_id
           end
         end
       end
@@ -35,7 +36,7 @@ module Api
 
         respond_to do |format|
           format.json do
-            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }, account_leads: account_leads
+            render json: lead, serializer: LeadSerializer, include: { lead_sequences: [:sequence] }, account_leads: account_leads, account_id: current_user.account_id
           end
         end
       end
@@ -77,7 +78,7 @@ module Api
 
         respond_to do |format|
           format.json do
-            render json: lead, serializer: LeadSerializer
+            render json: lead, serializer: LeadSerializer, account_id: current_user.account_id
           end
         end
       end
