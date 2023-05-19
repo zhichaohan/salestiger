@@ -62,10 +62,10 @@ class Account < ApplicationRecord
     workflow_infos.each do |info|
       ta = a.target_audiences.find_or_create_by!(name: info[:target_audience][:name])
       ta.update!(
-        titles: ['CEO', 'COO', 'VP of Sales', 'Head of Sales'],
-        industry: 'SAAS',
-        company_size: '1-50',
-        location: 'San Diego'
+        titles: info[:target_audience][:titles],
+        industry: info[:target_audience][:industry],
+        company_size: info[:target_audience][:company_size],
+        location: info[:target_audience][:location]
       )
 
       p = a.products.find_or_create_by!(name: info[:product][:name])

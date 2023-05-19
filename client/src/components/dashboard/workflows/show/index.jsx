@@ -4,6 +4,7 @@ import LeadsTable from '../../leads/table';
 import SequencesTable from '../../sequences/table';
 import LinkedinSequencesTable from '../../linkedin_sequences/table';
 import WorkflowAttributesCreateModal from '../../workflow_attributes/create_modal';
+import WorkflowAttributesEditModal from '../../workflow_attributes/edit_modal';
 import SequencesCreateModal from '../../sequences/create_modal';
 import LinkedinSequencesCreateModal from '../../linkedin_sequences/create_modal';
 import CardHeader from '../../../ui_kit/card_header';
@@ -19,6 +20,8 @@ export default function WorkflowsShow({
   const [showCreateAttributeModal, setShowCreateAttributeModal] = useState(false);
   const [showCreateSequenceModal, setShowCreateSequenceModal] = useState(false);
   const [showCreateLinkedinSequenceModal, setShowCreateLinkedinSequenceModal] = useState(false);
+  const [showEditAttributeModal, setShowEditAttributeModal] = useState(false);
+  const [workflowAttributeToEdit, setWorkflowAttributeToEdit] = useState();
 
   const loadWorkflow = () => {
     getWorkflow(id, (data) => {
@@ -34,6 +37,11 @@ export default function WorkflowsShow({
 
   const addAttributeClick = () => {
     setShowCreateAttributeModal(true);
+  }
+
+  const editWorkflowAttributeClick = (wa) => () => {
+    setWorkflowAttributeToEdit(wa);
+    setShowEditAttributeModal(true);
   }
 
   const addSequenceClick = () => {
@@ -274,6 +282,7 @@ export default function WorkflowsShow({
             <SequencesTable
               workflow={workflow}
               sequences={workflow.sequences}
+              reload={loadWorkflow}
             />
           </div>
         </div>
@@ -380,6 +389,9 @@ export default function WorkflowsShow({
                               <td>
                                 <p className="task_desc_0">{wa.value}</p>
                               </td>
+                              <td>
+                                <a href="javascript:void(0)" onClick={editWorkflowAttributeClick(wa)}><i class="fa fa-pencil-square-o"></i></a>
+                              </td>
                               {
                                 /*
                                 <td>
@@ -411,6 +423,18 @@ export default function WorkflowsShow({
             onSubmit={() => {
               loadWorkflow();
               notifySuccess(`A new workflow attribute is created`)
+            }}
+          />
+        }
+        {
+          showEditAttributeModal &&
+          <WorkflowAttributesEditModal
+            showModal={showEditAttributeModal}
+            setShowModal={setShowEditAttributeModal}
+            workflowAttribute={workflowAttributeToEdit}
+            onSubmit={() => {
+              loadWorkflow();
+              notifySuccess(`A workflow attribute is updated`)
             }}
           />
         }

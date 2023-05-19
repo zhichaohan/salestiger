@@ -33,16 +33,18 @@ Rails.application.routes.draw do
       end
       resources :linkedin_sequences, only: [:show] do
         resources :linkedin_sequence_steps, only: [:create]
-        
+
         post :add_leads, on: :member
       end
       resources :lead_sequence_steps do
         post :cancel, on: :member
       end
       resources :sequence_steps, only: [:update]
+      resources :workflow_attributes, only: [:update]
       resources :linkedin_sequence_steps, only: [:update]
       resources :lead_imports, only: [:create, :show]
       resources :account_leads, only: [:update, :create]
+      resources :sequences, only: [:destroy]
     end
   end
 

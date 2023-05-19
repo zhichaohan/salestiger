@@ -38,6 +38,18 @@ module Api
         end
       end
 
+      def destroy
+        sequence = Sequence.find(params[:id])
+
+        success = sequence.destroy!
+
+        respond_to do |format|
+          format.json do
+            render json: { success: success }
+          end
+        end
+      end
+
       def add_leads
         sequence = Sequence.find(params[:id])
         team_member = TeamMember.find_by(uuid: params[:team_member_id])
