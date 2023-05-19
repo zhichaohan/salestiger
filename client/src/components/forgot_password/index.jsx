@@ -2,35 +2,24 @@ import React, { Component, useState, useContext, useEffect } from 'react'
 import { Link, useHistory } from "react-router-dom";
 import { autofocusAll } from '../../helpers'
 import Context from '../../utils/context';
+import { notifySuccess, notifyError } from '../../helpers';
 import styles from './index.module.css';
 
-export default function SignIn() {
+export default function ForgotPassword() {
   let history = useHistory();
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const [inputFocus, setInputFocus] = useState('email');
   const context = useContext(Context);
-  const searchParams = new URLSearchParams(location.search);
-  let returnTo = '';
-  if (searchParams.get('return_to')) {
-    returnTo = searchParams.get('return_to');
-  }
 
   useEffect(() => {
     autofocusAll();
   }, []);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    context.auth.userSignIn(email, password, true, (data) => {
-      if (returnTo === '') {
-        window.location = "/";
-      }
-      else {
-        window.location = returnTo;
-      }
-    }, (errors) => {
-      console.log("errors", errors);
+  const onSubmit = () => {
+    context.auth.userRecoverPassword(email, () => {
+      notifySuccess('If an account with that email exists, we will send over instructions for resetting your password');
+    }, () => {
+      notifyError('If an account with that email exists, we will send over instructions for resetting your password');
     });
   }
 
@@ -46,7 +35,7 @@ export default function SignIn() {
                   <div className="box-signup mt-90">
                     <h1 className="text-heading-3 mb-40 text-center">Welcome back.</h1>
                     <div className="text-center">
-                      <div className="mt-40 box-line-throught mb-40"><span className="text-body-text color-gray-500">sign in with your email</span></div>
+                      <div className="mt-40 box-line-throught mb-40"><span className="text-body-text color-gray-500">Provide your email and receive a link to reset your password</span></div>
                     </div>
                     <div className="box-form-signup">
                       <div className="form-group">
@@ -54,12 +43,6 @@ export default function SignIn() {
                           <input onFocus={() => setInputFocus('email')} value={email} onChange={(e) => setEmail(e.target.value)} className={`form-control ${inputFocus === 'email' ? 'input-green-bd' : ''}`} type="text" placeholder="Your email *" />
                         </div>
                       </div>
-                      <div className="form-group">
-                        <div className="form-field"><span className="text-body-small color-green-900 tag-top">Password</span>
-                          <input onFocus={() => setInputFocus('password')} value={password} onChange={(e) => setPassword(e.target.value)} type="password" className={`form-control ${inputFocus === 'password' ? 'input-green-bd' : ''}`} placeholder="" />
-                        </div>
-                      </div>
-                      <div className="form-group"><a className="text-body-text" href="/forgot-password">Forgot password?</a></div>
                       <div className="form-group">
                         <button className="btn btn-green-full text-heading-6" onClick={onSubmit}>Continue</button>
                       </div>
