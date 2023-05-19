@@ -6,16 +6,29 @@ module Api
       def create
         workflow = Workflow.find_by(id: params[:workflow_id])
 
-        workflow_attribute = workflow.workflow_attributes.create!(
-          name: params[:name],
-          value: params[:value]
-        )
+        workflow_attribute = workflow.workflow_attributes.create!(workflow_attribute_params)
 
         respond_to do |format|
           format.json do
             render json: workflow_attribute
           end
         end
+      end
+
+      def update
+        workflow_attribute = WorkflowAttribute.find(params[:id])
+
+        workflow_attribute.update(workflow_attribute_params)
+
+        respond_to do |format|
+          format.json do
+            render json: workflow_attribute
+          end
+        end
+      end
+
+      def workflow_attribute_params
+        params.permit(:name, :value)
       end
     end
   end
