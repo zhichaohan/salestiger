@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import { getTeamMember, updateTeamMember } from '../../../../api/team_members';
-import { notifySuccess } from '../../../../helpers';
+import { notifySuccess, notifyError } from '../../../../helpers';
 
 export default function TeamMembersEdit({
   match
@@ -14,6 +14,11 @@ export default function TeamMembersEdit({
   const [linkedinEmail, setLinkedinEmail] = useState();
   const [linkedinPassword, setLinkedinPassword] = useState();
   const history = useHistory();
+
+  const searchParams = new URLSearchParams(location.search);
+  if (searchParams.get('try_again')) {
+    notifyError('Please try connecting gmail again')
+  }
 
   useEffect(() => {
     getTeamMember(id, (r) => {
