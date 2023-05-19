@@ -20,6 +20,10 @@ class TeamMember < ApplicationRecord
     "/team_members/#{self.slug}"
   end
 
+  def edit_path
+    "/team_members/#{self.slug}/edit"
+  end
+
   def process_merge_keys(text)
     str = text
     str = str.gsub("{{TEAM MEMBER FIRST NAME}}", self.first_name)
