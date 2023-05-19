@@ -11,6 +11,8 @@ class WelcomeController < ApplicationController
     gon.s3_key = ENV['S3_KEY']
     gon.s3_secret = ENV['S3_SECRET']
     gon.lead_statuses = AccountLead::STATUSES
+    gon.reset_password_token = params[:reset_password_token]
+
     if current_user.present?
       gon.sequences = current_user.account.sequences.map { |s| SequenceSerializer.new(s).to_h }
       gon.linkedin_sequences = current_user.account.linkedin_sequences.map { |s| LinkedinSequenceSerializer.new(s).to_h }

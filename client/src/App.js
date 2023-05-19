@@ -8,6 +8,8 @@ import {
 import Home from './components/home_v2';
 import Terms from './components/terms';
 import SignIn from './components/sign_in_v2';
+import ForgotPassword from './components/forgot_password';
+import EditPassword from './components/edit_password';
 import Loader from './components/loader';
 import Header from './components/header_v2';
 import Footer from './components/footer';
@@ -112,6 +114,8 @@ function App() {
             <PublicRoute exact path="/" component={Home} layout={PublicLayout} />
             <PublicRoute exact path="/terms" component={Terms} layout={PublicLayout} />
             <PublicRoute exact path="/sign-in" component={SignIn} layout={PublicLayout} />
+            <PublicRoute exact path="/edit-password" component={EditPassword} layout={PublicLayout} />
+            <PublicRoute exact path="/forgot-password" component={ForgotPassword} layout={PublicLayout} />
             <Redirect to={pathname} />
           </Switch>
         </Router>
