@@ -14,11 +14,16 @@ class GoogleOauthTokensController < ApplicationController
     if team_member.present?
       team_member.update!(auth_token: token)
       team_member.reload
-      team_member.setup_gmail_watcher!
+      begin
+        team_member.setup_gmail_watcher!
+      rescue Google::Apis::ClientError => e
+        redirect_to "#{team_member.edit_path}?try_again=true"
+        return
+      end
     end
 
     if team_member.present?
-      redirect_to team_member.show_path
+      redirect_to "#{team_member.show_path}#{m_params}"
       return
     end
 

@@ -24,6 +24,20 @@ t.update(
   gmail: 'zhichao@salestiger.io'
 )
 
+t = a.team_members.find_or_create_by!(name: 'Zhichao Han')
+t.update(
+  title: 'Account Executive',
+  photo_url: 'https://admin.pixelstrap.com/enzo/assets/images/avtar/16.jpg',
+  gmail: 'zhichao.han.89@gmail.com'
+)
+
+t = a.team_members.find_or_create_by!(name: 'Zhichao Test')
+t.update(
+  title: 'Account Executive',
+  photo_url: 'https://admin.pixelstrap.com/enzo/assets/images/avtar/16.jpg',
+  gmail: 'zhichao@patientpartner.com'
+)
+
 t = a.team_members.find_or_create_by!(name: 'Chris Hedum')
 t.update(
   title: 'CEO',
