@@ -282,6 +282,7 @@ export default function WorkflowsShow({
             <SequencesTable
               workflow={workflow}
               sequences={workflow.sequences}
+              reload={loadWorkflow}
             />
           </div>
         </div>

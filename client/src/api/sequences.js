@@ -66,3 +66,19 @@ export const getSequences = (
     successCallback(data);
   })
 }
+
+export const deleteSequence = (
+    id,
+    successCallback
+) => {
+  fetch(`/api/v1/sequences/${id}`, {
+      method: 'DELETE',
+      headers: {
+          "Content-Type": "application/json",
+      }
+  })
+  .then(response => response.json())
+  .then(data => {
+    successCallback(data);
+  })
+}

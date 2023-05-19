@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       resources :linkedin_sequence_steps, only: [:update]
       resources :lead_imports, only: [:create, :show]
       resources :account_leads, only: [:update, :create]
+      resources :sequences, only: [:destroy]
     end
   end
 
