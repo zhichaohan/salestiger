@@ -23,7 +23,7 @@ class GoogleOauthTokensController < ApplicationController
     end
 
     if team_member.present?
-      redirect_to "#{team_member.show_path}#{m_params}"
+      redirect_to team_member.show_path
       return
     end
 
