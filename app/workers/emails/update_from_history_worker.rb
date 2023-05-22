@@ -26,7 +26,13 @@ class Emails::UpdateFromHistoryWorker
             last_history.messages_added.each do |message_added|
               if team_member.emails.where(gmail_thread_id: message_added.message.thread_id).exists?
                 if team_member.emails.where(gmail_id: message_added.message.id).empty?
-                  gmail_message = gmail.get_user_message('me', message_added.message.id)
+                  begin
+                    gmail_message = gmail.get_user_message('me', message_added.message.id)
+                  rescue Google::Apis::ClientError => e
+                    SlackService.notify_product_notifications("Error retrieving message #{message_added.message.id} for email #{team_member.gmail}.\nThread Subject: #{team_member.emails.where(gmail_thread_id: message_added.message.thread_id).pluck(:subject).join('\n')}")
+                    break
+                  end
+
                   payload = gmail_message.payload
                   headers = payload.headers
 
