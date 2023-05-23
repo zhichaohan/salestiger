@@ -13,6 +13,7 @@ import TeamMembersIndex from './team_members';
 import TeamMembersNew from './team_members/new';
 import TeamMembersShow from './team_members/show';
 import TeamMembersEdit from './team_members/edit';
+import TargetAudiencesEdit from './target_audiences/edit';
 import TeamMemberVerifyLinkedin from './team_members/verify_linkedin';
 import LeadsIndex from './leads';
 import LeadsShow from './leads/show';
@@ -64,6 +65,7 @@ function Dashboard() {
         <RouteWithLayout exact path="/leads" component={LeadsIndex} layout={DashboardLayout} />
         <RouteWithLayout exact path="/lead_imports/new" component={LeadImportsNew} layout={DashboardLayout} />
         <RouteWithLayout exact path="/lead_imports/:id" component={LeadImportsShow} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/target_audiences/:id/edit" component={TargetAudiencesEdit} layout={DashboardLayout} />
       </Switch>
     </Router>
   )

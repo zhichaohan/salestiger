@@ -262,6 +262,39 @@ ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
 
 
 --
+-- Name: email_automations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.email_automations (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    exclude_engaged_leads boolean,
+    exclude_engaged_leads_across_accounts boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: email_automations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.email_automations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: email_automations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.email_automations_id_seq OWNED BY public.email_automations.id;
+
+
+--
 -- Name: emails; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -718,7 +751,11 @@ CREATE TABLE public.target_audiences (
     company_size character varying,
     location character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying,
+    industries character varying[],
+    min_company_size integer,
+    max_company_size integer
 );
 
 
@@ -1047,6 +1084,13 @@ ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.co
 
 
 --
+-- Name: email_automations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.email_automations ALTER COLUMN id SET DEFAULT nextval('public.email_automations_id_seq'::regclass);
+
+
+--
 -- Name: emails id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1240,6 +1284,14 @@ ALTER TABLE ONLY public.auth_tokens
 
 ALTER TABLE ONLY public.companies
     ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: email_automations email_automations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.email_automations
+    ADD CONSTRAINT email_automations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1457,6 +1509,13 @@ CREATE INDEX index_account_leads_on_last_sent_email_id ON public.account_leads U
 --
 
 CREATE INDEX index_account_leads_on_lead_id ON public.account_leads USING btree (lead_id);
+
+
+--
+-- Name: index_email_automations_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_email_automations_on_sequence_id ON public.email_automations USING btree (sequence_id);
 
 
 --
@@ -1897,6 +1956,14 @@ ALTER TABLE ONLY public.workflows
 
 
 --
+-- Name: email_automations fk_rails_941b3422ee; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.email_automations
+    ADD CONSTRAINT fk_rails_941b3422ee FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
 -- Name: account_leads fk_rails_9773a1a0d6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2077,6 +2144,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230517232543'),
 ('20230518035946'),
 ('20230518164540'),
-('20230518180834');
+('20230518180834'),
+('20230523201955'),
+('20230523205629'),
+('20230523224333');
 
 

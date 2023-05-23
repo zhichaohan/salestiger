@@ -78,4 +78,10 @@ class Lead < ApplicationRecord
 
     logs.sort! { |a, b| a[:datetime] <=> b[:datetime] }
   end
+
+  def self.all_titles
+    Rails.cache.fetch("all_lead_titles", expires_in: 24.hours) do
+      self.pluck("DISTINCT title")
+    end
+  end
 end

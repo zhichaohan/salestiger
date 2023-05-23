@@ -7,4 +7,10 @@ class Company < ApplicationRecord
 
     str
   end
+
+  def self.all_industries
+    Rails.cache.fetch("all_company_industries", expires_in: 24.hours) do
+      self.pluck("DISTINCT industry")
+    end
+  end
 end
