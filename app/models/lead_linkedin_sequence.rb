@@ -8,7 +8,7 @@ class LeadLinkedinSequence < ApplicationRecord
   end
 
   def generate_invitation_note
-    str = self.lead.process_merge_keys(self.invitation_note)
+    str = self.lead.process_merge_keys(self.linkedin_sequence.invitation_note)
     str = self.team_member.process_merge_keys(str)
     self.linkedin_sequence.workflow.process_merge_keys(str)
   end
