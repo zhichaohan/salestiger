@@ -99,4 +99,15 @@ class TeamMember < ApplicationRecord
   def connected_gmail
     self.auth_token.present? && self.gmail_history_id.present?
   end
+
+  def send_linkedin_invite!(lead)
+    ac = self.account.account_leads.find_by(lead: lead)
+
+    if ac.blank?
+      ac = self.account.account_leads.find_or_create_by!(lead: lead)
+    end
+
+    actm = ac.account_lead_team_members.find_or_create_by!(team_member: self)
+    actm.update!(linkedin_status: 'pending connection')
+  end
 end
