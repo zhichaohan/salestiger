@@ -1,4 +1,5 @@
 import React, { Component, useState, useContext, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import LeadsTable from '../../leads/table';
 import SequencesTable from '../../sequences/table';
@@ -22,6 +23,7 @@ export default function WorkflowsShow({
   const [showCreateLinkedinSequenceModal, setShowCreateLinkedinSequenceModal] = useState(false);
   const [showEditAttributeModal, setShowEditAttributeModal] = useState(false);
   const [workflowAttributeToEdit, setWorkflowAttributeToEdit] = useState();
+  const history = useHistory();
 
   const loadWorkflow = () => {
     getWorkflow(id, (data) => {
@@ -50,6 +52,10 @@ export default function WorkflowsShow({
 
   const addLinkedinSequenceClick = () => {
     setShowCreateLinkedinSequenceModal(true);
+  }
+
+  const editTargetAudience = () => {
+    history.push(`/target_audiences/${workflow.target_audience.slug}/edit`);
   }
 
   if (!workflow) {
@@ -356,9 +362,11 @@ export default function WorkflowsShow({
           workflow.target_audience &&
           <div className="col-xl-6 col-lg-6">
             <div className="card">
-              <div className="card-header pb-0">
-                <h5>Target Audience: {workflow.target_audience.name}</h5>
-              </div>
+              <CardHeader
+                title={`Target Audience: ${workflow.target_audience.name}`}
+                editObj={`target audience`}
+                editObjOnClick={editTargetAudience}
+              />
               <div className="card-body">
                 <p className="mb-0">We target companies in {workflow.target_audience.industry} of size {workflow.target_audience.company_size} in {workflow.target_audience.location}. We look for {workflow.target_audience.titles.join(', ')}.</p>
               </div>

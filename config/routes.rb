@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       resources :lead_imports, only: [:create, :show]
       resources :account_leads, only: [:update, :create]
       resources :sequences, only: [:destroy]
+      resources :target_audiences, only: [:show, :update]
     end
   end
 

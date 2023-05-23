@@ -7,6 +7,9 @@ class AccountLead < ApplicationRecord
 
   around_update :log_status_change!
 
+  scope :exclude_engaged_leads, -> { where(last_sent_email: nil) }
+  scope :exclude_engaged_leads_across_accounts, -> (account_id) { joins("LEFT JOIN account_leads al2 ON account_leads.lead_id = al2.lead_id AND al2.account_id <> ?", account_id).where("al2.id IS NULL") }
+
   STATUSES = [
     'New Opportunities',
     'Engaged',
