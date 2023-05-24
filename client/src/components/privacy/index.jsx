@@ -98,13 +98,10 @@ export default function Terms() {
                     <p>The Company allows You to create an account and log in to use the Service through the following Third-party Social Media Services:</p>
                     <ul className={styles.unordered_list}>
                       <li>Google</li>
-                      <li>Facebook</li>
-                      <li>Twitter</li>
-                      <li>LinkedIn</li>
                     </ul>
                     <p>
                       If You decide to register through or otherwise grant us access to a Third-Party Social Media Service, We may collect Personal data that is already associated with Your Third-Party Social Media Service's account, such as Your name,
-                      Your email address, Your activities or Your contact list associated with that account.
+                      Your email address, Your activities or Your contact list associated with that account. We will use permissions granted by the user to perform the Service, such as sending and receiving emails. Sales Tiger's use of information received from Google APIs will adhere to <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.
                     </p>
                     <p>
                       You may also have the option of sharing additional information with the Company through Your Third-Party Social Media Service's account. If You choose to provide such information and Personal Data, during registration or otherwise,
