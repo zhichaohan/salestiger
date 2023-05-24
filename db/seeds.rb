@@ -251,3 +251,29 @@ Account.setup_new!(
   }],
   'https://www.voltwave.io/'
 )
+
+
+Account.setup_new!(
+  'Google Auth Test',
+  'https://salestiger-assets.s3.us-west-2.amazonaws.com/images/googlecloudplatform.png',
+  [
+    { name: 'Zhichao Han', email: 'zhichao+googleauthtest@salestiger.io', password: 'zhichao+googleauthtest@salestiger.io' },
+    { name: 'Oauth Test', email: 'oauthtest121@gmail.com', password: 'r^897R^3' },
+  ],
+  [
+    {
+      name: 'Zhichao Test',
+      title: 'CEO',
+      photo_url: 'https://admin.pixelstrap.com/enzo/assets/images/avtar/16.jpg',
+      gmail: 'nathan@salestiger.io'
+    },
+    {
+      name: 'Oauth Test',
+      title: 'VP of Sales',
+      photo_url: 'https://salestiger-assets.s3.us-west-2.amazonaws.com/images/gcp.png',
+      gmail: 'oauthtest121@gmail.com'
+    }
+  ],
+  [],
+  'https://www.salestiger.io/'
+)
