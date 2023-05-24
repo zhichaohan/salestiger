@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Home from './components/home_v2';
 import Terms from './components/terms';
+import Privacy from './components/privacy';
 import SignIn from './components/sign_in_v2';
 import ForgotPassword from './components/forgot_password';
 import EditPassword from './components/edit_password';
@@ -113,6 +114,7 @@ function App() {
           <Switch>
             <PublicRoute exact path="/" component={Home} layout={PublicLayout} />
             <PublicRoute exact path="/terms" component={Terms} layout={PublicLayout} />
+            <PublicRoute exact path="/privacy" component={Privacy} layout={PublicLayout} />
             <PublicRoute exact path="/sign-in" component={SignIn} layout={PublicLayout} />
             <PublicRoute exact path="/edit-password" component={EditPassword} layout={PublicLayout} />
             <PublicRoute exact path="/forgot-password" component={ForgotPassword} layout={PublicLayout} />
