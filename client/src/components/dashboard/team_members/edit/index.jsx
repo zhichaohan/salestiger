@@ -4,6 +4,7 @@ import PageTitleSection from '../../page_title_section';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import { getTeamMember, updateTeamMember } from '../../../../api/team_members';
 import { notifySuccess, notifyError } from '../../../../helpers';
+import styles from './index.module.css';
 
 export default function TeamMembersEdit({
   match
@@ -92,7 +93,7 @@ export default function TeamMembersEdit({
                         </div>
                       </div>
                       <div className="form-footer">
-                        <button type="submit" className="btn btn-primary btn-block">{teamMember.connected_gmail ? 'Reconnect' : 'Connect'} Gmail Account</button>
+                        <button type="submit" className={styles.google_button}><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/images/btn_google_signin_dark_normal_web.png" /></button>
                       </div>
                     </form>
 
@@ -121,30 +122,35 @@ export default function TeamMembersEdit({
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col">
-                <div className="card">
-                  <div className="card-header pb-0">
-                    <h4 className="card-title mb-0">LinkedIn</h4>
-                  </div>
-                  <div className="card-body">
-                    <form>
-                      <div className="row mb-3">
-                        <label className="form-label">Email Address</label>
-                        <input value={linkedinEmail} onChange={(e) => setLinkedinEmail(e.target.value)} type="text" className="form-control" placeholder="your-email@domain.com" />
+            {
+              /*
+
+                <div className="row">
+                  <div className="col">
+                    <div className="card">
+                      <div className="card-header pb-0">
+                        <h4 className="card-title mb-0">LinkedIn</h4>
                       </div>
-                        <div className="row mb-3">
-                          <label className="form-label">Password</label>
-                          <input value={linkedinPassword} onChange={(e) => setLinkedinPassword(e.target.value)} type="password" className="form-control" />
-                        </div>
-                      <div className="form-footer">
-                        <button type="submit" className="btn btn-primary btn-block" onClick={updateLinkedinClick}>Update LinkedIn Login</button>
+                      <div className="card-body">
+                        <form>
+                          <div className="row mb-3">
+                            <label className="form-label">Email Address</label>
+                            <input value={linkedinEmail} onChange={(e) => setLinkedinEmail(e.target.value)} type="text" className="form-control" placeholder="your-email@domain.com" />
+                          </div>
+                            <div className="row mb-3">
+                              <label className="form-label">Password</label>
+                              <input value={linkedinPassword} onChange={(e) => setLinkedinPassword(e.target.value)} type="password" className="form-control" />
+                            </div>
+                          <div className="form-footer">
+                            <button type="submit" className="btn btn-primary btn-block" onClick={updateLinkedinClick}>Update LinkedIn Login</button>
+                          </div>
+                        </form>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              */
+            }
           </div>
           <div className="col-lg-8">
             <form className="card">
