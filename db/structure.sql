@@ -535,7 +535,8 @@ CREATE TABLE public.leads (
     departments character varying,
     city character varying,
     state character varying,
-    lead_import_id bigint
+    lead_import_id bigint,
+    global_email_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2147,6 +2148,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230518180834'),
 ('20230523201955'),
 ('20230523205629'),
-('20230523224333');
+('20230523224333'),
+('20230525171328');
 
 

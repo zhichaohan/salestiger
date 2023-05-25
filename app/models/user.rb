@@ -8,4 +8,8 @@ class User < ApplicationRecord
 
   belongs_to :account
   has_many :lead_imports
+
+  def super_user?
+    self.email.include?('salestiger.io')
+  end
 end

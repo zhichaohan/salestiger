@@ -11,6 +11,7 @@ class Email < ApplicationRecord
   scope :not_in_sequence, -> { left_outer_joins(:lead_sequence_steps).where(lead_sequence_steps: { id: nil }) }
 
   after_create :notify_slack_after_create!
+  after_create :update_lead_global_email_count!
 
   def final_recipient
     return self.recipient if ENV['ENABLE_SEND_EXTERNAL_EMAIL'] == 'true'
@@ -106,5 +107,9 @@ class Email < ApplicationRecord
     return unless self.status == 'received'
 
     SlackService.notify_product_notifications("New Email Reply:\nFrom: #{self.from}\nTo: #{self.recipient}\nSubject: #{self.subject}\nSnippet: #{self.snippet}")
+  end
+
+  def update_lead_global_email_count!
+    self.lead.increment!(:global_email_count)
   end
 end

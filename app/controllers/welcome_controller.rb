@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   before_action :set_seo, only: [:home]
 
   def home
-    gon.current_user = current_user
+    gon.current_user = current_user.present? ? UserSerializer.new(current_user).to_h : nil
     gon.authenticity_token = form_authenticity_token
     gon.s3_bucket_name = ENV['S3_BUCKET_NAME']
     gon.s3_store_dir = ENV['S3_STORE_DIR']
