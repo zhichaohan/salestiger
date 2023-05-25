@@ -13,7 +13,8 @@ class LeadSerializer < ActiveModel::Serializer
              :show_path,
              :slug,
              :lead_sequences,
-             :lead_linkedin_sequences
+             :lead_linkedin_sequences,
+             :global_email_count
 
   belongs_to :company
 

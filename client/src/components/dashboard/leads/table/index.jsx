@@ -6,6 +6,7 @@ import { createEmail } from '../../../../api/emails';
 import { addLeadsToSequence } from '../../../../api/sequences';
 import { notifySuccess, renderTime } from '../../../../helpers';
 import styles from './index.module.css';
+import Context from '../../../../utils/context';
 
 export default function LeadsTable({
   leads,
@@ -19,6 +20,8 @@ export default function LeadsTable({
   const [emailRecipientId, setEmailRecipientId] = useState();
   const [checkedLeads, setCheckAllLeads] = useState([]);
   const hasCheckboxes = teamMembers && teamMembers.length > 0;
+  const context = useContext(Context);
+  const currentUser = context.auth.getCurrentUser();
 
   const checkAllChecked = checkedLeads.length === leads.length;
   const checkAllClick = () => {
@@ -93,6 +96,9 @@ export default function LeadsTable({
               <th scope="col">Received Email Count</th>
               <th scope="col">Linkedin Status</th>
               <th scope="col">Hot Lead?</th>
+              {
+                currentUser.super_user && <th scope="col">Global Email Count</th>
+              }
             </tr>
           </thead>
           <tbody>
@@ -165,6 +171,9 @@ export default function LeadsTable({
                   <td>
                     { lead.account_info && lead.account_info.score > 5 && <img width="25" src="https://png.pngtree.com/png-vector/20190226/ourmid/pngtree-fire-logo-icon-design-template-vector-png-image_705402.jpg" /> }
                   </td>
+                  {
+                    currentUser.super_user && <td>{ lead.global_email_count }</td>
+                  }
                 </tr>
               )
             })
