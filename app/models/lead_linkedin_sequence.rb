@@ -4,7 +4,7 @@ class LeadLinkedinSequence < ApplicationRecord
   belongs_to :team_member
 
   def notify!
-    SlackService.notify_linkedin_bot("Lead ID: #{lead.id} has been added to sequence: #{linkedin_sequence.id}\nTeam Member: #{team_member.name}\nLead Linkedin URL: #{lead.linkedin_url}\nInvitation Note: #{self.generate_invitation_note}")
+    SlackService.notify_linkedin_bot("Lead ID: #{lead.id} has been added to sequence: #{linkedin_sequence.id}\nTeam Member: #{team_member.name}\nLead Linkedin URL: #{lead.linkedin_url}\nInvitation Note: #{self.generate_invitation_note}\nCommand: TeamMember.find(#{self.team_member.id}).send_linkedin_invite!(Lead.find(#{lead.id}))")
   end
 
   def generate_invitation_note
