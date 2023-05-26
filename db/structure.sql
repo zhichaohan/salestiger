@@ -271,7 +271,10 @@ CREATE TABLE public.email_automations (
     exclude_engaged_leads boolean,
     exclude_engaged_leads_across_accounts boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    exclude_leads_with_email_across_accounts boolean,
+    num_qualified_leads integer DEFAULT 0,
+    num_random_leads integer DEFAULT 0
 );
 
 
@@ -668,6 +671,106 @@ ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: sequence_department_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequence_department_scores (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    department character varying NOT NULL,
+    score double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sequence_department_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequence_department_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequence_department_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequence_department_scores_id_seq OWNED BY public.sequence_department_scores.id;
+
+
+--
+-- Name: sequence_industry_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequence_industry_scores (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    industry character varying NOT NULL,
+    score double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sequence_industry_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequence_industry_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequence_industry_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequence_industry_scores_id_seq OWNED BY public.sequence_industry_scores.id;
+
+
+--
+-- Name: sequence_num_employees_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sequence_num_employees_scores (
+    id bigint NOT NULL,
+    sequence_id bigint NOT NULL,
+    min_num_employees integer NOT NULL,
+    max_num_employees integer NOT NULL,
+    score double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sequence_num_employees_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sequence_num_employees_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sequence_num_employees_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sequence_num_employees_scores_id_seq OWNED BY public.sequence_num_employees_scores.id;
 
 
 --
@@ -1162,6 +1265,27 @@ ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: sequence_department_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_department_scores ALTER COLUMN id SET DEFAULT nextval('public.sequence_department_scores_id_seq'::regclass);
+
+
+--
+-- Name: sequence_industry_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_industry_scores ALTER COLUMN id SET DEFAULT nextval('public.sequence_industry_scores_id_seq'::regclass);
+
+
+--
+-- Name: sequence_num_employees_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_num_employees_scores ALTER COLUMN id SET DEFAULT nextval('public.sequence_num_employees_scores_id_seq'::regclass);
+
+
+--
 -- Name: sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1381,6 +1505,30 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: sequence_department_scores sequence_department_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_department_scores
+    ADD CONSTRAINT sequence_department_scores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sequence_industry_scores sequence_industry_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_industry_scores
+    ADD CONSTRAINT sequence_industry_scores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sequence_num_employees_scores sequence_num_employees_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_num_employees_scores
+    ADD CONSTRAINT sequence_num_employees_scores_pkey PRIMARY KEY (id);
 
 
 --
@@ -1646,6 +1794,27 @@ CREATE INDEX index_products_on_account_id ON public.products USING btree (accoun
 
 
 --
+-- Name: index_sequence_department_scores_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequence_department_scores_on_sequence_id ON public.sequence_department_scores USING btree (sequence_id);
+
+
+--
+-- Name: index_sequence_industry_scores_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequence_industry_scores_on_sequence_id ON public.sequence_industry_scores USING btree (sequence_id);
+
+
+--
+-- Name: index_sequence_num_employees_scores_on_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sequence_num_employees_scores_on_sequence_id ON public.sequence_num_employees_scores USING btree (sequence_id);
+
+
+--
 -- Name: index_sequence_steps_on_sequence_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1885,6 +2054,14 @@ ALTER TABLE ONLY public.workflows
 
 
 --
+-- Name: sequence_department_scores fk_rails_60e7c45783; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_department_scores
+    ADD CONSTRAINT fk_rails_60e7c45783 FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
 -- Name: users fk_rails_61ac11da2b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2061,11 +2238,27 @@ ALTER TABLE ONLY public.account_lead_status_changes
 
 
 --
+-- Name: sequence_num_employees_scores fk_rails_f10f9e688b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_num_employees_scores
+    ADD CONSTRAINT fk_rails_f10f9e688b FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
 -- Name: target_audiences fk_rails_f1ce3b6297; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.target_audiences
     ADD CONSTRAINT fk_rails_f1ce3b6297 FOREIGN KEY (account_id) REFERENCES public.accounts(id);
+
+
+--
+-- Name: sequence_industry_scores fk_rails_fe4ce6630c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sequence_industry_scores
+    ADD CONSTRAINT fk_rails_fe4ce6630c FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
 
 
 --
@@ -2149,6 +2342,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230523201955'),
 ('20230523205629'),
 ('20230523224333'),
-('20230525171328');
+('20230525171328'),
+('20230525184415'),
+('20230525222258'),
+('20230525233218'),
+('20230526032425'),
+('20230526181406');
 
 
