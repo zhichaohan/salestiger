@@ -16,11 +16,7 @@ module Api
 
         leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}, lead_linkedin_sequences: :linkedin_sequence)
 
-        puts "here"
-
         account_leads = current_user.account.account_leads.preload(:last_sent_email, account_lead_team_members: :team_member).where(lead_id: leads.pluck(:id))
-
-        puts "here2"
 
         respond_to do |format|
           format.json do
