@@ -4,6 +4,7 @@ import PageTitleSection from '../page_title_section';
 import CardHeader from '../../ui_kit/card_header';
 import LeadsTable from './table';
 import { objToQueryString } from '../../../helpers';
+import { getLeads } from '../../../api/leads';
 import { toast } from 'react-toastify';
 
 export default function LeadsIndex() {
@@ -117,6 +118,11 @@ export default function LeadsIndex() {
                               leads={leads}
                               teamMembers={teamMembers}
                               sequences={gon.sequences}
+                              reload={(params) => {
+                                getLeads(params, (results) => {
+                                  setLeads(results);
+                                })
+                              }}
                             />
                           </div>
                         </div>

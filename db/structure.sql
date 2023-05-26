@@ -563,6 +563,38 @@ ALTER SEQUENCE public.leads_id_seq OWNED BY public.leads.id;
 
 
 --
+-- Name: linkedin_automations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.linkedin_automations (
+    id bigint NOT NULL,
+    linkedin_sequence_id bigint NOT NULL,
+    num_daily_invitations integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: linkedin_automations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.linkedin_automations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: linkedin_automations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.linkedin_automations_id_seq OWNED BY public.linkedin_automations.id;
+
+
+--
 -- Name: linkedin_sequence_steps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1244,6 +1276,13 @@ ALTER TABLE ONLY public.leads ALTER COLUMN id SET DEFAULT nextval('public.leads_
 
 
 --
+-- Name: linkedin_automations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_automations ALTER COLUMN id SET DEFAULT nextval('public.linkedin_automations_id_seq'::regclass);
+
+
+--
 -- Name: linkedin_sequence_steps id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1473,6 +1512,14 @@ ALTER TABLE ONLY public.lead_sequences
 
 ALTER TABLE ONLY public.leads
     ADD CONSTRAINT leads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: linkedin_automations linkedin_automations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_automations
+    ADD CONSTRAINT linkedin_automations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1773,6 +1820,13 @@ CREATE INDEX index_leads_on_lead_import_id ON public.leads USING btree (lead_imp
 
 
 --
+-- Name: index_linkedin_automations_on_linkedin_sequence_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_linkedin_automations_on_linkedin_sequence_id ON public.linkedin_automations USING btree (linkedin_sequence_id);
+
+
+--
 -- Name: index_linkedin_sequence_steps_on_linkedin_sequence_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1995,6 +2049,14 @@ ALTER TABLE ONLY public.workflow_leads
 
 ALTER TABLE ONLY public.sequence_steps
     ADD CONSTRAINT fk_rails_285e44196d FOREIGN KEY (sequence_id) REFERENCES public.sequences(id);
+
+
+--
+-- Name: linkedin_automations fk_rails_29663bb312; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.linkedin_automations
+    ADD CONSTRAINT fk_rails_29663bb312 FOREIGN KEY (linkedin_sequence_id) REFERENCES public.linkedin_sequences(id);
 
 
 --
@@ -2347,6 +2409,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230525222258'),
 ('20230525233218'),
 ('20230526032425'),
-('20230526181406');
+('20230526181406'),
+('20230526183727');
 
 
