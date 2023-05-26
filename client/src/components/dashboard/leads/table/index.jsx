@@ -22,6 +22,7 @@ export default function LeadsTable({
   const hasCheckboxes = teamMembers && teamMembers.length > 0;
   const context = useContext(Context);
   const currentUser = context.auth.getCurrentUser();
+  const [sort, setSort] = useState();
 
   const checkAllChecked = checkedLeads.length === leads.length;
   const checkAllClick = () => {
@@ -50,6 +51,33 @@ export default function LeadsTable({
 
   const phoneOnClick = (lead) => () => {
     setShowPhoneModal(true);
+  }
+
+
+
+  const renderHeader = (label, sortTitle) => {
+    const sortClick = () => {
+      if (!sort) {
+        setSort(`${sortTitle}-asc`);
+        reload({ order: `${sortTitle} asc` })
+      }
+      else if (sort === `${sortTitle}-asc`) {
+        setSort(`${sortTitle}-desc`);
+        reload({ order: `${sortTitle} desc` })
+      }
+      else if (sort === `${sortTitle}-desc`) {
+        setSort(null);
+        reload({})
+      }
+    }
+
+    return (
+      <th scope="col">
+        <a href="javascript:void(0)" onClick={sortClick}>{label}</a>
+        {sort === `${sortTitle}-asc` ? <i className="fa fa-caret-up"></i> : <></>}
+        {sort === `${sortTitle}-desc` ? <i className="fa fa-caret-down"></i> : <></>}
+      </th>
+    )
   }
 
   return (
@@ -98,6 +126,9 @@ export default function LeadsTable({
               <th scope="col">Hot Lead?</th>
               {
                 currentUser.super_user && <th scope="col">Global Email Count</th>
+              }
+              {
+                currentUser.super_user && renderHeader('Score', 'account_leads.score')
               }
             </tr>
           </thead>
@@ -173,6 +204,9 @@ export default function LeadsTable({
                   </td>
                   {
                     currentUser.super_user && <td>{ lead.global_email_count }</td>
+                  }
+                  {
+                    currentUser.super_user && lead.account_info && <td>{ lead.account_info.score }</td>
                   }
                 </tr>
               )
