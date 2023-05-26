@@ -84,4 +84,10 @@ class Lead < ApplicationRecord
       self.pluck("DISTINCT title")
     end
   end
+
+  def self.all_departments
+    Rails.cache.fetch("all_lead_departments", expires_in: 24.hours) do
+      self.pluck("DISTINCT departments").compact.map { |d| d&.split(',') }.flatten.map { |d| d.strip }.uniq
+    end
+  end
 end

@@ -2,6 +2,8 @@ class AccountLeadTeamMember < ApplicationRecord
   belongs_to :account_lead
   belongs_to :team_member
 
+  after_save :update_account_lead_score!
+
   LINKEDIN_STATUS = [
     'pending invitation',
     'pending connection',
@@ -16,5 +18,11 @@ class AccountLeadTeamMember < ApplicationRecord
     end
 
     { type: 'info', label: self.linkedin_status }
+  end
+
+  def update_account_lead_score!
+    self.account_lead.calculate_score!
+
+    self.account_lead.save!
   end
 end

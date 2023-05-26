@@ -1,0 +1,2 @@
+class SequenceDepartmentScore < ApplicationRecord
+end

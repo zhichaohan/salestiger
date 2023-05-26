@@ -1,0 +1,2 @@
+class SequenceNumEmployeesScore < ApplicationRecord
+end
