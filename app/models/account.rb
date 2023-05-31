@@ -159,9 +159,9 @@ class Account < ApplicationRecord
 
     emails_sent = self.team_members.joins(:emails).where(emails: { status: 'sent' }).count
     opened_emails = self.team_members.joins(:emails).where.not(emails: { last_opened_at: nil }).count
-    open_rate = emails_sent == 0 ? 0 : (opened_emails / emails_sent)
+    open_rate = emails_sent == 0 ? 0 : (opened_emails.to_f * 100 / emails_sent.to_f).floor
 
-    conversion_rate = new_customers == 0 ? 0 : (meetings_booked / new_customers)
+    conversion_rate = new_customers == 0 ? 0 : (meetings_booked.to_f / new_customers.to_f)
 
     {
       leads_engaged: leads_engaged,
