@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import Chart from "react-apexcharts";
 import PageTitleSection from '../page_title_section';
 import CardHeader from '../../ui_kit/card_header';
+import LoadingSpinner from '../../ui_kit/loading_spinner';
 import LeadsTable from '../leads/table';
 import { getLeads } from '../../../api/leads';
+import { getAccountStatistics, getEmailsSent } from '../../../api/accounts';
 
 export default function Home() {
   const leadsGenerated = 10431;
@@ -18,11 +20,20 @@ export default function Home() {
   const openRate = 5;
   const [leads, setLeads] = useState([]);
   const [view, setView] = useState('loading');
+  const [statistics, setStatistics] = useState();
+  const [emailsSent, setEmailsSent] = useState();
 
   useEffect(() => {
-    getLeads({ order: 'COALESCE(account_leads.score, 0) DESC', limit: 10 }, (results) => {
-      setLeads(results);
-      setView('loaded');
+    getAccountStatistics((r) => {
+      setStatistics(r);
+      getLeads({ order: 'COALESCE(account_leads.score, 0) DESC', limit: 10 }, (results) => {
+        setLeads(results);
+        getEmailsSent((emailsSent) => {
+          console.log("emailsSent", emailsSent);
+          setEmailsSent(emailsSent);
+          setView('loaded');
+        })
+      })
     })
   }, [])
 
@@ -34,8 +45,8 @@ export default function Home() {
             <div className="card-body">
               <div className="d-flex static-widget">
                 <div className="flex-grow-1">
-                  <h6 className="font-roboto">Leads Generated</h6>
-                  <h4 className="mb-0 counter">{leadsGenerated}</h4>
+                  <h6 className="font-roboto">Leads Engaged</h6>
+                  <h4 className="mb-0 counter">{statistics.leads_engaged}</h4>
                 </div>
                 <svg className="fill-danger" width="41" height="46" viewBox="0 0 41 46" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.5245 23.3155C24.0019 23.3152 26.3325 16.8296 26.9426 11.5022C27.6941 4.93936 24.5906 0 17.5245 0C10.4593 0 7.35423 4.93899 8.10639 11.5022C8.71709 16.8296 11.047 23.316 17.5245 23.3155Z"></path>
@@ -57,7 +68,7 @@ export default function Home() {
               <div className="d-flex static-widget">
                 <div className="flex-grow-1">
                   <h6 className="font-roboto">Meetings Booked</h6>
-                  <h4 className="mb-0 counter">{meetingsBooked}</h4>
+                  <h4 className="mb-0 counter">{statistics.meetings_booked}</h4>
                 </div>
                 <svg className="fill-success" width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.92047 8.49509C5.81037 8.42629 5.81748 8.25971 5.93378 8.20177C7.49907 7.41686 9.01464 6.65821 10.5302 5.89775C14.4012 3.95495 18.2696 2.00762 22.1478 0.0792996C22.3387 -0.0157583 22.6468 -0.029338 22.8359 0.060288C28.2402 2.64315 33.6357 5.24502 39.033 7.84327C39.0339 7.84327 39.0339 7.84417 39.0348 7.84417C39.152 7.90121 39.1582 8.06869 39.0472 8.1375C38.9939 8.17009 38.9433 8.20087 38.8918 8.22984C33.5398 11.2228 28.187 14.2121 22.8385 17.2115C22.5793 17.3572 22.3839 17.3762 22.1131 17.2296C16.7851 14.3507 11.4518 11.4826 6.12023 8.61188C6.05453 8.57748 5.98972 8.53855 5.92047 8.49509Z"></path>
@@ -81,7 +92,7 @@ export default function Home() {
               <div className="d-flex static-widget">
                 <div className="flex-grow-1">
                   <h6 className="font-roboto">Total Revenue</h6>
-                  <h4 className="mb-0 counter">${totalRevenue}</h4>
+                  <h4 className="mb-0 counter">${statistics.total_revenue}</h4>
                 </div>
                 <svg className="fill-secondary" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.5938 14.1562V17.2278C20.9604 17.8102 19.7812 19.3566 19.7812 21.1875C19.7812 23.5138 21.6737 25.4062 24 25.4062C24.7759 25.4062 25.4062 26.0366 25.4062 26.8125C25.4062 27.5884 24.7759 28.2188 24 28.2188C23.2241 28.2188 22.5938 27.5884 22.5938 26.8125H19.7812C19.7812 28.6434 20.9604 30.1898 22.5938 30.7722V33.8438H25.4062V30.7722C27.0396 30.1898 28.2188 28.6434 28.2188 26.8125C28.2188 24.4862 26.3263 22.5938 24 22.5938C23.2241 22.5938 22.5938 21.9634 22.5938 21.1875C22.5938 20.4116 23.2241 19.7812 24 19.7812C24.7759 19.7812 25.4062 20.4116 25.4062 21.1875H28.2188C28.2188 19.3566 27.0396 17.8102 25.4062 17.2278V14.1562H22.5938Z"></path>
@@ -119,7 +130,7 @@ export default function Home() {
                     </div>
                     <div className="flex-grow-1">
                       <h6>New Customers</h6>
-                      <h5>{newCustomers}</h5>
+                      <h5>{statistics.new_customers}</h5>
                     </div>
                   </div>
                 </div>
@@ -137,7 +148,7 @@ export default function Home() {
                     </div>
                     <div className="flex-grow-1">
                       <h6>ASP</h6>
-                      <h5>${asp}</h5>
+                      <h5>${statistics.average_selling_price}</h5>
                     </div>
                   </div>
                 </div>
@@ -152,7 +163,7 @@ export default function Home() {
                     </div>
                     <div className="flex-grow-1">
                       <h6>Total Pipeline Generated</h6>
-                      <h5>${totalPipelineGenerated}</h5>
+                      <h5>${statistics.total_pipeline}</h5>
                     </div>
                   </div>
                 </div>
@@ -166,8 +177,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="flex-grow-1">
-                      <h6>Average Sales Cycle</h6>
-                      <h5>{averageSalesCycle} days</h5>
+                      <h6>Emails Sent</h6>
+                      <h5>{statistics.emails_sent}</h5>
                     </div>
                   </div>
                 </div>
@@ -187,7 +198,7 @@ export default function Home() {
                     </div>
                     <div className="flex-grow-1">
                       <h6>Open rate</h6>
-                      <h5>{openRate}%</h5>
+                      <h5>{statistics.open_rate}%</h5>
                     </div>
                   </div>
                 </div>
@@ -200,7 +211,7 @@ export default function Home() {
                     </div>
                     <div className="flex-grow-1">
                       <h6>Conversion rate</h6>
-                      <h5>{conversionRate}%</h5>
+                      <h5>{statistics.conversion_rate}%</h5>
                     </div>
                   </div>
                 </div>
@@ -215,6 +226,18 @@ export default function Home() {
   const renderSdrPerformanceSection = () => {
     const primary = '#3e5fce';
     const secondary = '#ffce00';
+    const series = [];
+    let labels = [];
+    emailsSent.forEach(e => {
+      if (e.emails_sent && Object.keys(e.emails_sent).length !== 0) {
+        series.push({
+          name: e.team_member,
+          type: 'area',
+          data: Object.values(e.emails_sent)
+        });
+        labels = Object.keys(e.emails_sent)
+      }
+    })
 
     const optionsproductchart = {
       chart: {
@@ -225,18 +248,7 @@ export default function Home() {
         curve: "smooth",
       },
 
-      series: [
-        {
-          name: "Total",
-          type: "area",
-          data: [Math.floor(meetingsBooked*0.1), Math.floor(meetingsBooked*0.12), Math.floor(meetingsBooked*0.23), Math.floor(meetingsBooked*0.55)],
-        },
-        {
-          name: "Chris",
-          type: "line",
-          data: [Math.floor(meetingsBooked*0.1/2), Math.floor(meetingsBooked*0.12/2), Math.floor(meetingsBooked*0.23/2), Math.floor(meetingsBooked*0.55/2)],
-        },
-      ],
+      series: series,
       fill: {
         colors: [primary, secondary],
         type: "gradient",
@@ -252,27 +264,14 @@ export default function Home() {
       },
 
       colors: [primary, secondary],
-      labels: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09 ",
-        "10",
-        "11",
-        "12",
-      ],
+      labels: labels,
       markers: {
         size: 0,
       },
       yaxis: [
         {
           title: {
-            text: "Meetings Booked",
+            text: "Emails Sent",
           },
         },
       ],
@@ -282,7 +281,7 @@ export default function Home() {
         y: {
           formatter: function (y) {
             if (typeof y !== "undefined") {
-              return y.toFixed(0) + " meetings booked";
+              return y.toFixed(0) + " Emails Sent";
             }
             return y;
           },
@@ -336,6 +335,10 @@ export default function Home() {
         </div>
       </div>
     );
+  }
+
+  if (view === 'loading') {
+    return (<LoadingSpinner />)
   }
 
   return (
