@@ -110,4 +110,8 @@ class TeamMember < ApplicationRecord
     actm = ac.account_lead_team_members.find_or_create_by!(team_member: self)
     actm.update!(linkedin_status: 'pending connection')
   end
+
+  def emails_sent
+    self.emails.sent.group_by_day(:sent_at).count
+  end
 end

@@ -46,6 +46,10 @@ Rails.application.routes.draw do
       resources :account_leads, only: [:update, :create]
       resources :sequences, only: [:destroy]
       resources :target_audiences, only: [:show, :update]
+      resources :accounts do
+        get :statistics, on: :collection
+        get :emails_sent, on: :collection
+      end
     end
   end
 

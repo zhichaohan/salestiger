@@ -136,4 +136,52 @@ class Account < ApplicationRecord
       w.update_statistics!
     end
   end
+
+  def home_page_statistics
+    leads_engaged = self.account_leads.where.not(status: nil).count
+    meetings_booked = self.account_leads.where(status: ['Meeting Attended', 'Redzone']).count
+    new_customers = self.account_leads.where(status: ['Redzone']).count
+
+    sales = []
+    self.account_leads.where(status: ['Redzone']).each do |al|
+      sales << al.lead.lead_sequences.select { |ls| ls.sequence.workflow&.product&.average_selling_price }
+    end
+    sales = sales.compact
+    average_selling_price = sales.size == 0 ? 0 : (sales.sum(0.0) / sales.size)
+    total_revenue = sales.sum(0.0)
+
+    pipeline = []
+    self.account_leads.where(status: ['Meeting Attended', 'Redzone']).each do |al|
+      pipeline << al.lead.lead_sequences.select { |ls| ls.sequence.workflow&.product&.average_selling_price }
+    end
+    pipeline = pipeline.compact
+    total_pipeline = pipeline.sum(0.0)
+
+    emails_sent = self.team_members.joins(:emails).where(emails: { status: 'sent' }).count
+    opened_emails = self.team_members.joins(:emails).where.not(emails: { last_opened_at: nil }).count
+    open_rate = emails_sent == 0 ? 0 : (opened_emails / emails_sent)
+
+    conversion_rate = new_customers == 0 ? 0 : (meetings_booked / new_customers)
+
+    {
+      leads_engaged: leads_engaged,
+      meetings_booked: meetings_booked,
+      new_customers: new_customers,
+      average_selling_price: average_selling_price,
+      total_revenue: total_revenue,
+      total_pipeline: total_pipeline,
+      emails_sent: emails_sent,
+      open_rate: open_rate,
+      conversion_rate: conversion_rate
+    }
+  end
+
+  def emails_sent
+    self.team_members.map do |team_member|
+      {
+        name: team_member.name,
+        emails_sent: team_member.emails_sent
+      }
+    end
+  end
 end
