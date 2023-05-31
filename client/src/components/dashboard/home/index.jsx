@@ -297,7 +297,7 @@ export default function Home() {
           </div>
           <div className="card-body">
             <div class="card-header pb-0 pt-0">
-              <h5>Meetings Booked</h5>
+              <h5>Emails Sent</h5>
             </div>
             <div className="chart-container">
               <div className="row">
