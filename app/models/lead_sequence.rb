@@ -6,9 +6,9 @@ class LeadSequence < ApplicationRecord
   has_many :lead_sequence_steps, dependent: :destroy
 
   scope :for_industry, ->(industry) { joins(lead: :company).where(companies: { industry: industry }) }
-  scope :with_employee_size, ->(min_num_employees, max_num_employees) { joins(lead: :company).where("companies.num_employees BETWEEN #{min_num_employees} AND #{max_num_employees}") }
+  scope :with_employee_size, ->(min_num_employees, max_num_employees) { joins(lead: :company).where(companies: { num_employees: min_num_employees..max_num_employees }) }
   scope :for_department, ->(department) { joins(:lead).where("leads.departments LIKE ?", "%#{department}%") }
-  scope :with_account_leads, ->(account_id) { joins("JOIN account_leads ON lead_sequences.lead_id = account_leads.lead_id AND account_leads.account_id = #{account_id}") }
+  scope :with_account_leads, ->(account_id) { joins("JOIN account_leads ON lead_sequences.lead_id = account_leads.lead_id AND account_leads.account_id = ", account_id) }
 
 
   def first_step

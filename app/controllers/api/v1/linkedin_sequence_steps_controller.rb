@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!, only: [:create]
 
       def update
-        sequence_step = LinkedinSequenceStep.find(params[:id])
+        sequence_step = current_account.linkedin_sequence_steps.find(params[:id])
 
         sequence_step.update!(
           hours_delay: params[:hours_delay],
@@ -19,7 +19,7 @@ module Api
       end
 
       def create
-        sequence = LinkedinSequence.find_by(id: params[:linkedin_sequence_id])
+        sequence = current_account.linkedin_sequences.find_by(id: params[:linkedin_sequence_id])
 
         order_index = sequence.linkedin_sequence_steps.count + 1
 

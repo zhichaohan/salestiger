@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!, only: [:index, :create]
 
       def index
-        sequences = current_user.account.sequences
+        sequences = current_account.sequences
 
         respond_to do |format|
           format.json do
@@ -29,7 +29,7 @@ module Api
       end
 
       def show
-        sequence = Sequence.find_by(slug: params[:id])
+        sequence = current_account.sequences.find_by(slug: params[:id])
 
         respond_to do |format|
           format.json do
@@ -39,7 +39,7 @@ module Api
       end
 
       def destroy
-        sequence = Sequence.find(params[:id])
+        sequence = current_account.sequences.find(params[:id])
 
         success = sequence.destroy!
 
@@ -51,7 +51,7 @@ module Api
       end
 
       def add_leads
-        sequence = Sequence.find(params[:id])
+        sequence = current_account.sequences.find(params[:id])
         team_member = TeamMember.find_by(uuid: params[:team_member_id])
 
         params[:lead_ids].each do |lead_id|

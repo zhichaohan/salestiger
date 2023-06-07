@@ -8,7 +8,7 @@ module Api
       end
 
       def show
-        email = Email.find(params[:id])
+        email = current_account.emails.find(params[:id])
 
         respond_to do |format|
           format.json do
@@ -18,7 +18,7 @@ module Api
       end
 
       def update
-        email = Email.find(params[:id])
+        email = current_account.emails.find(params[:id])
 
         email.update(email_params)
 
@@ -30,7 +30,7 @@ module Api
       end
 
       def create
-        team_member = current_user.account.team_members.find_by(uuid: params[:team_member_id])
+        team_member = current_account.team_members.find_by(uuid: params[:team_member_id])
         lead = Lead.find_by(uuid: params[:lead_id])
 
         email = team_member.emails.create!(

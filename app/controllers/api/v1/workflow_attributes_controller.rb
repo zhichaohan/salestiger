@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        workflow_attribute = WorkflowAttribute.find(params[:id])
+        workflow_attribute = current_account.workflow_attributes.find(params[:id])
 
         workflow_attribute.update(workflow_attribute_params)
 

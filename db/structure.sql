@@ -109,7 +109,7 @@ CREATE TABLE public.account_leads (
     sent_email_count integer DEFAULT 0,
     sent_email_open_count integer DEFAULT 0,
     received_email_count integer DEFAULT 0,
-    score integer
+    score integer DEFAULT 0
 );
 
 
@@ -2410,6 +2410,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230525233218'),
 ('20230526032425'),
 ('20230526181406'),
-('20230526183727');
+('20230526183727'),
+('20230607180728');
 
 

@@ -5,12 +5,17 @@ class Account < ApplicationRecord
 
   has_many :users
   has_many :team_members
+  has_many :emails, through: :team_members
   has_many :target_audiences
   has_many :products
   has_many :workflows
+  has_many :workflow_attributes, through: :workflows
   has_many :account_leads
+  has_many :leads, through: :account_leads
   has_many :sequences, through: :workflows
+  has_many :sequence_steps, through: :sequences
   has_many :linkedin_sequences, through: :workflows
+  has_many :linkedin_sequence_steps, through: :linkedin_sequences
   has_many :lead_sequences, through: :sequences
   has_many :lead_sequence_steps, through: :lead_sequences
   has_many :workflow_team_members, through: :workflows
@@ -154,7 +159,7 @@ class Account < ApplicationRecord
     self.account_leads.where(status: ['Meeting Attended', 'Redzone']).each do |al|
       pipeline << al.lead.lead_sequences.select { |ls| ls.sequence.workflow&.product&.average_selling_price }
     end
-    pipeline = pipeline.compact
+    pipeline = pipeline.compact.flatten
     total_pipeline = pipeline.sum(0.0)
 
     emails_sent = self.team_members.joins(:emails).where(emails: { status: 'sent' }).count

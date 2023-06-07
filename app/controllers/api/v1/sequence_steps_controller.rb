@@ -4,7 +4,7 @@ module Api
       before_action :authenticate_user!, only: [:create]
 
       def update
-        sequence_step = SequenceStep.find(params[:id])
+        sequence_step = current_account.sequence_steps.find(params[:id])
 
         sequence_step.update!(
           hours_delay: params[:hours_delay],

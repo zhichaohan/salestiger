@@ -31,7 +31,7 @@ module Api
       end
 
       def add_leads
-        sequence = LinkedinSequence.find(params[:id])
+        sequence = current_account.linkedin_sequences.find(params[:id])
         team_member = TeamMember.find_by(uuid: params[:team_member_id])
 
         params[:lead_ids].each do |lead_id|
