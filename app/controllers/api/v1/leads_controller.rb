@@ -4,17 +4,23 @@ module Api
       before_action :authenticate_user!, only: [:index, :logs, :create]
 
       def index
-        leads = Lead.joins(:account_leads).where(account_leads: { account_id: current_user.account.id })
+        account_leads = current_account.account_leads
 
         if params[:order].present?
-          leads = leads.order(params[:order])
+          if params[:order] == 'COALESCE(account_leads.score, 0) DESC'
+            account_leads = account_leads.order(score: :desc)
+          elsif params[:order] == 'score desc'
+            account_leads = account_leads.order(score: :desc)
+          elsif params[:order] == 'score asc'
+            account_leads = account_leads.order(score: :asc)
+          end
         end
 
         if params[:limit].present?
-          leads = leads.limit(params[:limit])
+          account_leads = account_leads.limit(params[:limit])
         end
 
-        leads.preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}, lead_linkedin_sequences: :linkedin_sequence)
+        leads = current_user.account.leads.where(id: account_leads.pluck(:id)).preload(:company, lead_sequences: { sequence: :workflow, team_member: {}}, lead_linkedin_sequences: :linkedin_sequence)
 
         account_leads = current_user.account.account_leads.preload(:last_sent_email, account_lead_team_members: :team_member).where(lead_id: leads.pluck(:id))
 

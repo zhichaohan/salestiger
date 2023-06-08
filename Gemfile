@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -36,6 +36,7 @@ gem 'webpacker'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'json', '~> 2.6', '>= 2.6.3'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
@@ -85,7 +86,7 @@ gem 'redd'
 gem 'slack-notifier'
 gem 'meta-tags'
 gem 'sitemap_generator'
-gem 'aws-sdk-v1'
+# gem 'aws-sdk-v1'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'google-api-client', :require => 'google/apis'

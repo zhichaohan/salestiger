@@ -62,4 +62,6 @@ Rails.application.routes.draw do
   root 'welcome#home'
 
   match '/', to: 'welcome#home', anchor: false, via: [:get]
+
+  resources :team_members, only: [:edit]
 end

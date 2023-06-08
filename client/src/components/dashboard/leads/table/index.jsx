@@ -128,7 +128,7 @@ export default function LeadsTable({
                 currentUser.super_user && <th scope="col">Global Email Count</th>
               }
               {
-                currentUser.super_user && renderHeader('Score', 'account_leads.score')
+                currentUser.super_user && renderHeader('Score', 'score')
               }
             </tr>
           </thead>
