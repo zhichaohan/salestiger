@@ -20,7 +20,7 @@ module Api
       end
 
       def create
-        sequence = Sequence.find_by(id: params[:sequence_id])
+        sequence = current_account.sequences.find_by(id: params[:sequence_id])
 
         order_index = sequence.sequence_steps.count + 1
 
