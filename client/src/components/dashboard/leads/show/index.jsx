@@ -3,7 +3,7 @@ import PageTitleSection from '../../page_title_section';
 import SocialList from '../../team_members/social_list';
 import EmailsEditModal from '../../emails/edit_modal';
 import ConfirmationModal from '../../../ui_kit/confirmation_modal'
-import DOMPurify from '../../../../utils/purify.min.js'
+// import DOMPurify from '../../../../utils/purify.min.js'
 import CardHeader from '../../../ui_kit/card_header';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { getLead, getLeadLogs } from '../../../../api/leads';
@@ -228,7 +228,7 @@ export default function LeadsShow({
                               <p class="project_name_0">{renderTime(log.datetime)}</p>
                             </td>
                             <td>
-                              <p class="task_desc_0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(log.description.replaceAll('\n', '<br/>'), {target: 'blank'})}}></p>
+                              <p class="task_desc_0" dangerouslySetInnerHTML={{ __html: log.description.replaceAll('\n', '<br/>')}}></p>
                             </td>
                             <td>
                               {

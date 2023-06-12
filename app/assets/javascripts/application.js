@@ -13,7 +13,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require wow.min.js
 //= require_tree .
 
 function objToQueryString(obj, prefix) {

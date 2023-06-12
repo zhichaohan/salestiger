@@ -4,7 +4,6 @@ import LinkedinSequenceStepsCreateModal from '../../linkedin_sequence_steps/crea
 import LinkedinSequenceStepsUpdateModal from '../../linkedin_sequence_steps/update_modal';
 import { getLinkedinSequence } from '../../../../api/linkedin_sequences';
 import { notifySuccess } from '../../../../helpers';
-import DOMPurify from '../../../../utils/purify.min.js'
 import styles from './index.module.css';
 
 export default function LinkedinSequencesShow({
