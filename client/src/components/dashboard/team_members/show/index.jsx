@@ -14,7 +14,7 @@ export default function TeamMembersShow({
     getTeamMember(id, (r) => {
       setTeamMember(r);
     }, () => {
-      console.log("an error has occurred");
+      
     })
   }, []);
 

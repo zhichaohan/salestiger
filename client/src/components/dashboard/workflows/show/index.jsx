@@ -29,7 +29,7 @@ export default function WorkflowsShow({
     getWorkflow(id, (data) => {
       setWorkflow(data);
     }, () => {
-      console.log("error");
+      
     });
   }
 

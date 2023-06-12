@@ -43,7 +43,7 @@ export default function LeadsShow({
         })
       })
     }, () => {
-      console.log("an error has occurred");
+      
     })
   }
 

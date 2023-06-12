@@ -21,7 +21,6 @@ export default function TeamMembersIndex() {
     );
     response.then(response => response.json())
     .then(data => {
-      console.log("data", data);
       setTeamMembers(data);
     })
   }, [])

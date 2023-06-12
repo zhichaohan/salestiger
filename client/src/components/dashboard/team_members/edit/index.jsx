@@ -28,13 +28,12 @@ export default function TeamMembersEdit({
       setLinkedinEmail(r.linkedin_email);
       setLinkedinPassword(r.linkedin_password);
     }, () => {
-      console.log("an error has occurred");
+
     })
   }, []);
 
   const onEmailSettingsSubmit = (e) => {
     e.preventDefault();
-    console.log("signatureHtml", signatureHtml);
     updateTeamMember(id, {
       email_signature: signatureHtml,
     }, () => {

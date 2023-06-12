@@ -21,7 +21,6 @@ export default function WorkflowsIndex() {
     );
     response.then(response => response.json())
     .then(data => {
-      console.log("data", data);
       setWorkflows(data);
     })
   }, [])

@@ -26,7 +26,6 @@ export default function LinkedinSequencesShow({
     getLinkedinSequence(sequenceId, (data) => {
       setSequence(data);
     }, () => {
-      console.log("error");
     });
   }
 

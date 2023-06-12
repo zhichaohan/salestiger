@@ -27,7 +27,7 @@ export default function SequencesShow({
     getSequence(sequenceId, (data) => {
       setSequence(data);
     }, () => {
-      console.log("error");
+      
     });
   }
 

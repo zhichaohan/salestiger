@@ -29,7 +29,6 @@ export default function Home() {
       getLeads({ order: 'COALESCE(account_leads.score, 0) DESC', limit: 10 }, (results) => {
         setLeads(results);
         getEmailsSent((emailsSent) => {
-          console.log("emailsSent", emailsSent);
           setEmailsSent(emailsSent);
           setView('loaded');
         })

@@ -21,7 +21,6 @@ export default function EmailsIndex() {
     );
     response.then(response => response.json())
     .then(data => {
-      console.log("data", data);
       setEmails(data);
     })
   }, [])

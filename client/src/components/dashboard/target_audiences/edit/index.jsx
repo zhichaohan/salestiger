@@ -33,7 +33,7 @@ export default function TargetAudiencesEdit({
       setMaxCompanySize(r.max_company_size);
       setTargetAudience(r);
     }, () => {
-      console.log("an error has occurred");
+      
     })
   }, []);
 

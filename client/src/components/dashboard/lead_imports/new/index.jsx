@@ -42,7 +42,6 @@ export default function LeadImportsNew() {
                         <div className="col-sm-9">
                           <S3UploadFile
                             onChange={(newFiles) => {
-                              console.log("newFiles", newFiles);
                               setFileToUpload(newFiles);
                             }}
                             type="form-field"

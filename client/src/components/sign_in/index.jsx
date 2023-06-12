@@ -29,7 +29,7 @@ export default function SignIn() {
         window.location = returnTo;
       }
     }, (errors) => {
-      console.log("errors", errors);
+
     });
   }
 

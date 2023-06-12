@@ -25,7 +25,7 @@ export default function TeamMemberVerifyLinkedin({
       }, 10000);
       return () => clearTimeout(timer);
     }, () => {
-      console.log("an error has occurred");
+      
     })
   }
 
