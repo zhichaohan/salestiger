@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { createSequence } from '../../../../api/sequences';
 
@@ -9,7 +9,7 @@ export default function SequencesCreateModal({
   onSubmit,
 }) {
   const [name, setName] = useState('');
-  
+
   const onSubmitClick = () => {
     createSequence(
       workflow.id, {

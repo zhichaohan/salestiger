@@ -1,6 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import PageTitleSection from '../page_title_section';
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 
 export default function EmailsIndex() {

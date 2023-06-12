@@ -1,9 +1,8 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link, useHistory, useLocation } from "react-router-dom";
+import React, { useState, useContext, useEffect } from 'react'
+import { useHistory, useLocation } from "react-router-dom";
 import { autofocusAll } from '../../helpers'
 import Context from '../../utils/context';
-import { notifySuccess, notifyError } from '../../helpers';
-import styles from './index.module.css';
+import { notifyError } from '../../helpers';
 
 export default function EditPassword() {
   let history = useHistory();

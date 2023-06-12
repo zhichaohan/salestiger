@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
-import HtmlEditor from '../../../ui_kit/html_editor';
+import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { updateLinkedinSequenceStep } from '../../../../api/linkedin_sequence_steps';
 

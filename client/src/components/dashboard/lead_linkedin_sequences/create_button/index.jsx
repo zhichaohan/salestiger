@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import LeadLinkedinSequencesCreateModal from '../create_modal';
 import { addLeadsToLinkedinSequence } from '../../../../api/linkedin_sequences';
 import { notifySuccess } from '../../../../helpers';

@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import SequenceStepsCreateModal from '../../sequence_steps/create_modal';
 import SequenceStepsUpdateModal from '../../sequence_steps/update_modal';
@@ -27,7 +27,7 @@ export default function SequencesShow({
     getSequence(sequenceId, (data) => {
       setSequence(data);
     }, () => {
-      
+
     });
   }
 

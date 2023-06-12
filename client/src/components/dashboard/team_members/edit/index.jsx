@@ -1,5 +1,5 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import { getTeamMember, updateTeamMember } from '../../../../api/team_members';

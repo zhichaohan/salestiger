@@ -1,6 +1,6 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { getTeamMember } from '../../../../api/team_members';
 import { notifySuccess } from '../../../../helpers';
 
@@ -25,7 +25,7 @@ export default function TeamMemberVerifyLinkedin({
       }, 10000);
       return () => clearTimeout(timer);
     }, () => {
-      
+
     })
   }
 

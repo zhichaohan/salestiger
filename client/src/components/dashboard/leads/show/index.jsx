@@ -1,10 +1,9 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import SocialList from '../../team_members/social_list';
 import EmailsEditModal from '../../emails/edit_modal';
 import ConfirmationModal from '../../../ui_kit/confirmation_modal'
 // import DOMPurify from '../../../../utils/purify.min.js'
-import CardHeader from '../../../ui_kit/card_header';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import { getLead, getLeadLogs } from '../../../../api/leads';
 import { updateAccountLead, createAccountLead } from '../../../../api/account_leads';
@@ -43,7 +42,7 @@ export default function LeadsShow({
         })
       })
     }, () => {
-      
+
     })
   }
 

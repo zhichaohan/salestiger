@@ -1,10 +1,9 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css'
 import styles from './index.module.css';
 import { createLandingPageContacts } from '../../api/landing_page_contacts';
-import { notifySuccess, notifyError, scrollWithOffset } from '../../helpers';
+import { notifySuccess, scrollWithOffset } from '../../helpers';
 
 export default function Home() {
   const [firstName, setFirstName] = useState();
