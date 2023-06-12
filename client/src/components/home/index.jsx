@@ -1,8 +1,6 @@
-import React, { Component, useState, useContext } from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
 import { createLandingPageContacts } from '../../api/landing_page_contacts';
-import { notifySuccess, notifyError } from '../../helpers';
-import styles from './index.module.css';
+import { notifySuccess } from '../../helpers';
 
 export default function Home() {
   const [firstName, setFirstName] = useState();

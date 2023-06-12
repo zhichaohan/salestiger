@@ -1,11 +1,10 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import CardHeader from '../../../ui_kit/card_header';
 import LeadsTable from '../../leads/table';
 import { getLeadImport } from '../../../../api/lead_imports';
 import { getTeamMembers } from '../../../../api/team_members';
 import { getSequences } from '../../../../api/sequences';
-import styles from './index.module.css'
 
 export default function LeadImportsShow({
   match

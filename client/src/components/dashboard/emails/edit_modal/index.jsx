@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import Modal from "react-bootstrap/Modal";
 import { updateEmail } from '../../../../api/emails';

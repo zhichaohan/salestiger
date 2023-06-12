@@ -1,10 +1,10 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import SequenceStepsCreateModal from '../../sequence_steps/create_modal';
 import SequenceStepsUpdateModal from '../../sequence_steps/update_modal';
 import { getSequence } from '../../../../api/sequences';
 import { notifySuccess } from '../../../../helpers';
-import DOMPurify from '../../../../utils/purify.min.js'
+// import DOMPurify from '../../../../utils/purify.min.js'
 import styles from './index.module.css';
 
 export default function SequencesShow({
@@ -27,7 +27,7 @@ export default function SequencesShow({
     getSequence(sequenceId, (data) => {
       setSequence(data);
     }, () => {
-      console.log("error");
+
     });
   }
 
@@ -73,7 +73,7 @@ export default function SequencesShow({
                             </h4>
                             <i className="fa fa-pencil-square-o" onClick={updateSequenceStepClick(step)}></i>
                           </div>
-                          <p className="m-0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(step.sanitized_email_template.replaceAll('\n', '<br/>'), {target: 'blank'})}}></p>
+                          <p className="m-0" dangerouslySetInnerHTML={{ __html: step.sanitized_email_template.replaceAll('\n', '<br/>')}}></p>
                           <span className="cd-date">{step.hours_delay} hours delay</span>
                         </div>
                       </div>

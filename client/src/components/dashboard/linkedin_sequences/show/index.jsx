@@ -1,10 +1,9 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import LinkedinSequenceStepsCreateModal from '../../linkedin_sequence_steps/create_modal';
 import LinkedinSequenceStepsUpdateModal from '../../linkedin_sequence_steps/update_modal';
 import { getLinkedinSequence } from '../../../../api/linkedin_sequences';
 import { notifySuccess } from '../../../../helpers';
-import DOMPurify from '../../../../utils/purify.min.js'
 import styles from './index.module.css';
 
 export default function LinkedinSequencesShow({
@@ -27,7 +26,6 @@ export default function LinkedinSequencesShow({
     getLinkedinSequence(sequenceId, (data) => {
       setSequence(data);
     }, () => {
-      console.log("error");
     });
   }
 

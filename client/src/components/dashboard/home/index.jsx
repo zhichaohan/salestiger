@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
 import Chart from "react-apexcharts";
 import PageTitleSection from '../page_title_section';
 import CardHeader from '../../ui_kit/card_header';
@@ -29,7 +28,6 @@ export default function Home() {
       getLeads({ order: 'COALESCE(account_leads.score, 0) DESC', limit: 10 }, (results) => {
         setLeads(results);
         getEmailsSent((emailsSent) => {
-          console.log("emailsSent", emailsSent);
           setEmailsSent(emailsSent);
           setView('loaded');
         })

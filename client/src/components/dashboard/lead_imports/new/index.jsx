@@ -1,9 +1,8 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import S3UploadFile from '../../../ui_kit/s3_upload_file';
 import { createLeadImport } from '../../../../api/lead_imports';
-import styles from './index.module.css'
 
 export default function LeadImportsNew() {
   const [fileToUpload, setFileToUpload] = useState([]);
@@ -42,7 +41,6 @@ export default function LeadImportsNew() {
                         <div className="col-sm-9">
                           <S3UploadFile
                             onChange={(newFiles) => {
-                              console.log("newFiles", newFiles);
                               setFileToUpload(newFiles);
                             }}
                             type="form-field"

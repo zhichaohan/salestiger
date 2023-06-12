@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import SequencesDeleteModal from '../delete_modal';
 import { notifySuccess } from '../../../../helpers';
 

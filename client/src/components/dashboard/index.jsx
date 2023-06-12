@@ -2,11 +2,8 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect
+  Switch
 } from 'react-router-dom';
-import Header from './header';
-import Footer from './footer';
 import WorkflowsIndex from './workflows';
 import WorkflowsShow from './workflows/show';
 import TeamMembersIndex from './team_members';

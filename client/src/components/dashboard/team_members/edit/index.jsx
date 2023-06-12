@@ -1,5 +1,5 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import HtmlEditor from '../../../ui_kit/html_editor';
 import { getTeamMember, updateTeamMember } from '../../../../api/team_members';
@@ -28,13 +28,12 @@ export default function TeamMembersEdit({
       setLinkedinEmail(r.linkedin_email);
       setLinkedinPassword(r.linkedin_password);
     }, () => {
-      console.log("an error has occurred");
+
     })
   }, []);
 
   const onEmailSettingsSubmit = (e) => {
     e.preventDefault();
-    console.log("signatureHtml", signatureHtml);
     updateTeamMember(id, {
       email_signature: signatureHtml,
     }, () => {

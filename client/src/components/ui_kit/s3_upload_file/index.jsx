@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.css'
 import S3 from 'react-aws-s3';
 import uuid from 'react-uuid'

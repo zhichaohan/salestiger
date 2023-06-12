@@ -1,7 +1,5 @@
-import React, { Component, useState, useContext } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react'
 import Context from '../../utils/context';
-import styles from './index.module.css';
 
 export default function Header() {
   const context = useContext(Context);

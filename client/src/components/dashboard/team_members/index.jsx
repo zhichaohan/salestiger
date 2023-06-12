@@ -1,5 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../page_title_section';
 import SocialList from './social_list';
 import { toast } from 'react-toastify';
@@ -21,7 +20,6 @@ export default function TeamMembersIndex() {
     );
     response.then(response => response.json())
     .then(data => {
-      console.log("data", data);
       setTeamMembers(data);
     })
   }, [])

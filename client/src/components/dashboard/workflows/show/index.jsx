@@ -1,5 +1,5 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import PageTitleSection from '../../page_title_section';
 import LeadsTable from '../../leads/table';
 import SequencesTable from '../../sequences/table';
@@ -11,7 +11,6 @@ import LinkedinSequencesCreateModal from '../../linkedin_sequences/create_modal'
 import CardHeader from '../../../ui_kit/card_header';
 import { getWorkflow } from '../../../../api/workflows';
 import { notifySuccess } from '../../../../helpers';
-import styles from './index.module.css';
 
 export default function WorkflowsShow({
   match
@@ -29,7 +28,7 @@ export default function WorkflowsShow({
     getWorkflow(id, (data) => {
       setWorkflow(data);
     }, () => {
-      console.log("error");
+
     });
   }
 

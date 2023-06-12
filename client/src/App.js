@@ -13,12 +13,10 @@ import ForgotPassword from './components/forgot_password';
 import EditPassword from './components/edit_password';
 import Loader from './components/loader';
 import Header from './components/header_v2';
-import Footer from './components/footer';
 import Dashboard from './components/dashboard';
 import Context from "./utils/context";
 import Auth from "./utils/auth";
 import './App.css'
-import styles from './index.module.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "slick-carousel/slick/slick.css";

@@ -1,5 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
 import styles from './index.module.css';
 
 export default function Loader() {

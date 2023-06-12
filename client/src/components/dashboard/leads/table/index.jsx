@@ -1,9 +1,8 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import EmailsCreateModal from '../../emails/create_modal';
 import LeadSequencesCreateButton from '../../lead_sequences/create_button';
 import LeadLinkedinSequencesCreateButton from '../../lead_linkedin_sequences/create_button';
 import { createEmail } from '../../../../api/emails';
-import { addLeadsToSequence } from '../../../../api/sequences';
 import { notifySuccess, renderTime } from '../../../../helpers';
 import styles from './index.module.css';
 import Context from '../../../../utils/context';

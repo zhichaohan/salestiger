@@ -1,8 +1,7 @@
-import React, { Component, useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageTitleSection from '../../page_title_section';
 import Select from 'react-select';
 import { getTargetAudience, updateTargetAudience } from '../../../../api/target_audiences';
-import styles from './index.module.css';
 import { notifySuccess, notifyError } from '../../../../helpers';
 
 export default function TargetAudiencesEdit({
@@ -33,7 +32,7 @@ export default function TargetAudiencesEdit({
       setMaxCompanySize(r.max_company_size);
       setTargetAudience(r);
     }, () => {
-      console.log("an error has occurred");
+
     })
   }, []);
 

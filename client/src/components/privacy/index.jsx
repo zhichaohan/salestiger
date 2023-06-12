@@ -1,5 +1,4 @@
-import React, { Component, useState, useContext } from 'react'
-import { Link } from "react-router-dom";
+import React from 'react'
 import styles from './index.module.css';
 
 export default function Terms() {
