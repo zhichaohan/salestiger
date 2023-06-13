@@ -11,6 +11,7 @@
     "@stripe/stripe-js": "^1.32.0",
     "apexcharts": "^3.40.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-loader": "^9.1.2",
     "create-react-class": "^15.7.0",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
@@ -39,8 +40,7 @@
     "node": "16.x"
   },
   "devDependencies": {
-    "@webpack-cli/serve": "^2.0.5",
-    "babel-loader": "^9.1.2"
+    "@webpack-cli/serve": "^2.0.5"
   },
   "resolutions": {
     "css-select": "4.1.3",
