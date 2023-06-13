@@ -9,6 +9,9 @@ const customConfig = {
       tls: false,
       child_process: false
     }
+  },
+  optimization: {
+    sideEffects: false
   }
 };
 
