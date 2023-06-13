@@ -20,4 +20,10 @@ environment.config.delete('node.child_process')
 
 environment.config.merge(customConfig);
 
+// Webpacker uses this plugin to generate its manifest but
+// at present it does not generate the integrity for each asset.
+const manifestPlugin = environment.plugins.get('Manifest');
+manifestPlugin.options.integrity = true;
+manifestPlugin.options.integrityHashes = ['sha256'];
+
 module.exports = environment
