@@ -68,7 +68,9 @@ export default function LeadsNew() {
             <div className="col-lg-12">
               <div className="card">
                 <div className={`card-header ${styles.header}`}>
-                  <a className="f-w-600" href={`/lead_imports/new`}><i class={`fa fa-plus ${styles.icon}`}></i>Import CSV</a>
+                {
+                  /* <a className="f-w-600" href={`/lead_imports/new`}><i class={`fa fa-plus ${styles.icon}`}></i>Import CSV</a> */
+                }
                 </div>
                 <div className="card-body">
                   <form>
