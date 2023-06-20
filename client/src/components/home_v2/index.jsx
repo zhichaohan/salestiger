@@ -35,13 +35,29 @@ export default function Home() {
   return (
     <main className="main">
       <div className="section-box">
-        <div className="banner-hero banner-homepage6">
+        <div className={`banner-hero banner-homepage6 ${styles.banner_hero}`}>
           <div className="container">
             <div className="row">
               <div className="col-lg-7 mt-50 pb-120">
-                <h1 className="text-display-3 mt-20">The Easiest way to crush sales targets</h1>
-                <p className="text-body-lead-large color-gray-500 mt-30 pr-40">We combine decades of sales experience<br className="d-lg-block d-none" />with AI and automation to create your cyber sales team</p>
-                <div className="mt-40"><a className="btn btn-black shape-square icon-arrow-right-white" href="#">Get Start</a></div>
+                <h1 className="text-display-3 mt-20">Crush sales targets without the headcount</h1>
+                <p className="text-body-lead-large color-gray-500 mt-30 pr-40">Automated lead acquisition<br className="d-lg-block d-none" />with a cyber sales team</p>
+                <div className="mt-40"><a className="btn btn-black shape-square icon-arrow-right-white" href="#">Get Started</a></div>
+                <div className="mt-50">
+                  <div className="row">
+                    <div className="col-lg-3 col-sm-4 col-4">
+                      <h3 className="text-heading-4 color-gray-900 mb-15">+<span className="count">48</span>%</h3>
+                      <p className="text-body-text-md color-gray-500">New Qualified Meetings</p>
+                    </div>
+                    <div className="col-lg-3 col-sm-4 col-4">
+                      <h3 className="text-heading-4 color-gray-900 mb-15"><span className="count">15</span></h3>
+                      <p className="text-body-text-md color-gray-500">Hours Saved a week</p>
+                    </div>
+                    <div className="col-lg-3 col-sm-4 col-4">
+                      <h3 className="text-heading-4 color-gray-900 mb-15">+<span className="count">78</span>%</h3>
+                      <p className="text-body-text-md color-gray-500">Sales Activity</p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="col-lg-5 d-none d-lg-block">
                 <div className="banner-imgs">
@@ -58,8 +74,8 @@ export default function Home() {
           <div className="row">
             <div className="col-lg-1 col-sm-1 col-12"></div>
             <div className="col-lg-10 col-sm-10 col-12 text-center">
-              <h2 className="text-heading-1 color-gray-900 mb-10">Work smarter. Scale faster.</h2>
-              <p className="text-body-lead-large color-gray-600 mt-20">We have the data, technology and strategy<br className="d-lg-block d-none" /> to take your product to market.</p>
+              <h2 className="text-heading-1 color-gray-900 mb-10">Work smarter. Scale faster</h2>
+              <p className="text-body-lead-large color-gray-600 mt-20">We take the time consuming process of lead prospecting and outreach off your hands<br className="d-lg-block d-none" /> so you spend more time closing deals.</p>
             </div>
             <div className="col-lg-1 col-sm-1 col-12"></div>
           </div>
@@ -70,7 +86,7 @@ export default function Home() {
               <div className="list-icons mt-50">
                 <div className="item-icon"><span className="icon-left"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage2/icon-acquis.svg" /></span>
                   <h4 className="text-heading-4">1. Lead acquisition</h4>
-                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>Our algorithm learns from historical response and conversion rates to find the most qualified leads.</p>
+                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>We find the most qualified leads from the millions of contacts in our database.</p>
                 </div>
               </div>
             </div>
@@ -78,15 +94,15 @@ export default function Home() {
               <div className="list-icons mt-50">
                 <div className="item-icon"><span className="icon-left"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage2/icon-active.svg" /></span>
                   <h4 className="text-heading-4">2. Engage</h4>
-                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>We utilize cutting-edge communication tactics and multi-channel outreach to schedule face-to-face meetings with decision-makers.</p>
+                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>We utilize our battle proven, multi-channel outreach to schedule face-to-face meetings with decision-makers.</p>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-md-12 col-sm-12">
               <div className="list-icons mt-50">
                 <div className="item-icon"><span className="icon-left"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage2/icon-retent.svg" /></span>
-                  <h4 className="text-heading-4">3. Convert</h4>
-                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>We use our battle proven strategies to nurture opportunities and turn meetings into signed contracts.</p>
+                  <h4 className="text-heading-4">3. Iterate</h4>
+                  <p className={`text-body-text color-gray-600 mt-15 ${styles.section_2_text}`}>We perform analytics and get your feedback so we provide more qualified leads and more effiective outreach.</p>
                 </div>
               </div>
             </div>
@@ -117,113 +133,175 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-6 pdl-md">
-              <h3 className="text-heading-1">Contact us and get started meeting your sales goals</h3>
+              <h3 className="text-heading-1">Get started meeting your sales goals today</h3>
               <div className="mt-40 box-mw-610">
-                <div className="form-newsletter-2">
-                  <form>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="input-newsletter" type="text" placeholder="Enter your email ..." />
-                    <button className="btn btn-newsletter icon-arrow-right-white" type="submit" onClick={contactUsClick}>Contact Us</button>
-                  </form>
-                </div>
+                <a className="btn btn-black icon-arrow-right-white" href="blog-1.html">Get Started</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section id="features" className="section-box">
-        <div className="container mt-120">
-          <div className="bg-2 bdrd-58 pattern-white pb-60">
-            <div className="row">
-              <div className="col-lg-2 col-sm-1 col-12"></div>
-              <div className="col-lg-8 col-sm-10 col-12 text-center mt-70">
-                <h2 className="text-heading-1 color-gray-900">What We Offer</h2>
-                <p className="text-body-lead-large color-gray-600 mt-20">What makes us different from others? We give holistic solutions with strategy, data &amp; technology.</p>
-              </div>
-              <div className="col-lg-2 col-sm-1 col-12"></div>
+
+      <section className="section-box mt-70">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-1 col-sm-1 col-12"></div>
+            <div className="col-lg-10 col-sm-10 col-12 text-center">
+              <div className="text-center mb-20"><span className="tag-1">How It Work ?</span></div>
+              <h2 className="text-display-3 color-gray-900 mb-60">Create your cyber SDR<br className="d-lg-block d-none" /> and see it in action</h2>
             </div>
-            <div className="container mt-70">
-              <div className="box-swiper">
-                <Swiper
-                  spaceBetween={30}
-                  slidesPerView={3}
-                  slidesPerGroup={1}
-                  loop={true}
-                  navigation={{
-                    nextEl: ".swiper-button-next-3",
-                    prevEl: ".swiper-button-prev-3",
-                  }}
-                  pagination={{
-                    el: ".swiper-pagination",
-                    type: "custom",
-                    renderCustom: function (swiper, current, total) {
-                      var customPaginationHtml = "";
-                      for (var i = 0; i < total; i++) {
-                        //Determine which pager should be activated at this time
-                        if (i == current - 1) {
-                          customPaginationHtml +=
-                            '<span className="swiper-pagination-customs swiper-pagination-customs-active"></span>';
-                        } else {
-                          customPaginationHtml +=
-                            '<span className="swiper-pagination-customs"></span>';
-                        }
-                      }
-                      return customPaginationHtml;
-                    },
-                  }}
-                  autoplay={{
-                    delay: 10000,
-                  }}
-                  breakpoints={{
-                    1199: {
-                      slidesPerView: 3,
-                    },
-                    800: {
-                      slidesPerView: 2,
-                    },
-                    600: {
-                      slidesPerView: 1,
-                    },
-                    350: {
-                      slidesPerView: 1,
-                    },
-                    310: {
-                      slidesPerView: 1,
-                    },
-                    200: {
-                      slidesPerView: 1,
-                    },
-                  }}
-                >
-                  <div className="swiper-wrapper pb-70 pt-5">
-                    <SwiperSlide>
-                      <div className="card-grid-style-2 hover-up">
-                        <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/market.svg" /></div>
-                        <h3 className="text-heading-5 mt-20">Data with insights</h3>
-                        <p className="text-body-text color-gray-600 mt-20">We not only provide lead data but have proprietary solutions to find the most qualified leads and provide insights.</p>
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="card-grid-style-2 hover-up">
-                        <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/consulting.svg" /></div>
-                        <h3 className="text-heading-5 mt-20">Technology solutions</h3>
-                        <p className="text-body-text color-gray-600 mt-20">Automate your multichannel outreach and engagement and manage all your sales efforts with a single dashboard.</p>
-                      </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="card-grid-style-2 hover-up">
-                        <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/cognity.svg" /></div>
-                        <h3 className="text-heading-5 mt-20">Sales strategy and research</h3>
-                        <p className="text-body-text color-gray-600 mt-20">Our experienced team offers a wide range of services, from strategy development to implementation and execution, to help you optimize your sales performance and drive revenue growth.</p>
-                      </div>
-                    </SwiperSlide>
+            <div className="col-lg-1 col-sm-1 col-12"></div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-1 col-sm-12 col-12"></div>
+            <div className="col-lg-10 col-sm-12 col-12">
+              <ul className="list-steps">
+                <li className="icon-asset1 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                  <div className="text-center block-step">
+                    <div className="mb-30"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/about/2/icon-start-plan.svg" /></div>
+                    <h3 className="text-heading-5 mb-10">Tell us</h3>
+                    <p className="text-body-text color-gray-500">Describe your product and target audience</p>
                   </div>
-                  <div className="swiper-pagination swiper-pagination3"></div>
-                </Swiper>
-              </div>
+                </li>
+                <li className="icon-asset2 wow animate__animated animate__fadeIn" data-wow-delay=".3s">
+                  <div className="text-center block-step">
+                    <div className="mb-30"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/about/2/icon-connect.svg" /></div>
+                    <h3 className="text-heading-5 mb-10">Connect</h3>
+                    <p className="text-body-text color-gray-500">Setup your email and LinkedIn (optional) account</p>
+                  </div>
+                </li>
+                <li className="icon-asset3 wow animate__animated animate__fadeIn" data-wow-delay=".5s">
+                  <div className="text-center block-step bg-5">
+                    <div className="mb-30"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/about/2/icon-match.svg" /></div>
+                    <h3 className="text-heading-5 mb-10">Engage</h3>
+                    <p className="text-body-text color-gray-500">Your cyber SDR will outreach a batch of potential leads every day via email and LinkedIn</p>
+                  </div>
+                </li>
+                <li className="icon-asset4 wow animate__animated animate__fadeIn" data-wow-delay=".9s">
+                  <div className="text-center block-step bg-5">
+                    <div className="mb-30"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/about/2/icon-complete.svg" /></div>
+                    <h3 className="text-heading-5 mb-10">Review</h3>
+                    <p className="text-body-text color-gray-500">Your cyber SDR will periodically seek feedback on the quality of the leads</p>
+                  </div>
+                </li>
+                <li className="wow animate__animated animate__fadeIn" data-wow-delay=".7s">
+                  <div className="text-center block-step bg-9">
+                    <div className="mb-30"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/about/2/icon-review.svg" /></div>
+                    <h3 className="text-heading-5 mb-10">Respond</h3>
+                    <p className="text-body-text color-gray-500">Responses and meeting requests will start appearing in your inbox</p>
+                  </div>
+                </li>
+              </ul>
             </div>
+            <div className="col-lg-1 col-sm-12 col-12"></div>
           </div>
         </div>
       </section>
+
+      {
+        /*
+
+        <section id="features" className="section-box">
+          <div className="container mt-120">
+            <div className="bg-2 bdrd-58 pattern-white pb-60">
+              <div className="row">
+                <div className="col-lg-2 col-sm-1 col-12"></div>
+                <div className="col-lg-8 col-sm-10 col-12 text-center mt-70">
+                  <h2 className="text-heading-1 color-gray-900">What We Offer</h2>
+                  <p className="text-body-lead-large color-gray-600 mt-20">What makes us different from others? We give holistic solutions with strategy, data &amp; technology.</p>
+                </div>
+                <div className="col-lg-2 col-sm-1 col-12"></div>
+              </div>
+              <div className="container mt-70">
+                <div className="box-swiper">
+                  <Swiper
+                    spaceBetween={30}
+                    slidesPerView={3}
+                    slidesPerGroup={1}
+                    loop={true}
+                    navigation={{
+                      nextEl: ".swiper-button-next-3",
+                      prevEl: ".swiper-button-prev-3",
+                    }}
+                    pagination={{
+                      el: ".swiper-pagination",
+                      type: "custom",
+                      renderCustom: function (swiper, current, total) {
+                        var customPaginationHtml = "";
+                        for (var i = 0; i < total; i++) {
+                          //Determine which pager should be activated at this time
+                          if (i == current - 1) {
+                            customPaginationHtml +=
+                              '<span className="swiper-pagination-customs swiper-pagination-customs-active"></span>';
+                          } else {
+                            customPaginationHtml +=
+                              '<span className="swiper-pagination-customs"></span>';
+                          }
+                        }
+                        return customPaginationHtml;
+                      },
+                    }}
+                    autoplay={{
+                      delay: 10000,
+                    }}
+                    breakpoints={{
+                      1199: {
+                        slidesPerView: 3,
+                      },
+                      800: {
+                        slidesPerView: 2,
+                      },
+                      600: {
+                        slidesPerView: 1,
+                      },
+                      350: {
+                        slidesPerView: 1,
+                      },
+                      310: {
+                        slidesPerView: 1,
+                      },
+                      200: {
+                        slidesPerView: 1,
+                      },
+                    }}
+                  >
+                    <div className="swiper-wrapper pb-70 pt-5">
+                      <SwiperSlide>
+                        <div className="card-grid-style-2 hover-up">
+                          <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/market.svg" /></div>
+                          <h3 className="text-heading-5 mt-20">Data with insights</h3>
+                          <p className="text-body-text color-gray-600 mt-20">We not only provide lead data but have proprietary solutions to find the most qualified leads and provide insights.</p>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        <div className="card-grid-style-2 hover-up">
+                          <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/consulting.svg" /></div>
+                          <h3 className="text-heading-5 mt-20">Technology solutions</h3>
+                          <p className="text-body-text color-gray-600 mt-20">Automate your multichannel outreach and engagement and manage all your sales efforts with a single dashboard.</p>
+                        </div>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        <div className="card-grid-style-2 hover-up">
+                          <div className="grid-2-img"><img src="https://salestiger-assets.s3.us-west-2.amazonaws.com/alithemes/assets/imgs/page/homepage1/cognity.svg" /></div>
+                          <h3 className="text-heading-5 mt-20">Sales strategy and research</h3>
+                          <p className="text-body-text color-gray-600 mt-20">Our experienced team offers a wide range of services, from strategy development to implementation and execution, to help you optimize your sales performance and drive revenue growth.</p>
+                        </div>
+                      </SwiperSlide>
+                    </div>
+                    <div className="swiper-pagination swiper-pagination3"></div>
+                  </Swiper>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        */
+      }
+
+
 
       <div className="section-box">
         <div className="container mt-120">
@@ -231,7 +309,7 @@ export default function Home() {
             <div className="col-xl-5 col-lg-6 col-sm-12 mb-30"><img className="bdrd-16 img-responsive" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/images/chrisimg.jpg" alt="Agon" /></div>
             <div className="col-xl-7 col-lg-6 col-sm-12 block-we-do"><span className="tag-1 bg-6 color-green-900">Chris Hedum, CEO</span>
               <h3 className="text-heading-1 mt-20">Meet our leadership</h3>
-              <p className="text-body-lead-large color-gray-600 mt-30">Chris Hedum is a dedicated husband, girl dad, & athlete with a passion for building high-performing teams. The success of these teams has allowed him to navigate through seed, Series A, B, & C rounds of funding and develop a model and definitive blueprint on what is required to scale a high-performing team.</p>
+              <p className="text-body-lead-large color-gray-600 mt-30">Chris Hedum is a dedicated husband, girl dad, & seasoned sales executive with over 10 years of experience in scaling and leading high-performing sales teams. He has a proven track record of driving revenue growth and building successful sales organizations in both startup and enterprise environments. He met his cofounder Zhi at PatientPartner where they worked together to automate and scale their sales operations from $1-10 million in revenue. They believe they can replicate their success for other companies</p>
               <div className="row mt-20">
                 <div className="col-lg-6 col-sm-6 col-12 mt-20">
                   <h4 className="text-heading-6 icon-leaf">$21,000,000+ In Revenue</h4>
@@ -303,6 +381,87 @@ export default function Home() {
          </div>
        </div>
      </section>
+
+      <section className="section-box mt-70">
+        <div className="container mt-50">
+          <h3 className="text-heading-1 text-center mb-10">Choose The Best Plan <br className="d-lg-block d-none" /> That&rsquo;s For You </h3>
+        </div>
+        <div className="container mt-20">
+          <div className="block-pricing block-pricing-2 mt-70">
+            <div className="row">
+              <div className="col-xl-12 col-lg-12">
+                <div className="row">
+                  <div className="col-xl-4 col-lg-6 col-md-6 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                    <div className="box-pricing-item hover-up">
+                      <div className="box-info-price">
+                        <span className="text-heading-3 for-month display-month">$49</span>
+                        <span className="text-month for-month text-body-small color-gray-400">/month</span>
+                      </div>
+                      <div className="line-bd-bottom">
+                        <h4 className="text-heading-5 mb-15">Starter</h4>
+                        <p className="text-body-small color-gray-400">All the basics for businesses that are just getting started.</p>
+                      </div>
+                      <ul className="list-package-feature">
+                        <li>1 Cyber SDR</li>
+                        <li>200 leads/month</li>
+                        <li>Automatic lead finder</li>
+                        <li>AI powered email templates and sequences</li>
+                        <li>5 LinkedIn invitations a day</li>
+                      </ul>
+                      <div>
+                        <a className="btn btn-black text-body-lead icon-arrow-right-white" href="#">Get Started</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-lg-6 col-md-6 wow animate__animated animate__fadeIn" data-wow-delay=".2s">
+                    <div className="box-pricing-item active hover-up">
+                      <div className="box-info-price">
+                        <span className="text-heading-3 for-month display-month">$99</span>
+                        <span className="text-month for-month text-body-small color-gray-400">/month</span>
+                      </div>
+                      <div className="line-bd-bottom">
+                        <h4 className="text-heading-5 mb-15">Essentials</h4>
+                        <p className="text-body-small color-gray-400">For businesses that are ready to scale.</p>
+                      </div>
+                      <ul className="list-package-feature">
+                        <li>1 Cyber SDR</li>
+                        <li>500 leads/month</li>
+                        <li>Automatic lead finder</li>
+                        <li>Email templates and sequences</li>
+                        <li>10 LinkedIn invitations a day</li>
+                      </ul>
+                      <div>
+                        <a className="btn btn-black text-body-lead icon-arrow-right-white" href="#">Get Started</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-4 col-lg-6 col-md-6 wow animate__animated animate__fadeIn" data-wow-delay=".3s">
+                    <div className="box-pricing-item hover-up">
+                      <div className="box-info-price">
+                        <span className="text-heading-3 for-month display-month">Contact Us</span>
+                      </div>
+                      <div className="line-bd-bottom">
+                        <h4 className="text-heading-5 mb-15">Enterprise</h4>
+                        <p className="text-body-small color-gray-400">For larger teams that want to take over the world.</p>
+                      </div>
+                      <ul className="list-package-feature">
+                        <li>Unlimited Cyber SDR</li>
+                        <li>Unlimited leads/month</li>
+                        <li>Automatic lead finder</li>
+                        <li>Email templates and sequences</li>
+                        <li>Unlimited LinkedIn invitations a day</li>
+                      </ul>
+                      <div>
+                        <a className="btn btn-black text-body-lead icon-arrow-right-white" href="#">Get Started</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div id="get-started" className="section-box box-gray-100 mt-120 mb-20">
         <div className="container">
