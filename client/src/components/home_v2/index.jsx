@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
+import CountUp from 'react-countup';
 import 'swiper/swiper.min.css'
 import styles from './index.module.css';
 import { createLandingPageContacts } from '../../api/landing_page_contacts';
@@ -45,15 +46,15 @@ export default function Home() {
                 <div className="mt-50">
                   <div className="row">
                     <div className="col-lg-3 col-sm-4 col-4">
-                      <h3 className="text-heading-4 color-gray-900 mb-15">+<span className="count">48</span>%</h3>
+                      <h3 className="text-heading-4 color-gray-900 mb-15">+ <CountUp end={48} />%</h3>
                       <p className="text-body-text-md color-gray-500">New Qualified Meetings</p>
                     </div>
                     <div className="col-lg-3 col-sm-4 col-4">
-                      <h3 className="text-heading-4 color-gray-900 mb-15"><span className="count">15</span></h3>
+                      <h3 className="text-heading-4 color-gray-900 mb-15"><CountUp end={15} /></h3>
                       <p className="text-body-text-md color-gray-500">Hours Saved a week</p>
                     </div>
                     <div className="col-lg-3 col-sm-4 col-4">
-                      <h3 className="text-heading-4 color-gray-900 mb-15">+<span className="count">78</span>%</h3>
+                      <h3 className="text-heading-4 color-gray-900 mb-15">+<CountUp end={78} />%</h3>
                       <p className="text-body-text-md color-gray-500">Sales Activity</p>
                     </div>
                   </div>
