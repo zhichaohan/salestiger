@@ -19,12 +19,9 @@ export default class Auth {
     return true;
   }
 
-  userSignUp = (name, userName, email, password, params, onSuccess, onError) => {
-    signUp(name, userName, email, password, params, (result) => {
-      this.currentUser = result;
-      if (onSuccess) {
-        onSuccess(result);
-      }
+  userSignUp = (name, companyName, email, password, params, onError) => {
+    signUp(name, companyName, email, password, params, (result) => {
+      window.location = "/"
     }, (errors) => {
       if (onError) {
         onError(errors);

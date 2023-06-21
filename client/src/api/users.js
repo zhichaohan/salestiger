@@ -1,6 +1,6 @@
 import { snakeCaseToTitleCase } from '../helpers';
 
-export const signUp = (name, userName, email, password, params, successCallback, errorCallback) => {
+export const signUp = (name, companyName, email, password, params, successCallback, errorCallback) => {
   fetch(`/users`, {
     method: 'POST',
     headers: {
@@ -11,9 +11,11 @@ export const signUp = (name, userName, email, password, params, successCallback,
       user: {
         ...params,
         name: name,
-        user_name: userName,
         email: email,
         password: password
+      },
+      account: {
+        name: companyName,
       }
     })
   })

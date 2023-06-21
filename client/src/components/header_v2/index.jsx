@@ -18,7 +18,7 @@ export default function Header() {
             </div>
           </div>
           <div className="header-right">
-            <div className="block-signin"><a className="btn btn-default hover-up icon-arrow-right" href="/#get-started">Get Started</a></div>
+            <div className="block-signin"><a className="btn btn-default hover-up icon-arrow-right" href="/get-started">Get Started</a></div>
           </div>
         </div>
       </div>

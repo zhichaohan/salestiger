@@ -6,6 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Home from './components/home_v2';
+import GetStarted from './components/get_started';
 import Terms from './components/terms';
 import Privacy from './components/privacy';
 import SignIn from './components/sign_in_v2';
@@ -111,6 +112,7 @@ function App() {
         <Router>
           <Switch>
             <PublicRoute exact path="/" component={Home} layout={PublicLayout} />
+            <PublicRoute exact path="/get-started" component={GetStarted} layout={PublicLayout} />
             <PublicRoute exact path="/terms" component={Terms} layout={PublicLayout} />
             <PublicRoute exact path="/privacy" component={Privacy} layout={PublicLayout} />
             <PublicRoute exact path="/sign-in" component={SignIn} layout={PublicLayout} />
