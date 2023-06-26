@@ -101,7 +101,7 @@ export default function GetStarted() {
                 <div className="form-group">
                   <button disabled={submitDisabled} onClick={onSubmit} className="btn btn-green-full text-heading-6">Continue</button>
                 </div>
-                <div><span className="text-body-text color-gray-500">Already have an account?</span> <a className="text-body-text color-green-900" href="page-login.html">Sign in now</a></div>
+                <div><span className="text-body-text color-gray-500">Already have an account?</span> <a className="text-body-text color-green-900" href="/sign-in">Sign in now</a></div>
               </div>
             </div>
           </div>

@@ -189,4 +189,8 @@ class Account < ApplicationRecord
       }
     end
   end
+
+  def need_first_workflow?
+    self.workflows.empty?
+  end
 end

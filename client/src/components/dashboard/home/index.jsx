@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Chart from "react-apexcharts";
 import PageTitleSection from '../page_title_section';
 import CardHeader from '../../ui_kit/card_header';
@@ -6,6 +6,7 @@ import LoadingSpinner from '../../ui_kit/loading_spinner';
 import LeadsTable from '../leads/table';
 import { getLeads } from '../../../api/leads';
 import { getAccountStatistics, getEmailsSent } from '../../../api/accounts';
+import Context from '../../../utils/context';
 
 export default function Home() {
   const leadsGenerated = 10431;
@@ -21,6 +22,8 @@ export default function Home() {
   const [view, setView] = useState('loading');
   const [statistics, setStatistics] = useState();
   const [emailsSent, setEmailsSent] = useState();
+  const context = useContext(Context);
+  const currentUser = context.auth.getCurrentUser();
 
   useEffect(() => {
     getAccountStatistics((r) => {
@@ -34,6 +37,31 @@ export default function Home() {
       })
     })
   }, [])
+
+  const renderAccountSetupSection = () => {
+    if (!currentUser.account.need_first_workflow) {
+      return <></>
+    }
+
+    return (
+      <div className="row">
+        <div className="col-xl-6 col-md-6 box-col-50 xl-50">
+          <div className="card profile-greeting">
+            <div className="card-body bg-size" style={{ backgroundImage: 'url(https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/dashboard/profile-greeting/bg.png)', backgroundSize: "cover", backgroundPosition: "center center", display: "block" }}><img className="img-fluid bg-img-cover" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/dashboard/profile-greeting/bg.png" alt="" style={{ display: "none" }} />
+              <div>
+                <h3>Create your cyber SDR</h3>
+                <h5>Start your outreach</h5>
+                <p>Tell us about your product and set up your account</p><a className="btn btn-primary" href="https://themeforest.net/user/pixelstrap/portfolio">Start now</a>
+              </div>
+            </div>
+            <div class="shap-block">
+              <div class="rounded-shap"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const renderSummarySection = () => {
     return (
@@ -348,6 +376,7 @@ export default function Home() {
       />
 
       <div className="container-fluid basic_table">
+        { renderAccountSetupSection() }
         { renderSummarySection() }
         <div className="row">
           { renderDetailsSection() }

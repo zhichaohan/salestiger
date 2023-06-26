@@ -100,7 +100,16 @@
         <!-- Page Sidebar Start-->
         <div class="sidebar-wrapper">
           <div>
-            <div class="logo-wrapper"><a href="/"><img class="img-fluid for-light" src="<%= current_user.account.logo_url %>" alt=""></a>
+            <div class="logo-wrapper">
+              <a href="/">
+                <% if current_user.account.logo_url.present? %>
+                  <img class="img-fluid for-light" src="<%= current_user.account.logo_url %>" alt="<%= current_user.account.name %>">
+                <% else %>
+                  <div class="sidebar-main-title">
+                    <h6 style="padding-left: 20px; padding-top: 20px;"><%= current_user.account.name %></h6>
+                  </div>
+                <% end %>
+              </a>
             </div>
             <div class="logo-icon-wrapper"><a href="/"><img class="img-fluid" src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/images/logo/logo-icon1.png" alt=""></a></div>
             <nav class="sidebar-main">
@@ -142,7 +151,7 @@
     <!-- Sidebar jquery-->
     <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/config.js" integrity="sha384-pT2C7Z08ZAeMz5ggGXYHzAyPKBWZvG1C/ysY+ef5KBtmQz+7aEO8ZnnT6b9umPWY" crossorigin="anonymous"></script>
     <!-- Plugins JS start-->
-    <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/sidebar-menu.js" integrity="sha384-RA8N+s4gdJ8T77orJs+2E0n+n1L36a2LdwATh4fQ11F4Yq7Os0KduYj1B5CSUyYO" crossorigin="anonymous"></script>
+    <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/sidebar-menu.js" ></script>
     <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/chart/chartist/chartist.js" integrity="sha384-CIpl9DC1B3ubuf9XVFtt3So+EbpENxcklez1BNenS8kJSF33GD9BL0QX4C9aa2pO" crossorigin="anonymous"></script>
     <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/chart/chartist/chartist-plugin-tooltip.js" integrity="sha384-Avcg5Y9mQ5uzfPwZCvs7d06PyT0OeytXgqjs97dd96efD6oLHkSK/30D0Z1Ye0P9" crossorigin="anonymous"></script>
     <script src="https://salestiger-assets.s3.us-west-2.amazonaws.com/enzo/assets/js/chart/knob/knob.min.js" integrity="sha384-YVTakUTiwCq1TKCD1wNUaQXkS8EwIpTqVOikk0zqOIL/fIiucb+FZKfZFuPOUMZm" crossorigin="anonymous"></script>

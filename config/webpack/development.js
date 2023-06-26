@@ -6,5 +6,14 @@ module.exports = {
   ...environment.toWebpackConfig(),
   entry: {
     index: './client/src/index.js',
+  },
+  devServer: {
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: false,
+      },
+    },
   }
 }
