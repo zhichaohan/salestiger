@@ -673,7 +673,11 @@ CREATE TABLE public.products (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     description character varying,
-    average_selling_price integer
+    average_selling_price integer,
+    features character varying[] DEFAULT '{}'::character varying[],
+    "problemStats" character varying[] DEFAULT '{}'::character varying[],
+    benefits character varying[] DEFAULT '{}'::character varying[],
+    "needPayoffStats" character varying[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -2411,6 +2415,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230526032425'),
 ('20230526181406'),
 ('20230526183727'),
-('20230607180728');
+('20230607180728'),
+('20230628214058');
 
 

@@ -20,6 +20,7 @@ import LeadImportsShow from './lead_imports/show';
 import SequencesShow from './sequences/show';
 import LinkedinSequencesShow from './linkedin_sequences/show';
 import Home from './home';
+import AccountsSetup from './accounts/setup';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "slick-carousel/slick/slick.css";
@@ -48,6 +49,7 @@ function Dashboard() {
     <Router>
       <Switch>
         <RouteWithLayout exact path="/" component={Home} layout={DashboardLayout} />
+        <RouteWithLayout exact path="/accounts/setup" component={AccountsSetup} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:workflowId/sequences/:sequenceId" component={SequencesShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:workflowId/linkedin_sequences/:sequenceId" component={LinkedinSequencesShow} layout={DashboardLayout} />
         <RouteWithLayout exact path="/workflows/:id" component={WorkflowsShow} layout={DashboardLayout} />

@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         get :statistics, on: :collection
         get :emails_sent, on: :collection
       end
+      resources :products, only: [:create]
     end
   end
 

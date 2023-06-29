@@ -67,3 +67,9 @@ export const scrollWithOffset = (id, offset) => {
 
 	window.scrollTo({top: y, behavior: 'smooth'});
 }
+
+export const arrayCompact = (arr) => {
+  return arr.filter((el) => {
+    return el !== null && el !== '';
+  });
+}

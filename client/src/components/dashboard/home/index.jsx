@@ -51,7 +51,7 @@ export default function Home() {
               <div>
                 <h3>Create your cyber SDR</h3>
                 <h5>Start your outreach</h5>
-                <p>Tell us about your product and set up your account</p><a className="btn btn-primary" href="https://themeforest.net/user/pixelstrap/portfolio">Start now</a>
+                <p>Tell us about your product and set up your account</p><a className="btn btn-primary" href="/accounts/setup">Start now</a>
               </div>
             </div>
             <div class="shap-block">
